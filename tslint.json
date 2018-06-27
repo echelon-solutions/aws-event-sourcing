@@ -6,19 +6,20 @@
     "no-var-keyword": true,
     "no-parameter-reassignment": true,
     "typedef": [true, "call-signature"],
-    "readonly-keyword": true,
+    "readonly-keyword": [true, "ignore-local"],
     "readonly-array": true,
     "no-let": true,
     "no-object-mutation": true,
     "no-delete": true,
     "no-method-signature": true,
     "no-this": true,
-    "no-class": true,
+    "no-class": false,
     "no-mixed-interface": true,
     "no-expression-statement": [
       true,
       { "ignore-prefix": ["console.", "process.exit"] }
     ],
-    "no-if-statement": true
+    "no-if-statement": true,
+    "ordered-imports": false,
   }
 }

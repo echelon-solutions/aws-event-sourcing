@@ -1,0 +1,382 @@
+<!doctype html>
+<html class="default no-js">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>aws-event-sourcing</title>
+	<meta name="description" content="">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="assets/css/main.css">
+</head>
+<body>
+<header>
+	<div class="tsd-page-toolbar">
+		<div class="container">
+			<div class="table-wrap">
+				<div class="table-cell" id="tsd-search" data-index="assets/js/search.js" data-base=".">
+					<div class="field">
+						<label for="tsd-search-field" class="tsd-widget search no-caption">Search</label>
+						<input id="tsd-search-field" type="text" />
+					</div>
+					<ul class="results">
+						<li class="state loading">Preparing search index...</li>
+						<li class="state failure">The search index is not available</li>
+					</ul>
+					<a href="index.html" class="title">aws-event-sourcing</a>
+				</div>
+				<div class="table-cell" id="tsd-widgets">
+					<div id="tsd-filter">
+						<a href="#" class="tsd-widget options no-caption" data-toggle="options">Options</a>
+						<div class="tsd-filter-group">
+							<div class="tsd-select" id="tsd-filter-visibility">
+								<span class="tsd-select-label">All</span>
+								<ul class="tsd-select-list">
+									<li data-value="public">Public</li>
+									<li data-value="protected">Public/Protected</li>
+									<li data-value="private" class="selected">All</li>
+								</ul>
+							</div>
+							<input type="checkbox" id="tsd-filter-inherited" checked />
+							<label class="tsd-widget" for="tsd-filter-inherited">Inherited</label>
+							<input type="checkbox" id="tsd-filter-externals" checked />
+							<label class="tsd-widget" for="tsd-filter-externals">Externals</label>
+							<input type="checkbox" id="tsd-filter-only-exported" />
+							<label class="tsd-widget" for="tsd-filter-only-exported">Only exported</label>
+						</div>
+					</div>
+					<a href="#" class="tsd-widget menu no-caption" data-toggle="menu">Menu</a>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="tsd-page-title">
+		<div class="container">
+			<ul class="tsd-breadcrumb">
+				<li>
+					<a href="globals.html">Globals</a>
+				</li>
+			</ul>
+			<h1> aws-event-sourcing</h1>
+		</div>
+	</div>
+</header>
+<div class="container container-main">
+	<div class="row">
+		<div class="col-8 col-content">
+			<div class="tsd-panel tsd-typography">
+				<h1 id="aws-event-sourcing">aws-event-sourcing</h1>
+				<p>A straightforward way to build event based applications with AWS Lambda.</p>
+				<h2 id="goals">Goals</h2>
+				<ul>
+					<li>Events should be processed in order</li>
+					<li>Events should be immutable</li>
+					<li>Event history should be persisted</li>
+					<li>Events and errors should be logged and traceable</li>
+					<li>Resources should be uniquely identifiable</li>
+					<li>Resource state should not be persisted, but instead derived from event history</li>
+					<li>The system should be reactive</li>
+					<li>The system should be easy to understand</li>
+					<li>The system should be easily applicable to various business domains</li>
+					<li>The system should scale easily</li>
+					<li>The system should be fault-tolerant</li>
+				</ul>
+				<h2 id="stack">Stack</h2>
+				<ul>
+					<li>Language [ Node, Typescript ]</li>
+					<li>Framework [ Serverless ]</li>
+					<li>Cloud (AWS) [ API Gateway, Lambda, DynamoDB ]</li>
+				</ul>
+				<h2 id="concepts">Concepts</h2>
+				<p>This design makes an assumption that everything in a system can be classified as either a <code>Resource</code> or an <code>Event</code>.</p>
+				<h3 id="resource">Resource</h3>
+				<p>A resource definition extends the <code>Resource</code> interface.</p>
+				<p>A resource is uniquely identifiable by UUID.</p>
+				<pre><code class="lang-typescript"><span class="hljs-keyword">export</span> <span class="hljs-keyword">interface</span> Resource {
+  id: <span class="hljs-built_in">string</span>
+}
+</code></pre>
+				<h3 id="event">Event</h3>
+				<p>An event definition extends the <code>Event</code> interface.</p>
+				<p>An event has an event number, a type, and a creation date.</p>
+				<pre><code class="lang-typescript"><span class="hljs-keyword">export</span> <span class="hljs-keyword">interface</span> Event {
+  <span class="hljs-built_in">number</span>: <span class="hljs-built_in">number</span>
+  <span class="hljs-keyword">type</span>: <span class="hljs-built_in">string</span>
+  created: <span class="hljs-built_in">string</span>
+}
+</code></pre>
+				<h3 id="aggregate">Aggregate</h3>
+				<p>Learning from DDD (domain driven design) and ES (event sourcing), we  group a resource and its events into a domain <code>Aggregate</code>.</p>
+				<p>The <code>Aggregate</code> is responsible for reading and applying the events for a resource. This is called &quot;hydrating&quot; the resource, and is how we calculate the current state.</p>
+				<pre><code class="lang-typescript"><span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> Aggregate&lt;BaseEventType <span class="hljs-keyword">extends</span> Event&gt; <span class="hljs-keyword">implements</span> Resource {
+  ...
+}
+</code></pre>
+				<p>The aggregate exposes the following methods.</p>
+				<ul>
+					<li><code>findOne</code> | retrieve a resource by resource id with up-to-date state</li>
+					<li><code>findAll</code> | retrieve all resources with up-to-date state</li>
+					<li><code>events</code> | retrieve up-to-date event history</li>
+					<li><code>hydrate</code> | retrieve up-to-date event history and apply the events to the resource</li>
+					<li><code>apply</code> | call the appropriate handler to handle the event type and apply state changes to the resource</li>
+					<li><code>commit</code> | retrieve up-to-date event history, attempt to apply an event, then publish the new event</li>
+				</ul>
+				<h2 id="implementation">Implementation</h2>
+				<p>To implement the pattern above, we begin by defining the resource, the events that manipulate it, and the aggregate that is responsible for applying events and calculating state.</p>
+				<p>Let&#39;s look at this in the context of the online shopping business domain.</p>
+				<h3 id="shopping-example">Shopping Example</h3>
+				<p>In most online ordering systems, there is a concept of a shopping cart. We want our site to be highly available, but we don&#39;t want to allow purchases of a product if we don&#39;t have any more of it left in our warehouse.</p>
+				<p>In this domain, our resource is the &quot;Product&quot;, so let&#39;s define it along with its attributes.</p>
+				<pre><code class="lang-typescript"><span class="hljs-keyword">interface</span> ProductResource <span class="hljs-keyword">extends</span> Resource {
+  status?: <span class="hljs-string">'available'</span> | <span class="hljs-string">'sold-out'</span>
+  quantity?: <span class="hljs-built_in">number</span>
+}
+</code></pre>
+				<p>Here we&#39;ve defined a uniquely identifiable <code>ProductResource</code> that has
+				a specific quantity, which lets us know how much of that product we have left in our warehouse.</p>
+				<p>There are several things that can happen during the shopping experience, both online and in our business. Let&#39;s define a base event type that shows us what events are possible.</p>
+				<pre><code class="lang-typescript"><span class="hljs-keyword">interface</span> ProductEvent <span class="hljs-keyword">extends</span> Event {
+  <span class="hljs-keyword">type</span>: <span class="hljs-string">'ProductReserved'</span> | <span class="hljs-string">'ProductRestocked'</span>
+}
+</code></pre>
+				<p>Before the customer checks out, we reserve the product for his/her purchase with a <code>ProductReservedEvent</code>. This should decrement the quantity available of the <code>Product</code> by 1.</p>
+				<pre><code class="lang-typescript"><span class="hljs-keyword">interface</span> ProductReservedEvent <span class="hljs-keyword">extends</span> ProductEvent {
+  <span class="hljs-keyword">type</span>: <span class="hljs-string">'ProductReserved'</span>
+}
+</code></pre>
+				<p>Also, at any time we may restock that specific product in our warehouse with a <code>ProductRestockedEvent</code>. This should increment the quantity available of the <code>Product</code>.</p>
+				<pre><code class="lang-typescript"><span class="hljs-keyword">interface</span> ProductRestockedEvent <span class="hljs-keyword">extends</span> ProductEvent {
+  <span class="hljs-keyword">type</span>: <span class="hljs-string">'ProductRestocked'</span>
+  amount: <span class="hljs-built_in">number</span>
+}
+</code></pre>
+				<p>We are almost done. All that is left is to implement our state changing business domain logic inside of the <code>Product</code> aggregate.</p>
+				<pre><code class="lang-typescript"><span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> Product <span class="hljs-keyword">extends</span> Aggregate&lt;ProductEvent&gt; <span class="hljs-keyword">implements</span> ProductResource {
+  status?: <span class="hljs-string">'available'</span> | <span class="hljs-string">'sold-out'</span>
+  quantity?: <span class="hljs-built_in">number</span>
+  <span class="hljs-keyword">constructor</span> (<span class="hljs-params">id?: <span class="hljs-built_in">string</span></span>) {
+    <span class="hljs-keyword">super</span> (id)
+  }
+  onProductReserved (event: ProductReservedEvent) {
+    <span class="hljs-keyword">if</span> (!<span class="hljs-keyword">this</span>.quantity || <span class="hljs-keyword">this</span>.status === <span class="hljs-string">'sold-out'</span>) <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> <span class="hljs-built_in">Error</span>(<span class="hljs-string">'Failed to apply the event.'</span>)
+    <span class="hljs-keyword">this</span>.quantity -= <span class="hljs-number">1</span>
+    <span class="hljs-keyword">this</span>.status = (<span class="hljs-keyword">this</span>.quantity &gt; <span class="hljs-number">0</span>) ? <span class="hljs-string">'available'</span> : <span class="hljs-string">'sold-out'</span>
+  }
+  onProductRestocked (event: ProductRestockedEvent) {
+    <span class="hljs-keyword">if</span> (event.amount === <span class="hljs-number">0</span>) <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> <span class="hljs-built_in">Error</span>(<span class="hljs-string">'Failed to apply the event.'</span>)
+    <span class="hljs-keyword">if</span> (!<span class="hljs-keyword">this</span>.quantity) <span class="hljs-keyword">this</span>.quantity = <span class="hljs-number">0</span>
+    <span class="hljs-keyword">this</span>.quantity += event.amount
+    <span class="hljs-keyword">this</span>.status = <span class="hljs-string">'available'</span>
+  }
+}
+</code></pre>
+				<p>And... we&#39;re done. we can now interface with the <code>Product</code> domain aggregate through its various methods. Let&#39;s expose an API that receives commands, loads the aggregate, and tries to apply new events.</p>
+				<pre><code class="lang-typescript">...
+app.post(<span class="hljs-string">'/products/{id}/buy'</span>, <span class="hljs-keyword">async</span> (req, res, next) =&gt; 
+  <span class="hljs-comment">// Create a new aggregate instance with the product id</span>
+  <span class="hljs-keyword">let</span> product = <span class="hljs-keyword">new</span> Product(req.params.id)
+  <span class="hljs-comment">// Hydrate the aggregate (get the latest events and state)</span>
+  <span class="hljs-keyword">await</span> product.hydrate()
+  <span class="hljs-comment">// Create the new event</span>
+  <span class="hljs-keyword">let</span> event: ProductReservedEvent = {
+    <span class="hljs-built_in">number</span>: product.version + <span class="hljs-number">1</span>,
+    <span class="hljs-keyword">type</span>: <span class="hljs-string">'ProductReserved'</span>,
+    created: <span class="hljs-keyword">new</span> <span class="hljs-built_in">Date</span>().toISOString()
+  }
+  <span class="hljs-comment">// Commit the event to the Product aggregate</span>
+  <span class="hljs-keyword">await</span> product.commit(event)
+  <span class="hljs-comment">// Send back a success status to the API client</span>
+  res.status(<span class="hljs-number">200</span>).send()
+})
+...
+</code></pre>
+				<p>For a fully working and deployable project that demonstrates the shopping example above, browse to <code>./examples/shopping/</code> in this repository.</p>
+				<h2 id="what-why-">What? Why?</h2>
+				<p>It doesn&#39;t look like we did much here. But actually, we achieved all of our goals with minimal code and complexity. Using other languages and frameworks, what we&#39;ve built would have surmounted to hundreds of lines of code and infrastructure that is hard to understand and maintain.</p>
+				<p>Here are the goals again, with an explanation for how we accomplished each one.</p>
+				<blockquote>
+					<p>Events should be processed in order</p>
+				</blockquote>
+				<p>Complete event history for a resource is loaded in memory every time we perform an operation on a resource. This guarantees that we are working with the most up to date data.</p>
+				<p>If two Lambdas happen to perform an update on the same version of a resource at the same time, DynamoDB conditional write logic prevents one event from succeeding.</p>
+				<p>Using AWS Lambda with DynamoDB Streams, we ensure that events are delivered in order both to the service and to subscribing services.</p>
+				<blockquote>
+					<p>Events should be immutable</p>
+				</blockquote>
+				<p>We don&#39;t update or remove events, maintaining an accurate event history for every resource.</p>
+				<blockquote>
+					<p>Event history should be persisted</p>
+				</blockquote>
+				<p>Every event record is a new insert into the DynamoDB table for that resource type.</p>
+				<blockquote>
+					<p>Events and errors should be logged and traceable</p>
+				</blockquote>
+				<p>Events and errors are recorded as searchable elements into X-Ray, a traceability tool brought to you by the folks at AWS. This allows us to see failures not only for current code execution but also for downstream services that are called. Every request is assigned a unique trace id.</p>
+				<blockquote>
+					<p>Resources should be uniquely identifiable</p>
+				</blockquote>
+				<p>Every new resource gets an autogenerated UUID V4 (random). This enables efficient sharding/partitioning on the DynamoDB table. A resource id does not need to be a globally unique identifier (GUID) -- it just needs to be unique as it pertains to the specific resource table in DynamoDB.</p>
+				<blockquote>
+					<p>Resource state should not be persisted, but instead derived from event history</p>
+				</blockquote>
+				<p>We never save the current state of a resource. Every time a domain aggregate is loaded, it retrieves all events for the resource and applies them in order to build up the current resource state.</p>
+				<blockquote>
+					<p>The system should be reactive</p>
+				</blockquote>
+				<p>All events are subscribable and services react with minimal latency by using AWS Lambda triggers on DynamoDB table streams.</p>
+				<blockquote>
+					<p>The system should be easy to understand</p>
+				</blockquote>
+				<p>There are only two concepts in our system design: resources and events. It is easy to explain what is going on whether you are looking at code, the database, or logs since they are all based on these two concepts.</p>
+				<blockquote>
+					<p>The system should be easily applicable to various business domains</p>
+				</blockquote>
+				<p>Since we generally describe everything as either a resource or an event, we can model virtually any business domain.</p>
+				<blockquote>
+					<p>The system should scale easily</p>
+				</blockquote>
+				<p>We take advantage of serverless principles and AWS Lambda infrastructure to scale out our services on-demand, as-needed, and pay-as-you-go.</p>
+				<blockquote>
+					<p>The system should be fault-tolerant</p>
+				</blockquote>
+				<p>Failed logic execution is retried for 24 hours, giving teams an adequate window to fix logic failures, after which failed events are reapplied automatically.</p>
+			</div>
+		</div>
+		<div class="col-4 col-menu menu-sticky-wrap menu-highlight">
+			<nav class="tsd-navigation primary">
+				<ul>
+					<li class="globals  ">
+						<a href="globals.html"><em>Globals</em></a>
+					</li>
+				</ul>
+			</nav>
+			<nav class="tsd-navigation secondary menu-sticky">
+				<ul class="before-current">
+					<li class=" tsd-kind-class tsd-has-type-parameter">
+						<a href="classes/aggregate.html" class="tsd-kind-icon">Aggregate</a>
+					</li>
+					<li class=" tsd-kind-class tsd-is-not-exported">
+						<a href="classes/baseerror.html" class="tsd-kind-icon">Base<wbr>Error</a>
+					</li>
+					<li class=" tsd-kind-class tsd-is-not-exported">
+						<a href="classes/illegaleventnumberargument.html" class="tsd-kind-icon">Illegal<wbr>Event<wbr>Number<wbr>Argument</a>
+					</li>
+					<li class=" tsd-kind-class tsd-is-not-exported">
+						<a href="classes/nodynamodata.html" class="tsd-kind-icon">No<wbr>Dynamo<wbr>Data</a>
+					</li>
+					<li class=" tsd-kind-class tsd-is-not-exported">
+						<a href="classes/resourcenotfound.html" class="tsd-kind-icon">Resource<wbr>Not<wbr>Found</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/event.html" class="tsd-kind-icon">Event</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/resource.html" class="tsd-kind-icon">Resource</a>
+					</li>
+					<li class=" tsd-kind-variable tsd-is-not-exported">
+						<a href="globals.html#aws" class="tsd-kind-icon">AWS</a>
+					</li>
+					<li class=" tsd-kind-variable">
+						<a href="globals.html#defaultmiddlewares" class="tsd-kind-icon">default<wbr>Middlewares</a>
+					</li>
+					<li class=" tsd-kind-variable">
+						<a href="globals.html#dynamo" class="tsd-kind-icon">dynamo</a>
+					</li>
+					<li class=" tsd-kind-variable">
+						<a href="globals.html#region" class="tsd-kind-icon">region</a>
+					</li>
+					<li class=" tsd-kind-variable tsd-is-not-exported">
+						<a href="globals.html#table" class="tsd-kind-icon">table</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="globals.html#asyncabc" class="tsd-kind-icon">asyncABC</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="globals.html#defaultapp" class="tsd-kind-icon">default<wbr>App</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="globals.html#double" class="tsd-kind-icon">double</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="globals.html#handlerrouter" class="tsd-kind-icon">handler<wbr>Router</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="globals.html#loadproperty" class="tsd-kind-icon">load<wbr>Property</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="globals.html#power" class="tsd-kind-icon">power</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="globals.html#xray" class="tsd-kind-icon">xray</a>
+					</li>
+				</ul>
+			</nav>
+		</div>
+	</div>
+</div>
+<footer class="with-border-bottom">
+	<div class="container">
+		<h2>Legend</h2>
+		<div class="tsd-legend-group">
+			<ul class="tsd-legend">
+				<li class="tsd-kind-module"><span class="tsd-kind-icon">Module</span></li>
+				<li class="tsd-kind-object-literal"><span class="tsd-kind-icon">Object literal</span></li>
+				<li class="tsd-kind-variable"><span class="tsd-kind-icon">Variable</span></li>
+				<li class="tsd-kind-function"><span class="tsd-kind-icon">Function</span></li>
+				<li class="tsd-kind-function tsd-has-type-parameter"><span class="tsd-kind-icon">Function with type parameter</span></li>
+				<li class="tsd-kind-index-signature"><span class="tsd-kind-icon">Index signature</span></li>
+				<li class="tsd-kind-type-alias"><span class="tsd-kind-icon">Type alias</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-enum"><span class="tsd-kind-icon">Enumeration</span></li>
+				<li class="tsd-kind-enum-member"><span class="tsd-kind-icon">Enumeration member</span></li>
+				<li class="tsd-kind-property tsd-parent-kind-enum"><span class="tsd-kind-icon">Property</span></li>
+				<li class="tsd-kind-method tsd-parent-kind-enum"><span class="tsd-kind-icon">Method</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-interface"><span class="tsd-kind-icon">Interface</span></li>
+				<li class="tsd-kind-interface tsd-has-type-parameter"><span class="tsd-kind-icon">Interface with type parameter</span></li>
+				<li class="tsd-kind-constructor tsd-parent-kind-interface"><span class="tsd-kind-icon">Constructor</span></li>
+				<li class="tsd-kind-property tsd-parent-kind-interface"><span class="tsd-kind-icon">Property</span></li>
+				<li class="tsd-kind-method tsd-parent-kind-interface"><span class="tsd-kind-icon">Method</span></li>
+				<li class="tsd-kind-index-signature tsd-parent-kind-interface"><span class="tsd-kind-icon">Index signature</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-class"><span class="tsd-kind-icon">Class</span></li>
+				<li class="tsd-kind-class tsd-has-type-parameter"><span class="tsd-kind-icon">Class with type parameter</span></li>
+				<li class="tsd-kind-constructor tsd-parent-kind-class"><span class="tsd-kind-icon">Constructor</span></li>
+				<li class="tsd-kind-property tsd-parent-kind-class"><span class="tsd-kind-icon">Property</span></li>
+				<li class="tsd-kind-method tsd-parent-kind-class"><span class="tsd-kind-icon">Method</span></li>
+				<li class="tsd-kind-accessor tsd-parent-kind-class"><span class="tsd-kind-icon">Accessor</span></li>
+				<li class="tsd-kind-index-signature tsd-parent-kind-class"><span class="tsd-kind-icon">Index signature</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-constructor tsd-parent-kind-class tsd-is-inherited"><span class="tsd-kind-icon">Inherited constructor</span></li>
+				<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited"><span class="tsd-kind-icon">Inherited property</span></li>
+				<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited"><span class="tsd-kind-icon">Inherited method</span></li>
+				<li class="tsd-kind-accessor tsd-parent-kind-class tsd-is-inherited"><span class="tsd-kind-icon">Inherited accessor</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-property tsd-parent-kind-class tsd-is-protected"><span class="tsd-kind-icon">Protected property</span></li>
+				<li class="tsd-kind-method tsd-parent-kind-class tsd-is-protected"><span class="tsd-kind-icon">Protected method</span></li>
+				<li class="tsd-kind-accessor tsd-parent-kind-class tsd-is-protected"><span class="tsd-kind-icon">Protected accessor</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><span class="tsd-kind-icon">Private property</span></li>
+				<li class="tsd-kind-method tsd-parent-kind-class tsd-is-private"><span class="tsd-kind-icon">Private method</span></li>
+				<li class="tsd-kind-accessor tsd-parent-kind-class tsd-is-private"><span class="tsd-kind-icon">Private accessor</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-property tsd-parent-kind-class tsd-is-static"><span class="tsd-kind-icon">Static property</span></li>
+				<li class="tsd-kind-call-signature tsd-parent-kind-class tsd-is-static"><span class="tsd-kind-icon">Static method</span></li>
+			</ul>
+		</div>
+	</div>
+</footer>
+<div class="container tsd-generator">
+	<p>Generated using <a href="http://typedoc.org/" target="_blank">TypeDoc</a></p>
+</div>
+<div class="overlay"></div>
+<script src="assets/js/main.js"></script>
+<script>if (location.protocol == 'file:') document.write('<script src="assets/js/search.js"><' + '/script>');</script>
+</body>
+</html>

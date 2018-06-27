@@ -59,10 +59,19 @@ Learning from DDD (domain driven design) and ES (event sourcing), we  group a re
 The `Aggregate` is responsible for reading and applying the events for a resource. This is called "hydrating" the resource, and is how we calculate the current state.
 
 ```typescript
-export abstract class Aggregate<BaseEventType extends Event> implements Resource {
+export class Aggregate<BaseEventType extends Event> implements Resource {
   ...
 }
 ```
+
+The aggregate exposes the following methods.
+
+- `findOne` | retrieve a resource by resource id with up-to-date state
+- `findAll` | retrieve all resources with up-to-date state
+- `events` | retrieve up-to-date event history
+- `hydrate` | retrieve up-to-date event history and apply the events to the resource
+- `apply` | call the appropriate handler to handle the event type and apply state changes to the resource
+- `commit` | retrieve up-to-date event history, attempt to apply an event, then publish the new event
 
 ## Implementation
 
@@ -120,16 +129,6 @@ export class Product extends Aggregate<ProductEvent> implements ProductResource 
   constructor (id?: string) {
     super (id)
   }
-  apply (events: Array<ProductEvent>) {
-    for (var event of events) {
-      switch (event.type) {
-        case 'ProductReserved': this.onProductReserved(event as DeployCreatedEvent); break
-        case 'ProductRestocked': this.onProductRestocked(event as DeployProcessedEvent); break
-        default: throw new Error('Unsupported event detected.')
-      }
-      this.version++
-    }
-  }
   onProductReserved (event: ProductReservedEvent) {
     if (!this.quantity || this.status === 'sold-out') throw new Error('Failed to apply the event.')
     this.quantity -= 1
@@ -144,7 +143,7 @@ export class Product extends Aggregate<ProductEvent> implements ProductResource 
 }
 ```
 
-And... we're done. we can now interace with the `Product` domain aggregate through its various methods. Let's expose an API that receives commands, loads the aggregate, and tries to apply new events.
+And... we're done. we can now interface with the `Product` domain aggregate through its various methods. Let's expose an API that receives commands, loads the aggregate, and tries to apply new events.
 
 ```typescript
 ...

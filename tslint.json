@@ -20,6 +20,6 @@
       { "ignore-prefix": ["console.", "process.exit"] }
     ],
     "no-if-statement": true,
-    "ordered-imports": false,
+    "ordered-imports": false
   }
 }

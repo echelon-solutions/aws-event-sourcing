@@ -1,14 +1,16 @@
 import { region } from '../environment/properties'
 
+import aws = require('aws-sdk')
 import { DynamoDB } from 'aws-sdk'
 import * as AWSXRay from 'aws-xray-sdk'
+/* tslint:disable:no-implicit-dependencies */
 import { APIGatewayProxyHandler, ScheduledHandler, SNSHandler, DynamoDBStreamHandler, APIGatewayEvent, ScheduledEvent, SNSEvent, DynamoDBStreamEvent } from 'aws-lambda'
 
 // CLIENTS
 
 const AWS = (process.env.IS_OFFLINE)
-  ? require('aws-sdk')
-  : AWSXRay.captureAWS(require('aws-sdk'))
+  ? aws
+  : AWSXRay.captureAWS(aws)
 
 export const dynamo = (process.env.IS_OFFLINE)
   ? new AWS.DynamoDB.DocumentClient({ region: 'localhost', endpoint: 'http://localhost:8000' }) as DynamoDB.DocumentClient
@@ -28,10 +30,10 @@ export function xray (key: string, value: string, searchable: boolean): void {
  * A Lambda handler router that determines the proper handler to use based on the type of the received event
  */
 export const handlerRouter = (event: any, context: any, callback: any, handlers: { 
-  api?: APIGatewayProxyHandler,
-  scheduled?: ScheduledHandler,
-  topic?: SNSHandler,
-  stream?: DynamoDBStreamHandler }) => {
+  readonly api?: APIGatewayProxyHandler,
+  readonly scheduled?: ScheduledHandler,
+  readonly topic?: SNSHandler,
+  readonly stream?: DynamoDBStreamHandler }) => {
   if ((event as APIGatewayEvent).httpMethod && handlers.api) handlers.api(event, context, callback)
   else if ((event as ScheduledEvent).source === 'aws.events' && handlers.scheduled) handlers.scheduled(event, context, callback)
   else if ((event as SNSEvent).Records && ((event as SNSEvent).Records[0].EventSource === 'aws:sns') && handlers.topic) handlers.topic(event, context, callback)

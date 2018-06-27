@@ -1,5 +1,5 @@
 {
-  "name": "aws-event-sourcing",
+  "name": "@echelon-solutions/aws-event-sourcing",
   "version": "0.1.1",
   "description": "A straightforward way to build event based applications with AWS Lambda.",
   "author": "Khalid Zoabi <kzoabi@outlook.com>",

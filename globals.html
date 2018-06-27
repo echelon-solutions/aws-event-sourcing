@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>aws-event-sourcing</title>
+	<title>@echelon-solutions/aws-event-sourcing</title>
 	<meta name="description" content="">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="assets/css/main.css">
@@ -22,7 +22,7 @@
 						<li class="state loading">Preparing search index...</li>
 						<li class="state failure">The search index is not available</li>
 					</ul>
-					<a href="index.html" class="title">aws-event-sourcing</a>
+					<a href="index.html" class="title">@echelon-solutions/aws-event-sourcing</a>
 				</div>
 				<div class="table-cell" id="tsd-widgets">
 					<div id="tsd-filter">
@@ -56,7 +56,7 @@
 					<a href="globals.html">Globals</a>
 				</li>
 			</ul>
-			<h1> aws-event-sourcing</h1>
+			<h1> @echelon-solutions/aws-event-sourcing</h1>
 		</div>
 	</div>
 </header>
@@ -117,7 +117,7 @@
 					<div class="tsd-signature tsd-kind-icon">AWS<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">any</span><span class="tsd-signature-symbol"> =&nbsp;(process.env.IS_OFFLINE)? require(&#x27;aws-sdk&#x27;): AWSXRay.captureAWS(require(&#x27;aws-sdk&#x27;))</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/echelon-solutions/aws-event-sourcing/blob/c5792dc/src/lib/environment/aws.ts#L11">lib/environment/aws.ts:11</a></li>
+							<li>Defined in <a href="https://github.com/echelon-solutions/aws-event-sourcing/blob/ecabf92/src/lib/environment/aws.ts#L11">lib/environment/aws.ts:11</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -127,7 +127,7 @@
 					<div class="tsd-signature tsd-kind-icon">default<wbr>Middlewares<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol"> =&nbsp;[(req: express.Request, res: express.Response, next: express.NextFunction) &#x3D;&gt; {xray(&#x27;error&#x27;, &#x27;CLIENT | 404 Not Found&#x27;, true)res.status(404).send()},(error: Error, req: express.Request, res: express.Response, next: express.NextFunction) &#x3D;&gt; {if (error.message &#x3D;&#x3D;&#x3D; &#x27;Invalid request&#x27;) {xray(&#x27;error&#x27;, &#x60;CLIENT | ${error.message}&#x60;, true)res.status(400).json({message: error.message})} else {console.error(error)xray(&#x27;error&#x27;, &#x60;SERVER | ${error.message}&#x60;, true)res.status(500).json({message: &#x27;Internal server error&#x27;})}},AWSXRay.express.closeSegment()]</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/echelon-solutions/aws-event-sourcing/blob/c5792dc/src/lib/environment/express.ts#L21">lib/environment/express.ts:21</a></li>
+							<li>Defined in <a href="https://github.com/echelon-solutions/aws-event-sourcing/blob/ecabf92/src/lib/environment/express.ts#L21">lib/environment/express.ts:21</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -142,7 +142,7 @@
 					<div class="tsd-signature tsd-kind-icon">dynamo<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">DocumentClient</span><span class="tsd-signature-symbol"> =&nbsp;(process.env.IS_OFFLINE)? new AWS.DynamoDB.DocumentClient({ region: &#x27;localhost&#x27;, endpoint: &#x27;http://localhost:8000&#x27; }) as DynamoDB.DocumentClient: new AWS.DynamoDB.DocumentClient({ apiVersion: &#x27;2012-08-10&#x27;, region }) as DynamoDB.DocumentClient</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/echelon-solutions/aws-event-sourcing/blob/c5792dc/src/lib/environment/aws.ts#L15">lib/environment/aws.ts:15</a></li>
+							<li>Defined in <a href="https://github.com/echelon-solutions/aws-event-sourcing/blob/ecabf92/src/lib/environment/aws.ts#L15">lib/environment/aws.ts:15</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -152,7 +152,7 @@
 					<div class="tsd-signature tsd-kind-icon">region<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol"> =&nbsp;(process.env.IS_OFFLINE) ? &#x27;us-east-1&#x27; : loadProperty(&#x27;AWS_REGION&#x27;, true)</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/echelon-solutions/aws-event-sourcing/blob/c5792dc/src/lib/environment/properties.ts#L6">lib/environment/properties.ts:6</a></li>
+							<li>Defined in <a href="https://github.com/echelon-solutions/aws-event-sourcing/blob/ecabf92/src/lib/environment/properties.ts#L6">lib/environment/properties.ts:6</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -162,7 +162,7 @@
 					<div class="tsd-signature tsd-kind-icon">table<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> =&nbsp;loadProperty(&#x27;DYNAMODB_TABLE&#x27;, true) as string</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/echelon-solutions/aws-event-sourcing/blob/c5792dc/src/lib/domain/aggregate.ts#L9">lib/domain/aggregate.ts:9</a></li>
+							<li>Defined in <a href="https://github.com/echelon-solutions/aws-event-sourcing/blob/ecabf92/src/lib/domain/aggregate.ts#L9">lib/domain/aggregate.ts:9</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -179,7 +179,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/echelon-solutions/aws-event-sourcing/blob/c5792dc/src/lib/async.ts#L20">lib/async.ts:20</a></li>
+									<li>Defined in <a href="https://github.com/echelon-solutions/aws-event-sourcing/blob/ecabf92/src/lib/async.ts#L20">lib/async.ts:20</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -212,7 +212,7 @@ asyncABC().then(<span class="hljs-built_in">console</span>.log);
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/echelon-solutions/aws-event-sourcing/blob/c5792dc/src/lib/environment/express.ts#L9">lib/environment/express.ts:9</a></li>
+									<li>Defined in <a href="https://github.com/echelon-solutions/aws-event-sourcing/blob/ecabf92/src/lib/environment/express.ts#L9">lib/environment/express.ts:9</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -234,7 +234,7 @@ asyncABC().then(<span class="hljs-built_in">console</span>.log);
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/echelon-solutions/aws-event-sourcing/blob/c5792dc/src/lib/number.ts#L22">lib/number.ts:22</a></li>
+									<li>Defined in <a href="https://github.com/echelon-solutions/aws-event-sourcing/blob/ecabf92/src/lib/number.ts#L22">lib/number.ts:22</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -281,7 +281,7 @@ asyncABC().then(<span class="hljs-built_in">console</span>.log);
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/echelon-solutions/aws-event-sourcing/blob/c5792dc/src/lib/environment/aws.ts#L32">lib/environment/aws.ts:32</a></li>
+									<li>Defined in <a href="https://github.com/echelon-solutions/aws-event-sourcing/blob/ecabf92/src/lib/environment/aws.ts#L32">lib/environment/aws.ts:32</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -332,7 +332,7 @@ asyncABC().then(<span class="hljs-built_in">console</span>.log);
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/echelon-solutions/aws-event-sourcing/blob/c5792dc/src/lib/environment/properties.ts#L1">lib/environment/properties.ts:1</a></li>
+									<li>Defined in <a href="https://github.com/echelon-solutions/aws-event-sourcing/blob/ecabf92/src/lib/environment/properties.ts#L1">lib/environment/properties.ts:1</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -361,7 +361,7 @@ asyncABC().then(<span class="hljs-built_in">console</span>.log);
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/echelon-solutions/aws-event-sourcing/blob/c5792dc/src/lib/number.ts#L43">lib/number.ts:43</a></li>
+									<li>Defined in <a href="https://github.com/echelon-solutions/aws-event-sourcing/blob/ecabf92/src/lib/number.ts#L43">lib/number.ts:43</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -402,7 +402,7 @@ asyncABC().then(<span class="hljs-built_in">console</span>.log);
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/echelon-solutions/aws-event-sourcing/blob/c5792dc/src/lib/environment/aws.ts#L22">lib/environment/aws.ts:22</a></li>
+									<li>Defined in <a href="https://github.com/echelon-solutions/aws-event-sourcing/blob/ecabf92/src/lib/environment/aws.ts#L22">lib/environment/aws.ts:22</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">

@@ -6,18 +6,21 @@
     "no-var-keyword": true,
     "no-parameter-reassignment": true,
     "typedef": [true, "call-signature"],
-    "readonly-keyword": [true, "ignore-local"],
-    "readonly-array": true,
+    "readonly-keyword": [true, "ignore-class", "ignore-local"],
+    "readonly-array": false,
     "no-let": true,
     "no-object-mutation": true,
     "no-delete": true,
     "no-method-signature": true,
-    "no-this": true,
+    "no-this": false,
     "no-class": false,
     "no-mixed-interface": true,
     "no-expression-statement": false,
     "no-if-statement": false,
     "ordered-imports": false,
-    "curly": [ true, "ignore-same-line" ]
+    "curly": [ true, "ignore-same-line" ],
+    "no-console": false,
+    "object-literal-sort-keys": false,
+    "max-classes-per-file": false
   }
 }

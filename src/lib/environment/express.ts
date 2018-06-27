@@ -6,8 +6,8 @@ import * as AWSXRay from 'aws-xray-sdk'
 /**
  * Create a new express app with defaults
  */
-export function defaultApp () {
-  let app = express()
+export function defaultApp (): express.Express {
+  const app = express()
   app.use(AWSXRay.express.openSegment('defaultName'))
   app.disable('x-powered-by')
   app.use(express.json())
@@ -17,6 +17,7 @@ export function defaultApp () {
 /**
  * For the following middlewares to work properly, they must be the last middlewares injected by app.use()
  */
+/* tslint:disable:readonly-array */
 export const defaultMiddlewares = [
   (req: express.Request, res: express.Response, next: express.NextFunction) => {
     xray('error', 'CLIENT | 404 Not Found', true)

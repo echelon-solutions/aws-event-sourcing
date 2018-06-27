@@ -9,8 +9,8 @@ import { v4 } from 'uuid'
 const table = loadProperty('DYNAMODB_TABLE', true) as string
 
 export class Aggregate<BaseEventType extends Event> implements Resource {
-  id: string
-  version: number
+  public readonly id: string
+  public version: number
   /**
    * Instantiate an aggregate instance, optionally passing in a resource id 
    *   to reference an existing resource.

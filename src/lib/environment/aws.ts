@@ -1,6 +1,5 @@
 import { region } from '../environment/properties'
 
-import aws = require('aws-sdk')
 import { DynamoDB } from 'aws-sdk'
 import * as AWSXRay from 'aws-xray-sdk'
 /* tslint:disable:no-implicit-dependencies */
@@ -8,9 +7,10 @@ import { APIGatewayProxyHandler, ScheduledHandler, SNSHandler, DynamoDBStreamHan
 
 // CLIENTS
 
+/* tslint:disable:no-var-requires */
 const AWS = (process.env.IS_OFFLINE)
-  ? aws
-  : AWSXRay.captureAWS(aws)
+  ? require('aws-sdk')
+  : AWSXRay.captureAWS(require('aws-sdk'))
 
 export const dynamo = (process.env.IS_OFFLINE)
   ? new AWS.DynamoDB.DocumentClient({ region: 'localhost', endpoint: 'http://localhost:8000' }) as DynamoDB.DocumentClient

@@ -1,9 +1,17 @@
-import { region } from '../environment/properties'
-
 import { DynamoDB } from 'aws-sdk'
 import * as AWSXRay from 'aws-xray-sdk'
 /* tslint:disable:no-implicit-dependencies */
 import { APIGatewayProxyHandler, ScheduledHandler, SNSHandler, DynamoDBStreamHandler, APIGatewayEvent, ScheduledEvent, SNSEvent, DynamoDBStreamEvent } from 'aws-lambda'
+import express from 'express'
+
+// PROPERTIES
+
+export function loadProperty (property: 'DYNAMODB_TABLE' | string, required: boolean): string | void {
+  if (process.env[property]) return process.env[property]
+  if (required) throw new Error(`Missing the required ${property} environment property.`)
+}
+
+export const region = (process.env.IS_OFFLINE) ? 'us-east-1' : loadProperty('AWS_REGION', true)
 
 // CLIENTS
 
@@ -25,6 +33,45 @@ export function xray (key: string, value: string, searchable: boolean): void {
     else AWSXRay.getSegment().addMetadata(key, value)
   }
 }
+
+// HELPERS
+
+/**
+ * Create a new express app with defaults
+ */
+export function defaultApp (): express.Express {
+  const app = express()
+  app.use(AWSXRay.express.openSegment('defaultName'))
+  app.disable('x-powered-by')
+  app.use(express.json())
+  return app
+}
+
+/**
+ * For the following middlewares to work properly, they must be the last middlewares injected by app.use()
+ */
+/* tslint:disable:readonly-array */
+export const defaultMiddlewares = [
+  (req: express.Request, res: express.Response, next: express.NextFunction) => {
+    xray('error', 'CLIENT | 404 Not Found', true)
+    res.status(404).send()
+  },
+  (error: Error, req: express.Request, res: express.Response, next: express.NextFunction) => {
+    if (error.message === 'Invalid request') {
+      xray('error', `CLIENT | ${error.message}`, true)
+      res.status(400).json({
+        message: error.message
+      })
+    } else {
+      console.error(error)
+      xray('error', `SERVER | ${error.message}`, true)
+      res.status(500).json({
+        message: 'Internal server error'
+      })
+    }
+  },
+  AWSXRay.express.closeSegment()
+]
 
 /**
  * A Lambda handler router that determines the proper handler to use based on the type of the received event

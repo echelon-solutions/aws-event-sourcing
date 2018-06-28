@@ -1,10 +1,21 @@
-import Resource from './resource'
-import Event from './event'
-
-import { dynamo, xray } from '../environment/aws'
-import { loadProperty } from '../environment/properties'
-
+import { dynamo, xray, loadProperty } from './environment'
 import { v4 } from 'uuid'
+
+/**
+ * A resource is uniquely identifiable. 
+ */
+export interface Resource {
+  readonly id: string
+}
+
+/**
+ * An event has a number, a type, and a creation date as an ISO string.
+ */
+export interface Event {
+  readonly number: number
+  readonly type: string
+  readonly created: string
+}
 
 const table = loadProperty('DYNAMODB_TABLE', true) as string
 

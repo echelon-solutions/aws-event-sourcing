@@ -145,7 +145,7 @@ class NoDynamoData extends BaseError {
   }
 }
 
-class ResourceNotFound extends BaseError {
+export class ResourceNotFound extends BaseError {
   constructor (id: string) {
     super (`The resource with id ${id} does not exist.`)
   }

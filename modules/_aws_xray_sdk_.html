@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>Event | @echelon-solutions/aws-event-sourcing</title>
+	<title>&quot;aws-xray-sdk&quot; | @echelon-solutions/aws-event-sourcing</title>
 	<meta name="description" content="">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="../assets/css/main.css">
@@ -56,10 +56,10 @@
 					<a href="../globals.html">Globals</a>
 				</li>
 				<li>
-					<a href="event.html">Event</a>
+					<a href="_aws_xray_sdk_.html">&quot;aws-xray-sdk&quot;</a>
 				</li>
 			</ul>
-			<h1>Interface Event</h1>
+			<h1>Module &quot;aws-xray-sdk&quot;</h1>
 		</div>
 	</div>
 </header>
@@ -69,64 +69,95 @@
 			<section class="tsd-panel tsd-comment">
 				<div class="tsd-comment tsd-typography">
 					<div class="lead">
-						<p>An event has a number, a type, and a creation date as an ISO string.</p>
+						<p>If you import a dependency which does not include its own type definitions,
+							TypeScript will try to find a definition for it by following the <code>typeRoots</code>
+							compiler option in tsconfig.json. For this project, we&#39;ve configured it to
+						fall back to this folder if nothing is found in node_modules/@types.</p>
 					</div>
+					<p>Often, you can install the DefinitelyTyped
+						(<a href="https://github.com/DefinitelyTyped/DefinitelyTyped">https://github.com/DefinitelyTyped/DefinitelyTyped</a>) type definition for the
+						dependency in question. However, if no one has yet contributed definitions
+						for the package, you may want to declare your own. (If you&#39;re using the
+					<code>noImplicitAny</code> compiler options, you&#39;ll be required to declare it.)</p>
+					<p>This is an example type definition for the <code>sha.js</code> package, used in hash.ts.</p>
+					<p>(This definition was primarily extracted from:
+					<a href="https://github.com/DefinitelyTyped/DefinitelyTyped/blob/master/types/node/v8/index.d.ts">https://github.com/DefinitelyTyped/DefinitelyTyped/blob/master/types/node/v8/index.d.ts</a></p>
 				</div>
-			</section>
-			<section class="tsd-panel tsd-hierarchy">
-				<h3>Hierarchy</h3>
-				<ul class="tsd-hierarchy">
-					<li>
-						<span class="target">Event</span>
-					</li>
-				</ul>
 			</section>
 			<section class="tsd-panel-group tsd-index-group">
 				<h2>Index</h2>
 				<section class="tsd-panel tsd-index-panel">
 					<div class="tsd-index-content">
 						<section class="tsd-index-section ">
-							<h3>Properties</h3>
+							<h3>Variables</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="event.html#created" class="tsd-kind-icon">created</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="event.html#number" class="tsd-kind-icon">number</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="event.html#type" class="tsd-kind-icon">type</a></li>
+								<li class="tsd-kind-variable tsd-parent-kind-module"><a href="_aws_xray_sdk_.html#express" class="tsd-kind-icon">express</a></li>
+							</ul>
+						</section>
+						<section class="tsd-index-section ">
+							<h3>Functions</h3>
+							<ul class="tsd-index-list">
+								<li class="tsd-kind-function tsd-parent-kind-module"><a href="_aws_xray_sdk_.html#captureaws" class="tsd-kind-icon">captureAWS</a></li>
+								<li class="tsd-kind-function tsd-parent-kind-module"><a href="_aws_xray_sdk_.html#getsegment" class="tsd-kind-icon">get<wbr>Segment</a></li>
 							</ul>
 						</section>
 					</div>
 				</section>
 			</section>
 			<section class="tsd-panel-group tsd-member-group ">
-				<h2>Properties</h2>
-				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
-					<a name="created" class="tsd-anchor"></a>
-					<h3>created</h3>
-					<div class="tsd-signature tsd-kind-icon">created<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
+				<h2>Variables</h2>
+				<section class="tsd-panel tsd-member tsd-kind-variable tsd-parent-kind-module">
+					<a name="express" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagConst">Const</span> express</h3>
+					<div class="tsd-signature tsd-kind-icon">express<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">any</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/echelon-solutions/aws-event-sourcing/blob/82f6acb/src/lib/domain.ts#L17">lib/domain.ts:17</a></li>
+							<li>Defined in <a href="https://github.com/echelon-solutions/aws-event-sourcing/blob/82f6acb/src/types/aws-xray-sdk.ts#L19">types/aws-xray-sdk.ts:19</a></li>
 						</ul>
 					</aside>
 				</section>
-				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
-					<a name="number" class="tsd-anchor"></a>
-					<h3>number</h3>
-					<div class="tsd-signature tsd-kind-icon">number<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
-					<aside class="tsd-sources">
-						<ul>
-							<li>Defined in <a href="https://github.com/echelon-solutions/aws-event-sourcing/blob/82f6acb/src/lib/domain.ts#L15">lib/domain.ts:15</a></li>
-						</ul>
-					</aside>
+			</section>
+			<section class="tsd-panel-group tsd-member-group ">
+				<h2>Functions</h2>
+				<section class="tsd-panel tsd-member tsd-kind-function tsd-parent-kind-module">
+					<a name="captureaws" class="tsd-anchor"></a>
+					<h3>captureAWS</h3>
+					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-module">
+						<li class="tsd-signature tsd-kind-icon">captureAWS<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">...</span>args<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/echelon-solutions/aws-event-sourcing/blob/82f6acb/src/types/aws-xray-sdk.ts#L20">types/aws-xray-sdk.ts:20</a></li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5><span class="tsd-flag ts-flagRest">Rest</span> <span class="tsd-signature-symbol">...</span>args: <span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">[]</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">any</span></h4>
+						</li>
+					</ul>
 				</section>
-				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
-					<a name="type" class="tsd-anchor"></a>
-					<h3>type</h3>
-					<div class="tsd-signature tsd-kind-icon">type<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
-					<aside class="tsd-sources">
-						<ul>
-							<li>Defined in <a href="https://github.com/echelon-solutions/aws-event-sourcing/blob/82f6acb/src/lib/domain.ts#L16">lib/domain.ts:16</a></li>
-						</ul>
-					</aside>
+				<section class="tsd-panel tsd-member tsd-kind-function tsd-parent-kind-module">
+					<a name="getsegment" class="tsd-anchor"></a>
+					<h3>get<wbr>Segment</h3>
+					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-module">
+						<li class="tsd-signature tsd-kind-icon">get<wbr>Segment<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/echelon-solutions/aws-event-sourcing/blob/82f6acb/src/types/aws-xray-sdk.ts#L21">types/aws-xray-sdk.ts:21</a></li>
+								</ul>
+							</aside>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">any</span></h4>
+						</li>
+					</ul>
 				</section>
 			</section>
 		</div>
@@ -136,72 +167,21 @@
 					<li class="globals  ">
 						<a href="../globals.html"><em>Globals</em></a>
 					</li>
+					<li class="current tsd-kind-module tsd-is-not-exported">
+						<a href="_aws_xray_sdk_.html">"aws-<wbr>xray-<wbr>sdk"</a>
+					</li>
 				</ul>
 			</nav>
 			<nav class="tsd-navigation secondary menu-sticky">
 				<ul class="before-current">
-					<li class=" tsd-kind-class tsd-has-type-parameter">
-						<a href="../classes/aggregate.html" class="tsd-kind-icon">Aggregate</a>
+					<li class=" tsd-kind-variable tsd-parent-kind-module">
+						<a href="_aws_xray_sdk_.html#express" class="tsd-kind-icon">express</a>
 					</li>
-					<li class=" tsd-kind-class tsd-is-not-exported">
-						<a href="../classes/baseerror.html" class="tsd-kind-icon">Base<wbr>Error</a>
+					<li class=" tsd-kind-function tsd-parent-kind-module">
+						<a href="_aws_xray_sdk_.html#captureaws" class="tsd-kind-icon">captureAWS</a>
 					</li>
-					<li class=" tsd-kind-class tsd-is-not-exported">
-						<a href="../classes/illegaleventnumberargument.html" class="tsd-kind-icon">Illegal<wbr>Event<wbr>Number<wbr>Argument</a>
-					</li>
-					<li class=" tsd-kind-class tsd-is-not-exported">
-						<a href="../classes/nodynamodata.html" class="tsd-kind-icon">No<wbr>Dynamo<wbr>Data</a>
-					</li>
-					<li class=" tsd-kind-class tsd-is-not-exported">
-						<a href="../classes/resourcenotfound.html" class="tsd-kind-icon">Resource<wbr>Not<wbr>Found</a>
-					</li>
-				</ul>
-				<ul class="current">
-					<li class="current tsd-kind-interface">
-						<a href="event.html" class="tsd-kind-icon">Event</a>
-						<ul>
-							<li class=" tsd-kind-property tsd-parent-kind-interface">
-								<a href="event.html#created" class="tsd-kind-icon">created</a>
-							</li>
-							<li class=" tsd-kind-property tsd-parent-kind-interface">
-								<a href="event.html#number" class="tsd-kind-icon">number</a>
-							</li>
-							<li class=" tsd-kind-property tsd-parent-kind-interface">
-								<a href="event.html#type" class="tsd-kind-icon">type</a>
-							</li>
-						</ul>
-					</li>
-				</ul>
-				<ul class="after-current">
-					<li class=" tsd-kind-interface">
-						<a href="resource.html" class="tsd-kind-icon">Resource</a>
-					</li>
-					<li class=" tsd-kind-variable tsd-is-not-exported">
-						<a href="../globals.html#aws" class="tsd-kind-icon">AWS</a>
-					</li>
-					<li class=" tsd-kind-variable">
-						<a href="../globals.html#defaultmiddlewares" class="tsd-kind-icon">default<wbr>Middlewares</a>
-					</li>
-					<li class=" tsd-kind-variable">
-						<a href="../globals.html#dynamo" class="tsd-kind-icon">dynamo</a>
-					</li>
-					<li class=" tsd-kind-variable">
-						<a href="../globals.html#region" class="tsd-kind-icon">region</a>
-					</li>
-					<li class=" tsd-kind-variable tsd-is-not-exported">
-						<a href="../globals.html#table" class="tsd-kind-icon">table</a>
-					</li>
-					<li class=" tsd-kind-function">
-						<a href="../globals.html#defaultapp" class="tsd-kind-icon">default<wbr>App</a>
-					</li>
-					<li class=" tsd-kind-function">
-						<a href="../globals.html#handlerrouter" class="tsd-kind-icon">handler<wbr>Router</a>
-					</li>
-					<li class=" tsd-kind-function">
-						<a href="../globals.html#loadproperty" class="tsd-kind-icon">load<wbr>Property</a>
-					</li>
-					<li class=" tsd-kind-function">
-						<a href="../globals.html#xray" class="tsd-kind-icon">xray</a>
+					<li class=" tsd-kind-function tsd-parent-kind-module">
+						<a href="_aws_xray_sdk_.html#getsegment" class="tsd-kind-icon">get<wbr>Segment</a>
 					</li>
 				</ul>
 			</nav>

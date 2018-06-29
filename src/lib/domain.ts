@@ -28,24 +28,24 @@ export class Aggregate<BaseEventType extends Event> implements Resource {
     await aggregate.hydrate()
     return (aggregate.version === 0) ? undefined : aggregate
   }
-  public static async findAll<BaseEventType extends Event, AggregateImplementation extends Aggregate<BaseEventType>> (type: { new(id?: string): AggregateImplementation }): Promise<Resource[]> {
+  public static async findAll<BaseEventType extends Event, AggregateImplementation extends Aggregate<BaseEventType>> (type: { new(options?: AggregateOptions): AggregateImplementation }, table?: string): Promise<AggregateImplementation[]> {
     const records = await dynamo.scan({
-      TableName: table
+      TableName: table || loadProperty('DYNAMODB_TABLE')
     }).promise()
     const resourcesAndEvents: { [key: string]: BaseEventType[] } = {}
-    if (!records.Items) throw new NoDynamoData()
+    if (!records.Items) return []
     for (const record of records.Items) {
       /* tslint:disable:no-object-mutation */
       if (!resourcesAndEvents[record.id]) resourcesAndEvents[record.id] = []
       resourcesAndEvents[record.id].push(record as BaseEventType)
     }
-    const aggregates: Array<Aggregate<BaseEventType>> = []
+    const aggregates: AggregateImplementation[] = []
     for (const id of Object.keys(resourcesAndEvents)) {
-      const aggregate: AggregateImplementation = new type(id)
+      const aggregate: AggregateImplementation = new type({ id })
       await aggregate.hydrate(resourcesAndEvents[id])
       aggregates.push(aggregate)
     }
-    return aggregates as Resource[]
+    return aggregates
   }
   public readonly id: string
   public version: number

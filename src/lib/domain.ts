@@ -1,4 +1,4 @@
-import { dynamo, xray, loadProperty } from './environment'
+import { dynamo, xray, loadProperty, BaseError } from './environment'
 import { v4 } from 'uuid'
 
 /**
@@ -17,13 +17,16 @@ export interface Event {
   readonly created: string
 }
 
-const table = loadProperty('DYNAMODB_TABLE', true) as string
+export interface AggregateOptions {
+  readonly id?: string
+  readonly table?: string
+}
 
 export class Aggregate<BaseEventType extends Event> implements Resource {
-  public static async findOne<BaseEventType extends Event, AggregateImplementation extends Aggregate<BaseEventType>> (id: string, type: { new(id?: string): AggregateImplementation }): Promise<ResourceNotFound | Resource> {
-    const aggregate: AggregateImplementation = new type(id)
+  public static async findOne<BaseEventType extends Event, AggregateImplementation extends Aggregate<BaseEventType>> (type: { new(options?: AggregateOptions): AggregateImplementation }, id: string, table?: string): Promise<AggregateImplementation | undefined> {
+    const aggregate: AggregateImplementation = new type({ id, table })
     await aggregate.hydrate()
-    return (aggregate.version === 0) ? new ResourceNotFound(id) : aggregate
+    return (aggregate.version === 0) ? undefined : aggregate
   }
   public static async findAll<BaseEventType extends Event, AggregateImplementation extends Aggregate<BaseEventType>> (type: { new(id?: string): AggregateImplementation }): Promise<Resource[]> {
     const records = await dynamo.scan({
@@ -122,9 +125,7 @@ export class Aggregate<BaseEventType extends Event> implements Resource {
         (this as any)[methods[methodIndex]](event)
         this.version++
         console.log(`Event number ${event.number} applied with ${methods[methodIndex]}.`)
-      } else throw new Error(`Unsupported event detected for event type ${event.type}. Please implement on${event.type}(event: ${event.type}Event).`)
-    }
-  }
+      } else throw new IllegalEventArgument(event)
 }
   }
 }

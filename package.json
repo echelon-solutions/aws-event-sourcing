@@ -1,6 +1,6 @@
 {
   "name": "@echelon-solutions/aws-event-sourcing",
-  "version": "0.1.4",
+  "version": "0.1.5",
   "description": "A straightforward way to build event based applications with AWS Lambda.",
   "author": "Khalid Zoabi <kzoabi@outlook.com>",
   "main": "build/main/index.js",

@@ -126,16 +126,6 @@ export class Aggregate<BaseEventType extends Event> implements Resource {
     }
   }
 }
-
-class BaseError extends Error {
-  // We have to do complicated things to set the error prototype to be able to use instanceof on the error
-  // This is an issue with Typescript and es5, maybe fixable when using webpack w/ es6?
-  /* tslint:disable:member-access variable-name */
-  __proto__: Error
-  constructor (message: string) {
-    const trueProto = new.target.prototype
-    super(message)
-    this.__proto__ = trueProto
   }
 }
 

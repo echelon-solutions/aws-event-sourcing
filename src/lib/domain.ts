@@ -49,18 +49,20 @@ export class Aggregate<BaseEventType extends Event> implements Resource {
   }
   public readonly id: string
   public version: number
+  private table: string
   /**
    * Instantiate an aggregate instance, optionally passing in a resource id 
    *   to reference an existing resource.
    * @param id 
    */
-  constructor (id?: string) {
-    this.id = id || v4()
+  constructor (options?: AggregateOptions) {
+    this.id = (options && options.id) ? options.id : v4()
     this.version = 0
+    this.table = (options && options.table) ? options.table : loadProperty('DYNAMODB_TABLE')
   }
   public async events (): Promise<BaseEventType[]> {
     return (await dynamo.query({
-      TableName: table,
+      TableName: this.table,
       KeyConditionExpression: 'id = :id',
       ScanIndexForward: true,
       ExpressionAttributeValues: {
@@ -88,7 +90,7 @@ export class Aggregate<BaseEventType extends Event> implements Resource {
        *   number.
        */
       await dynamo.put({
-        TableName: table,
+        TableName: this.table,
         ConditionExpression: 'attribute_not_exists(id)',
         Item: {
           id: this.id,
@@ -102,7 +104,7 @@ export class Aggregate<BaseEventType extends Event> implements Resource {
        * Add a new event to an existing resource.
        */
       await dynamo.put({
-        TableName: table,
+        TableName: this.table,
         ConditionExpression: 'attribute_not_exists(#eventNumber)',
         ExpressionAttributeNames: {
           '#eventNumber': 'number'

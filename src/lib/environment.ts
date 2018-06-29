@@ -6,12 +6,18 @@ import express from 'express'
 
 // PROPERTIES
 
-export function loadProperty (property: 'DYNAMODB_TABLE' | string, required: boolean): string | void {
+export type Property = 'DYNAMODB_TABLE' | 'AWS_REGION'
+
+export function loadPropertyOptional (property: Property): string | undefined {
   if (process.env[property]) return process.env[property]
-  if (required) throw new Error(`Missing the required ${property} environment property.`)
+  return undefined
 }
 
-export const region = (process.env.IS_OFFLINE) ? 'us-east-1' : loadProperty('AWS_REGION', true)
+export function loadProperty (property: Property): string {
+  const value = loadPropertyOptional(property)
+  if (!value) throw new PropertyNotFound(property)
+  return value
+}
 
 // CLIENTS
 
@@ -22,7 +28,7 @@ const AWS = (process.env.IS_OFFLINE)
 
 export const dynamo = (process.env.IS_OFFLINE)
   ? new AWS.DynamoDB.DocumentClient({ region: 'localhost', endpoint: 'http://localhost:8000' }) as DynamoDB.DocumentClient
-  : new AWS.DynamoDB.DocumentClient({ apiVersion: '2012-08-10', region }) as DynamoDB.DocumentClient
+  : new AWS.DynamoDB.DocumentClient({ apiVersion: '2012-08-10', region: loadProperty('AWS_REGION') }) as DynamoDB.DocumentClient
 
 /**
  * Adds an AWS XRAY log annotation that is searchable/filterable (or not) in the console.
@@ -82,6 +88,12 @@ export class BaseError extends Error {
     const trueProto = new.target.prototype
     super(message)
     this.__proto__ = trueProto
+  }
+}
+
+export class PropertyNotFound extends BaseError {
+  constructor (property: string) {
+    super (`Missing the required ${property} environment property.`)
   }
 }
 

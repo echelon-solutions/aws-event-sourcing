@@ -118,6 +118,9 @@ export class Aggregate<BaseEventType extends Event> implements Resource {
     }
     throw new IllegalEventNumberArgument()
   }
+  protected onEvent (event: Event): void {
+    console.warn('Generic event handler. You will only get this warning if you failed to implement the aggregate.')
+  }
   // TODO compile time errors vs run time
   private apply (events: BaseEventType[]): void {
     const methods = Object.getOwnPropertyNames(Object.getPrototypeOf(this))
@@ -128,7 +131,7 @@ export class Aggregate<BaseEventType extends Event> implements Resource {
         this.version++
         console.log(`Event number ${event.number} applied with ${methods[methodIndex]}.`)
       } else throw new IllegalEventArgument(event)
-}
+    }
   }
 }
 

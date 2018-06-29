@@ -102,6 +102,7 @@
 							<h3>Properties</h3>
 							<ul class="tsd-index-list">
 								<li class="tsd-kind-property tsd-parent-kind-class"><a href="aggregate.html#id" class="tsd-kind-icon">id</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><a href="aggregate.html#table" class="tsd-kind-icon">table</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-class"><a href="aggregate.html#version" class="tsd-kind-icon">version</a></li>
 							</ul>
 						</section>
@@ -112,6 +113,7 @@
 								<li class="tsd-kind-method tsd-parent-kind-class"><a href="aggregate.html#commit" class="tsd-kind-icon">commit</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class"><a href="aggregate.html#events" class="tsd-kind-icon">events</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class"><a href="aggregate.html#hydrate" class="tsd-kind-icon">hydrate</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-protected"><a href="aggregate.html#onevent" class="tsd-kind-icon">on<wbr>Event</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class tsd-has-type-parameter tsd-is-static"><a href="aggregate.html#findall" class="tsd-kind-icon">find<wbr>All</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class tsd-has-type-parameter tsd-is-static"><a href="aggregate.html#findone" class="tsd-kind-icon">find<wbr>One</a></li>
 							</ul>
@@ -125,13 +127,13 @@
 					<a name="constructor" class="tsd-anchor"></a>
 					<h3>constructor</h3>
 					<ul class="tsd-signatures tsd-kind-constructor tsd-parent-kind-class">
-						<li class="tsd-signature tsd-kind-icon">new <wbr>Aggregate<span class="tsd-signature-symbol">(</span>id<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="aggregate.html" class="tsd-signature-type">Aggregate</a></li>
+						<li class="tsd-signature tsd-kind-icon">new <wbr>Aggregate<span class="tsd-signature-symbol">(</span>options<span class="tsd-signature-symbol">?: </span><a href="../interfaces/aggregateoptions.html" class="tsd-signature-type">AggregateOptions</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="aggregate.html" class="tsd-signature-type">Aggregate</a></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/echelon-solutions/aws-event-sourcing/blob/9e371fe/src/lib/domain.ts#L48">lib/domain.ts:48</a></li>
+									<li>Defined in <a href="https://github.com/echelon-solutions/aws-event-sourcing/blob/aaa36f0/src/lib/domain.ts#L52">lib/domain.ts:52</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -143,11 +145,7 @@
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
-									<h5><span class="tsd-flag ts-flagOptional">Optional</span> id: <span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">string</span></h5>
-									<div class="tsd-comment tsd-typography">
-										<div class="lead">
-										</div>
-									</div>
+									<h5><span class="tsd-flag ts-flagOptional">Optional</span> options: <a href="../interfaces/aggregateoptions.html" class="tsd-signature-type">AggregateOptions</a></h5>
 								</li>
 							</ul>
 							<h4 class="tsd-returns-title">Returns <a href="aggregate.html" class="tsd-signature-type">Aggregate</a></h4>
@@ -164,7 +162,17 @@
 					<aside class="tsd-sources">
 						<p>Implementation of <a href="../interfaces/resource.html">Resource</a>.<a href="../interfaces/resource.html#id">id</a></p>
 						<ul>
-							<li>Defined in <a href="https://github.com/echelon-solutions/aws-event-sourcing/blob/9e371fe/src/lib/domain.ts#L47">lib/domain.ts:47</a></li>
+							<li>Defined in <a href="https://github.com/echelon-solutions/aws-event-sourcing/blob/aaa36f0/src/lib/domain.ts#L50">lib/domain.ts:50</a></li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-private">
+					<a name="table" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagPrivate">Private</span> table</h3>
+					<div class="tsd-signature tsd-kind-icon">table<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/echelon-solutions/aws-event-sourcing/blob/aaa36f0/src/lib/domain.ts#L52">lib/domain.ts:52</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -174,7 +182,7 @@
 					<div class="tsd-signature tsd-kind-icon">version<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/echelon-solutions/aws-event-sourcing/blob/9e371fe/src/lib/domain.ts#L48">lib/domain.ts:48</a></li>
+							<li>Defined in <a href="https://github.com/echelon-solutions/aws-event-sourcing/blob/aaa36f0/src/lib/domain.ts#L51">lib/domain.ts:51</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -191,7 +199,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/echelon-solutions/aws-event-sourcing/blob/9e371fe/src/lib/domain.ts#L117">lib/domain.ts:117</a></li>
+									<li>Defined in <a href="https://github.com/echelon-solutions/aws-event-sourcing/blob/aaa36f0/src/lib/domain.ts#L125">lib/domain.ts:125</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -214,7 +222,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/echelon-solutions/aws-event-sourcing/blob/9e371fe/src/lib/domain.ts#L72">lib/domain.ts:72</a></li>
+									<li>Defined in <a href="https://github.com/echelon-solutions/aws-event-sourcing/blob/aaa36f0/src/lib/domain.ts#L77">lib/domain.ts:77</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -237,7 +245,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/echelon-solutions/aws-event-sourcing/blob/9e371fe/src/lib/domain.ts#L58">lib/domain.ts:58</a></li>
+									<li>Defined in <a href="https://github.com/echelon-solutions/aws-event-sourcing/blob/aaa36f0/src/lib/domain.ts#L63">lib/domain.ts:63</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">BaseEventType</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">&gt;</span></h4>
@@ -254,7 +262,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/echelon-solutions/aws-event-sourcing/blob/9e371fe/src/lib/domain.ts#L68">lib/domain.ts:68</a></li>
+									<li>Defined in <a href="https://github.com/echelon-solutions/aws-event-sourcing/blob/aaa36f0/src/lib/domain.ts#L73">lib/domain.ts:73</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -267,17 +275,40 @@
 						</li>
 					</ul>
 				</section>
-				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-has-type-parameter tsd-is-static">
-					<a name="findall" class="tsd-anchor"></a>
-					<h3><span class="tsd-flag ts-flagStatic">Static</span> find<wbr>All</h3>
-					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-has-type-parameter tsd-is-static">
-						<li class="tsd-signature tsd-kind-icon">find<wbr>All&lt;BaseEventType, AggregateImplementation&gt;<span class="tsd-signature-symbol">(</span>type<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">object</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><a href="../interfaces/resource.html" class="tsd-signature-type">Resource</a><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">&gt;</span></li>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-protected">
+					<a name="onevent" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagProtected">Protected</span> on<wbr>Event</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-protected">
+						<li class="tsd-signature tsd-kind-icon">on<wbr>Event<span class="tsd-signature-symbol">(</span>event<span class="tsd-signature-symbol">: </span><a href="../interfaces/event.html" class="tsd-signature-type">Event</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/echelon-solutions/aws-event-sourcing/blob/9e371fe/src/lib/domain.ts#L28">lib/domain.ts:28</a></li>
+									<li>Defined in <a href="https://github.com/echelon-solutions/aws-event-sourcing/blob/aaa36f0/src/lib/domain.ts#L121">lib/domain.ts:121</a></li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>event: <a href="../interfaces/event.html" class="tsd-signature-type">Event</a></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-has-type-parameter tsd-is-static">
+					<a name="findall" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagStatic">Static</span> find<wbr>All</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-has-type-parameter tsd-is-static">
+						<li class="tsd-signature tsd-kind-icon">find<wbr>All&lt;BaseEventType, AggregateImplementation&gt;<span class="tsd-signature-symbol">(</span>type<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">object</span>, table<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">AggregateImplementation</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">&gt;</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/echelon-solutions/aws-event-sourcing/blob/aaa36f0/src/lib/domain.ts#L31">lib/domain.ts:31</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-type-parameters-title">Type parameters</h4>
@@ -297,19 +328,19 @@
 										<li class="tsd-parameter">
 											<h5>constructor<span class="tsd-signature-symbol">: </span>function</h5>
 											<ul class="tsd-signatures tsd-kind-constructor tsd-parent-kind-type-literal tsd-is-not-exported">
-												<li class="tsd-signature tsd-kind-icon">new __type<span class="tsd-signature-symbol">(</span>id<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">AggregateImplementation</span></li>
+												<li class="tsd-signature tsd-kind-icon">new __type<span class="tsd-signature-symbol">(</span>options<span class="tsd-signature-symbol">?: </span><a href="../interfaces/aggregateoptions.html" class="tsd-signature-type">AggregateOptions</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">AggregateImplementation</span></li>
 											</ul>
 											<ul class="tsd-descriptions">
 												<li class="tsd-description">
 													<aside class="tsd-sources">
 														<ul>
-															<li>Defined in <a href="https://github.com/echelon-solutions/aws-event-sourcing/blob/9e371fe/src/lib/domain.ts#L28">lib/domain.ts:28</a></li>
+															<li>Defined in <a href="https://github.com/echelon-solutions/aws-event-sourcing/blob/aaa36f0/src/lib/domain.ts#L31">lib/domain.ts:31</a></li>
 														</ul>
 													</aside>
 													<h4 class="tsd-parameters-title">Parameters</h4>
 													<ul class="tsd-parameters">
 														<li>
-															<h5><span class="tsd-flag ts-flagOptional">Optional</span> id: <span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">string</span></h5>
+															<h5><span class="tsd-flag ts-flagOptional">Optional</span> options: <a href="../interfaces/aggregateoptions.html" class="tsd-signature-type">AggregateOptions</a></h5>
 														</li>
 													</ul>
 													<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">AggregateImplementation</span></h4>
@@ -317,8 +348,11 @@
 										</ul>        </li>
 									</ul>
 								</li>
+								<li>
+									<h5><span class="tsd-flag ts-flagOptional">Optional</span> table: <span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">string</span></h5>
+								</li>
 							</ul>
-							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><a href="../interfaces/resource.html" class="tsd-signature-type">Resource</a><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">&gt;</span></h4>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">AggregateImplementation</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">&gt;</span></h4>
 						</li>
 					</ul>
 				</section>
@@ -326,13 +360,13 @@
 					<a name="findone" class="tsd-anchor"></a>
 					<h3><span class="tsd-flag ts-flagStatic">Static</span> find<wbr>One</h3>
 					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-has-type-parameter tsd-is-static">
-						<li class="tsd-signature tsd-kind-icon">find<wbr>One&lt;BaseEventType, AggregateImplementation&gt;<span class="tsd-signature-symbol">(</span>id<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, type<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">object</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><a href="resourcenotfound.html" class="tsd-signature-type">ResourceNotFound</a><span class="tsd-signature-symbol"> | </span><a href="../interfaces/resource.html" class="tsd-signature-type">Resource</a><span class="tsd-signature-symbol">&gt;</span></li>
+						<li class="tsd-signature tsd-kind-icon">find<wbr>One&lt;BaseEventType, AggregateImplementation&gt;<span class="tsd-signature-symbol">(</span>type<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">object</span>, id<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, table<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">AggregateImplementation</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol">&gt;</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/echelon-solutions/aws-event-sourcing/blob/9e371fe/src/lib/domain.ts#L23">lib/domain.ts:23</a></li>
+									<li>Defined in <a href="https://github.com/echelon-solutions/aws-event-sourcing/blob/aaa36f0/src/lib/domain.ts#L26">lib/domain.ts:26</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-type-parameters-title">Type parameters</h4>
@@ -347,27 +381,24 @@
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
-									<h5>id: <span class="tsd-signature-type">string</span></h5>
-								</li>
-								<li>
 									<h5>type: <span class="tsd-signature-type">object</span></h5>
 									<ul class="tsd-parameters">
 										<li class="tsd-parameter">
 											<h5>constructor<span class="tsd-signature-symbol">: </span>function</h5>
 											<ul class="tsd-signatures tsd-kind-constructor tsd-parent-kind-type-literal tsd-is-not-exported">
-												<li class="tsd-signature tsd-kind-icon">new __type<span class="tsd-signature-symbol">(</span>id<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">AggregateImplementation</span></li>
+												<li class="tsd-signature tsd-kind-icon">new __type<span class="tsd-signature-symbol">(</span>options<span class="tsd-signature-symbol">?: </span><a href="../interfaces/aggregateoptions.html" class="tsd-signature-type">AggregateOptions</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">AggregateImplementation</span></li>
 											</ul>
 											<ul class="tsd-descriptions">
 												<li class="tsd-description">
 													<aside class="tsd-sources">
 														<ul>
-															<li>Defined in <a href="https://github.com/echelon-solutions/aws-event-sourcing/blob/9e371fe/src/lib/domain.ts#L23">lib/domain.ts:23</a></li>
+															<li>Defined in <a href="https://github.com/echelon-solutions/aws-event-sourcing/blob/aaa36f0/src/lib/domain.ts#L26">lib/domain.ts:26</a></li>
 														</ul>
 													</aside>
 													<h4 class="tsd-parameters-title">Parameters</h4>
 													<ul class="tsd-parameters">
 														<li>
-															<h5><span class="tsd-flag ts-flagOptional">Optional</span> id: <span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">string</span></h5>
+															<h5><span class="tsd-flag ts-flagOptional">Optional</span> options: <a href="../interfaces/aggregateoptions.html" class="tsd-signature-type">AggregateOptions</a></h5>
 														</li>
 													</ul>
 													<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">AggregateImplementation</span></h4>
@@ -375,8 +406,14 @@
 										</ul>        </li>
 									</ul>
 								</li>
+								<li>
+									<h5>id: <span class="tsd-signature-type">string</span></h5>
+								</li>
+								<li>
+									<h5><span class="tsd-flag ts-flagOptional">Optional</span> table: <span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">string</span></h5>
+								</li>
 							</ul>
-							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><a href="resourcenotfound.html" class="tsd-signature-type">ResourceNotFound</a><span class="tsd-signature-symbol"> | </span><a href="../interfaces/resource.html" class="tsd-signature-type">Resource</a><span class="tsd-signature-symbol">&gt;</span></h4>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">AggregateImplementation</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol">&gt;</span></h4>
 						</li>
 					</ul>
 				</section>
@@ -403,6 +440,9 @@
 							<li class=" tsd-kind-property tsd-parent-kind-class">
 								<a href="aggregate.html#id" class="tsd-kind-icon">id</a>
 							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-private">
+								<a href="aggregate.html#table" class="tsd-kind-icon">table</a>
+							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-class">
 								<a href="aggregate.html#version" class="tsd-kind-icon">version</a>
 							</li>
@@ -418,6 +458,9 @@
 							<li class=" tsd-kind-method tsd-parent-kind-class">
 								<a href="aggregate.html#hydrate" class="tsd-kind-icon">hydrate</a>
 							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-protected">
+								<a href="aggregate.html#onevent" class="tsd-kind-icon">on<wbr>Event</a>
+							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class tsd-has-type-parameter tsd-is-static">
 								<a href="aggregate.html#findall" class="tsd-kind-icon">find<wbr>All</a>
 							</li>
@@ -428,23 +471,32 @@
 					</li>
 				</ul>
 				<ul class="after-current">
-					<li class=" tsd-kind-class tsd-is-not-exported">
+					<li class=" tsd-kind-class">
 						<a href="baseerror.html" class="tsd-kind-icon">Base<wbr>Error</a>
 					</li>
-					<li class=" tsd-kind-class tsd-is-not-exported">
-						<a href="illegaleventnumberargument.html" class="tsd-kind-icon">Illegal<wbr>Event<wbr>Number<wbr>Argument</a>
-					</li>
-					<li class=" tsd-kind-class tsd-is-not-exported">
-						<a href="nodynamodata.html" class="tsd-kind-icon">No<wbr>Dynamo<wbr>Data</a>
+					<li class=" tsd-kind-class">
+						<a href="illegaleventargument.html" class="tsd-kind-icon">Illegal<wbr>Event<wbr>Argument</a>
 					</li>
 					<li class=" tsd-kind-class">
-						<a href="resourcenotfound.html" class="tsd-kind-icon">Resource<wbr>Not<wbr>Found</a>
+						<a href="illegaleventnumberargument.html" class="tsd-kind-icon">Illegal<wbr>Event<wbr>Number<wbr>Argument</a>
+					</li>
+					<li class=" tsd-kind-class">
+						<a href="propertynotfound.html" class="tsd-kind-icon">Property<wbr>Not<wbr>Found</a>
+					</li>
+					<li class=" tsd-kind-class">
+						<a href="unroutableeventtype.html" class="tsd-kind-icon">Unroutable<wbr>Event<wbr>Type</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="../interfaces/aggregateoptions.html" class="tsd-kind-icon">Aggregate<wbr>Options</a>
 					</li>
 					<li class=" tsd-kind-interface">
 						<a href="../interfaces/event.html" class="tsd-kind-icon">Event</a>
 					</li>
 					<li class=" tsd-kind-interface">
 						<a href="../interfaces/resource.html" class="tsd-kind-icon">Resource</a>
+					</li>
+					<li class=" tsd-kind-type-alias">
+						<a href="../globals.html#property" class="tsd-kind-icon">Property</a>
 					</li>
 					<li class=" tsd-kind-variable tsd-is-not-exported">
 						<a href="../globals.html#aws" class="tsd-kind-icon">AWS</a>
@@ -455,11 +507,11 @@
 					<li class=" tsd-kind-variable">
 						<a href="../globals.html#dynamo" class="tsd-kind-icon">dynamo</a>
 					</li>
-					<li class=" tsd-kind-variable">
-						<a href="../globals.html#region" class="tsd-kind-icon">region</a>
+					<li class=" tsd-kind-variable tsd-is-not-exported">
+						<a href="../globals.html#localdatabase" class="tsd-kind-icon">local<wbr>Database</a>
 					</li>
 					<li class=" tsd-kind-variable tsd-is-not-exported">
-						<a href="../globals.html#table" class="tsd-kind-icon">table</a>
+						<a href="../globals.html#tablename" class="tsd-kind-icon">table<wbr>Name</a>
 					</li>
 					<li class=" tsd-kind-function">
 						<a href="../globals.html#defaultapp" class="tsd-kind-icon">default<wbr>App</a>
@@ -469,6 +521,9 @@
 					</li>
 					<li class=" tsd-kind-function">
 						<a href="../globals.html#loadproperty" class="tsd-kind-icon">load<wbr>Property</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="../globals.html#loadpropertyoptional" class="tsd-kind-icon">load<wbr>Property<wbr>Optional</a>
 					</li>
 					<li class=" tsd-kind-function">
 						<a href="../globals.html#xray" class="tsd-kind-icon">xray</a>

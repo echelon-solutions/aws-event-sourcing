@@ -71,23 +71,32 @@
 							<h3>Modules</h3>
 							<ul class="tsd-index-list">
 								<li class="tsd-kind-module tsd-is-not-exported"><a href="modules/_aws_xray_sdk_.html" class="tsd-kind-icon">"aws-<wbr>xray-<wbr>sdk"</a></li>
+								<li class="tsd-kind-module tsd-is-not-exported"><a href="modules/_supertest_.html" class="tsd-kind-icon">"supertest"</a></li>
 							</ul>
 						</section>
 						<section class="tsd-index-section ">
 							<h3>Classes</h3>
 							<ul class="tsd-index-list">
 								<li class="tsd-kind-class tsd-has-type-parameter"><a href="classes/aggregate.html" class="tsd-kind-icon">Aggregate</a></li>
-								<li class="tsd-kind-class tsd-is-not-exported"><a href="classes/baseerror.html" class="tsd-kind-icon">Base<wbr>Error</a></li>
-								<li class="tsd-kind-class tsd-is-not-exported"><a href="classes/illegaleventnumberargument.html" class="tsd-kind-icon">Illegal<wbr>Event<wbr>Number<wbr>Argument</a></li>
-								<li class="tsd-kind-class tsd-is-not-exported"><a href="classes/nodynamodata.html" class="tsd-kind-icon">No<wbr>Dynamo<wbr>Data</a></li>
-								<li class="tsd-kind-class"><a href="classes/resourcenotfound.html" class="tsd-kind-icon">Resource<wbr>Not<wbr>Found</a></li>
+								<li class="tsd-kind-class"><a href="classes/baseerror.html" class="tsd-kind-icon">Base<wbr>Error</a></li>
+								<li class="tsd-kind-class"><a href="classes/illegaleventargument.html" class="tsd-kind-icon">Illegal<wbr>Event<wbr>Argument</a></li>
+								<li class="tsd-kind-class"><a href="classes/illegaleventnumberargument.html" class="tsd-kind-icon">Illegal<wbr>Event<wbr>Number<wbr>Argument</a></li>
+								<li class="tsd-kind-class"><a href="classes/propertynotfound.html" class="tsd-kind-icon">Property<wbr>Not<wbr>Found</a></li>
+								<li class="tsd-kind-class"><a href="classes/unroutableeventtype.html" class="tsd-kind-icon">Unroutable<wbr>Event<wbr>Type</a></li>
 							</ul>
 						</section>
 						<section class="tsd-index-section ">
 							<h3>Interfaces</h3>
 							<ul class="tsd-index-list">
+								<li class="tsd-kind-interface"><a href="interfaces/aggregateoptions.html" class="tsd-kind-icon">Aggregate<wbr>Options</a></li>
 								<li class="tsd-kind-interface"><a href="interfaces/event.html" class="tsd-kind-icon">Event</a></li>
 								<li class="tsd-kind-interface"><a href="interfaces/resource.html" class="tsd-kind-icon">Resource</a></li>
+							</ul>
+						</section>
+						<section class="tsd-index-section ">
+							<h3>Type aliases</h3>
+							<ul class="tsd-index-list">
+								<li class="tsd-kind-type-alias"><a href="globals.html#property" class="tsd-kind-icon">Property</a></li>
 							</ul>
 						</section>
 						<section class="tsd-index-section ">
@@ -96,8 +105,8 @@
 								<li class="tsd-kind-variable tsd-is-not-exported"><a href="globals.html#aws" class="tsd-kind-icon">AWS</a></li>
 								<li class="tsd-kind-variable"><a href="globals.html#defaultmiddlewares" class="tsd-kind-icon">default<wbr>Middlewares</a></li>
 								<li class="tsd-kind-variable"><a href="globals.html#dynamo" class="tsd-kind-icon">dynamo</a></li>
-								<li class="tsd-kind-variable"><a href="globals.html#region" class="tsd-kind-icon">region</a></li>
-								<li class="tsd-kind-variable tsd-is-not-exported"><a href="globals.html#table" class="tsd-kind-icon">table</a></li>
+								<li class="tsd-kind-variable tsd-is-not-exported"><a href="globals.html#localdatabase" class="tsd-kind-icon">local<wbr>Database</a></li>
+								<li class="tsd-kind-variable tsd-is-not-exported"><a href="globals.html#tablename" class="tsd-kind-icon">table<wbr>Name</a></li>
 							</ul>
 						</section>
 						<section class="tsd-index-section ">
@@ -106,10 +115,24 @@
 								<li class="tsd-kind-function"><a href="globals.html#defaultapp" class="tsd-kind-icon">default<wbr>App</a></li>
 								<li class="tsd-kind-function"><a href="globals.html#handlerrouter" class="tsd-kind-icon">handler<wbr>Router</a></li>
 								<li class="tsd-kind-function"><a href="globals.html#loadproperty" class="tsd-kind-icon">load<wbr>Property</a></li>
+								<li class="tsd-kind-function"><a href="globals.html#loadpropertyoptional" class="tsd-kind-icon">load<wbr>Property<wbr>Optional</a></li>
 								<li class="tsd-kind-function"><a href="globals.html#xray" class="tsd-kind-icon">xray</a></li>
 							</ul>
 						</section>
 					</div>
+				</section>
+			</section>
+			<section class="tsd-panel-group tsd-member-group ">
+				<h2>Type aliases</h2>
+				<section class="tsd-panel tsd-member tsd-kind-type-alias">
+					<a name="property" class="tsd-anchor"></a>
+					<h3>Property</h3>
+					<div class="tsd-signature tsd-kind-icon">Property<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">"DYNAMODB_TABLE"</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">"AWS_REGION"</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/echelon-solutions/aws-event-sourcing/blob/aaa36f0/src/lib/environment.ts#L9">lib/environment.ts:9</a></li>
+						</ul>
+					</aside>
 				</section>
 			</section>
 			<section class="tsd-panel-group tsd-member-group ">
@@ -120,7 +143,7 @@
 					<div class="tsd-signature tsd-kind-icon">AWS<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">any</span><span class="tsd-signature-symbol"> =&nbsp;(process.env.IS_OFFLINE)? require(&#x27;aws-sdk&#x27;): AWSXRay.captureAWS(require(&#x27;aws-sdk&#x27;))</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/echelon-solutions/aws-event-sourcing/blob/9e371fe/src/lib/environment.ts#L19">lib/environment.ts:19</a></li>
+							<li>Defined in <a href="https://github.com/echelon-solutions/aws-event-sourcing/blob/aaa36f0/src/lib/environment.ts#L25">lib/environment.ts:25</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -130,7 +153,7 @@
 					<div class="tsd-signature tsd-kind-icon">default<wbr>Middlewares<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol"> =&nbsp;[(req: express.Request, res: express.Response, next: express.NextFunction) &#x3D;&gt; {xray(&#x27;error&#x27;, &#x27;CLIENT | 404 Not Found&#x27;, true)res.status(404).send()},(error: Error, req: express.Request, res: express.Response, next: express.NextFunction) &#x3D;&gt; {if (error.message &#x3D;&#x3D;&#x3D; &#x27;Invalid request&#x27;) {xray(&#x27;error&#x27;, &#x60;CLIENT | ${error.message}&#x60;, true)res.status(400).json({message: error.message})} else {console.error(error)xray(&#x27;error&#x27;, &#x60;SERVER | ${error.message}&#x60;, true)res.status(500).json({message: &#x27;Internal server error&#x27;})}},AWSXRay.express.closeSegment()]</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/echelon-solutions/aws-event-sourcing/blob/9e371fe/src/lib/environment.ts#L54">lib/environment.ts:54</a></li>
+							<li>Defined in <a href="https://github.com/echelon-solutions/aws-event-sourcing/blob/aaa36f0/src/lib/environment.ts#L60">lib/environment.ts:60</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -142,30 +165,30 @@
 				<section class="tsd-panel tsd-member tsd-kind-variable">
 					<a name="dynamo" class="tsd-anchor"></a>
 					<h3><span class="tsd-flag ts-flagConst">Const</span> dynamo</h3>
-					<div class="tsd-signature tsd-kind-icon">dynamo<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">DocumentClient</span><span class="tsd-signature-symbol"> =&nbsp;(process.env.IS_OFFLINE)? new AWS.DynamoDB.DocumentClient({ region: &#x27;localhost&#x27;, endpoint: &#x27;http://localhost:8000&#x27; }) as DynamoDB.DocumentClient: new AWS.DynamoDB.DocumentClient({ apiVersion: &#x27;2012-08-10&#x27;, region }) as DynamoDB.DocumentClient</span></div>
+					<div class="tsd-signature tsd-kind-icon">dynamo<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">DocumentClient</span><span class="tsd-signature-symbol"> =&nbsp;(process.env.IS_OFFLINE)? new AWS.DynamoDB.DocumentClient({ region: &#x27;localhost&#x27;, endpoint: &#x27;http://localhost:8000&#x27; }) as DynamoDB.DocumentClient: new AWS.DynamoDB.DocumentClient({ apiVersion: &#x27;2012-08-10&#x27;, region: loadProperty(&#x27;AWS_REGION&#x27;) }) as DynamoDB.DocumentClient</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/echelon-solutions/aws-event-sourcing/blob/9e371fe/src/lib/environment.ts#L23">lib/environment.ts:23</a></li>
-						</ul>
-					</aside>
-				</section>
-				<section class="tsd-panel tsd-member tsd-kind-variable">
-					<a name="region" class="tsd-anchor"></a>
-					<h3><span class="tsd-flag ts-flagConst">Const</span> region</h3>
-					<div class="tsd-signature tsd-kind-icon">region<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol"> =&nbsp;(process.env.IS_OFFLINE) ? &#x27;us-east-1&#x27; : loadProperty(&#x27;AWS_REGION&#x27;, true)</span></div>
-					<aside class="tsd-sources">
-						<ul>
-							<li>Defined in <a href="https://github.com/echelon-solutions/aws-event-sourcing/blob/9e371fe/src/lib/environment.ts#L14">lib/environment.ts:14</a></li>
+							<li>Defined in <a href="https://github.com/echelon-solutions/aws-event-sourcing/blob/aaa36f0/src/lib/environment.ts#L29">lib/environment.ts:29</a></li>
 						</ul>
 					</aside>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-variable tsd-is-not-exported">
-					<a name="table" class="tsd-anchor"></a>
-					<h3><span class="tsd-flag ts-flagConst">Const</span> table</h3>
-					<div class="tsd-signature tsd-kind-icon">table<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> =&nbsp;loadProperty(&#x27;DYNAMODB_TABLE&#x27;, true) as string</span></div>
+					<a name="localdatabase" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagLet">Let</span> local<wbr>Database</h3>
+					<div class="tsd-signature tsd-kind-icon">local<wbr>Database<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">any</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/echelon-solutions/aws-event-sourcing/blob/9e371fe/src/lib/domain.ts#L20">lib/domain.ts:20</a></li>
+							<li>Defined in <a href="https://github.com/echelon-solutions/aws-event-sourcing/blob/aaa36f0/src/lib/domain.spec.ts#L17">lib/domain.spec.ts:17</a></li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-variable tsd-is-not-exported">
+					<a name="tablename" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagConst">Const</span> table<wbr>Name</h3>
+					<div class="tsd-signature tsd-kind-icon">table<wbr>Name<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">"domain-test"</span><span class="tsd-signature-symbol"> =&nbsp;process.env.DYNAMODB_TABLE &#x3D; &#x27;domain-test&#x27;</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/echelon-solutions/aws-event-sourcing/blob/aaa36f0/src/lib/domain.spec.ts#L4">lib/domain.spec.ts:4</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -182,7 +205,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/echelon-solutions/aws-event-sourcing/blob/9e371fe/src/lib/environment.ts#L42">lib/environment.ts:42</a></li>
+									<li>Defined in <a href="https://github.com/echelon-solutions/aws-event-sourcing/blob/aaa36f0/src/lib/environment.ts#L48">lib/environment.ts:48</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -204,7 +227,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/echelon-solutions/aws-event-sourcing/blob/9e371fe/src/lib/environment.ts#L79">lib/environment.ts:79</a></li>
+									<li>Defined in <a href="https://github.com/echelon-solutions/aws-event-sourcing/blob/aaa36f0/src/lib/environment.ts#L109">lib/environment.ts:109</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -249,27 +272,47 @@
 					<a name="loadproperty" class="tsd-anchor"></a>
 					<h3>load<wbr>Property</h3>
 					<ul class="tsd-signatures tsd-kind-function">
-						<li class="tsd-signature tsd-kind-icon">load<wbr>Property<span class="tsd-signature-symbol">(</span>property<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">"DYNAMODB_TABLE"</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">string</span>, required<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">void</span></li>
+						<li class="tsd-signature tsd-kind-icon">load<wbr>Property<span class="tsd-signature-symbol">(</span>property<span class="tsd-signature-symbol">: </span><a href="globals.html#property" class="tsd-signature-type">Property</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/echelon-solutions/aws-event-sourcing/blob/9e371fe/src/lib/environment.ts#L9">lib/environment.ts:9</a></li>
+									<li>Defined in <a href="https://github.com/echelon-solutions/aws-event-sourcing/blob/aaa36f0/src/lib/environment.ts#L16">lib/environment.ts:16</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
-									<h5>property: <span class="tsd-signature-type">"DYNAMODB_TABLE"</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">string</span></h5>
+									<h5>property: <a href="globals.html#property" class="tsd-signature-type">Property</a></h5>
 								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">string</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-function">
+					<a name="loadpropertyoptional" class="tsd-anchor"></a>
+					<h3>load<wbr>Property<wbr>Optional</h3>
+					<ul class="tsd-signatures tsd-kind-function">
+						<li class="tsd-signature tsd-kind-icon">load<wbr>Property<wbr>Optional<span class="tsd-signature-symbol">(</span>property<span class="tsd-signature-symbol">: </span><a href="globals.html#property" class="tsd-signature-type">Property</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">undefined</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/echelon-solutions/aws-event-sourcing/blob/aaa36f0/src/lib/environment.ts#L11">lib/environment.ts:11</a></li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
 								<li>
-									<h5>required: <span class="tsd-signature-type">boolean</span></h5>
+									<h5>property: <a href="globals.html#property" class="tsd-signature-type">Property</a></h5>
 								</li>
 							</ul>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">string</span>
 								<span class="tsd-signature-symbol"> | </span>
-								<span class="tsd-signature-type">void</span>
+								<span class="tsd-signature-type">undefined</span>
 							</h4>
 						</li>
 					</ul>
@@ -284,7 +327,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/echelon-solutions/aws-event-sourcing/blob/9e371fe/src/lib/environment.ts#L30">lib/environment.ts:30</a></li>
+									<li>Defined in <a href="https://github.com/echelon-solutions/aws-event-sourcing/blob/aaa36f0/src/lib/environment.ts#L36">lib/environment.ts:36</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -319,6 +362,9 @@
 					<li class=" tsd-kind-module tsd-is-not-exported">
 						<a href="modules/_aws_xray_sdk_.html">"aws-<wbr>xray-<wbr>sdk"</a>
 					</li>
+					<li class=" tsd-kind-module tsd-is-not-exported">
+						<a href="modules/_supertest_.html">"supertest"</a>
+					</li>
 				</ul>
 			</nav>
 			<nav class="tsd-navigation secondary menu-sticky">
@@ -326,23 +372,32 @@
 					<li class=" tsd-kind-class tsd-has-type-parameter">
 						<a href="classes/aggregate.html" class="tsd-kind-icon">Aggregate</a>
 					</li>
-					<li class=" tsd-kind-class tsd-is-not-exported">
+					<li class=" tsd-kind-class">
 						<a href="classes/baseerror.html" class="tsd-kind-icon">Base<wbr>Error</a>
 					</li>
-					<li class=" tsd-kind-class tsd-is-not-exported">
-						<a href="classes/illegaleventnumberargument.html" class="tsd-kind-icon">Illegal<wbr>Event<wbr>Number<wbr>Argument</a>
-					</li>
-					<li class=" tsd-kind-class tsd-is-not-exported">
-						<a href="classes/nodynamodata.html" class="tsd-kind-icon">No<wbr>Dynamo<wbr>Data</a>
+					<li class=" tsd-kind-class">
+						<a href="classes/illegaleventargument.html" class="tsd-kind-icon">Illegal<wbr>Event<wbr>Argument</a>
 					</li>
 					<li class=" tsd-kind-class">
-						<a href="classes/resourcenotfound.html" class="tsd-kind-icon">Resource<wbr>Not<wbr>Found</a>
+						<a href="classes/illegaleventnumberargument.html" class="tsd-kind-icon">Illegal<wbr>Event<wbr>Number<wbr>Argument</a>
+					</li>
+					<li class=" tsd-kind-class">
+						<a href="classes/propertynotfound.html" class="tsd-kind-icon">Property<wbr>Not<wbr>Found</a>
+					</li>
+					<li class=" tsd-kind-class">
+						<a href="classes/unroutableeventtype.html" class="tsd-kind-icon">Unroutable<wbr>Event<wbr>Type</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/aggregateoptions.html" class="tsd-kind-icon">Aggregate<wbr>Options</a>
 					</li>
 					<li class=" tsd-kind-interface">
 						<a href="interfaces/event.html" class="tsd-kind-icon">Event</a>
 					</li>
 					<li class=" tsd-kind-interface">
 						<a href="interfaces/resource.html" class="tsd-kind-icon">Resource</a>
+					</li>
+					<li class=" tsd-kind-type-alias">
+						<a href="globals.html#property" class="tsd-kind-icon">Property</a>
 					</li>
 					<li class=" tsd-kind-variable tsd-is-not-exported">
 						<a href="globals.html#aws" class="tsd-kind-icon">AWS</a>
@@ -353,11 +408,11 @@
 					<li class=" tsd-kind-variable">
 						<a href="globals.html#dynamo" class="tsd-kind-icon">dynamo</a>
 					</li>
-					<li class=" tsd-kind-variable">
-						<a href="globals.html#region" class="tsd-kind-icon">region</a>
+					<li class=" tsd-kind-variable tsd-is-not-exported">
+						<a href="globals.html#localdatabase" class="tsd-kind-icon">local<wbr>Database</a>
 					</li>
 					<li class=" tsd-kind-variable tsd-is-not-exported">
-						<a href="globals.html#table" class="tsd-kind-icon">table</a>
+						<a href="globals.html#tablename" class="tsd-kind-icon">table<wbr>Name</a>
 					</li>
 					<li class=" tsd-kind-function">
 						<a href="globals.html#defaultapp" class="tsd-kind-icon">default<wbr>App</a>
@@ -367,6 +422,9 @@
 					</li>
 					<li class=" tsd-kind-function">
 						<a href="globals.html#loadproperty" class="tsd-kind-icon">load<wbr>Property</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="globals.html#loadpropertyoptional" class="tsd-kind-icon">load<wbr>Property<wbr>Optional</a>
 					</li>
 					<li class=" tsd-kind-function">
 						<a href="globals.html#xray" class="tsd-kind-icon">xray</a>

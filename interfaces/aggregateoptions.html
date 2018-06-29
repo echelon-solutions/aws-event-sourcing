@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>IllegalEventNumberArgument | @echelon-solutions/aws-event-sourcing</title>
+	<title>AggregateOptions | @echelon-solutions/aws-event-sourcing</title>
 	<meta name="description" content="">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="../assets/css/main.css">
@@ -56,10 +56,10 @@
 					<a href="../globals.html">Globals</a>
 				</li>
 				<li>
-					<a href="illegaleventnumberargument.html">IllegalEventNumberArgument</a>
+					<a href="aggregateoptions.html">AggregateOptions</a>
 				</li>
 			</ul>
-			<h1>Class IllegalEventNumberArgument</h1>
+			<h1>Interface AggregateOptions</h1>
 		</div>
 	</div>
 </header>
@@ -70,12 +70,7 @@
 				<h3>Hierarchy</h3>
 				<ul class="tsd-hierarchy">
 					<li>
-						<a href="baseerror.html" class="tsd-signature-type">BaseError</a>
-						<ul class="tsd-hierarchy">
-							<li>
-								<span class="target">IllegalEventNumberArgument</span>
-							</li>
-						</ul>
+						<span class="target">AggregateOptions</span>
 					</li>
 				</ul>
 			</section>
@@ -84,88 +79,34 @@
 				<section class="tsd-panel tsd-index-panel">
 					<div class="tsd-index-content">
 						<section class="tsd-index-section ">
-							<h3>Constructors</h3>
-							<ul class="tsd-index-list">
-								<li class="tsd-kind-constructor tsd-parent-kind-class tsd-is-overwrite"><a href="illegaleventnumberargument.html#constructor" class="tsd-kind-icon">constructor</a></li>
-							</ul>
-						</section>
-						<section class="tsd-index-section tsd-is-inherited">
 							<h3>Properties</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited"><a href="illegaleventnumberargument.html#__proto__" class="tsd-kind-icon">__proto__</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited tsd-is-static"><a href="illegaleventnumberargument.html#message" class="tsd-kind-icon">message</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited tsd-is-static"><a href="illegaleventnumberargument.html#name" class="tsd-kind-icon">name</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-overwrite tsd-is-inherited tsd-is-static"><a href="illegaleventnumberargument.html#stack" class="tsd-kind-icon">stack</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="aggregateoptions.html#id" class="tsd-kind-icon">id</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="aggregateoptions.html#table" class="tsd-kind-icon">table</a></li>
 							</ul>
 						</section>
 					</div>
 				</section>
 			</section>
 			<section class="tsd-panel-group tsd-member-group ">
-				<h2>Constructors</h2>
-				<section class="tsd-panel tsd-member tsd-kind-constructor tsd-parent-kind-class tsd-is-overwrite">
-					<a name="constructor" class="tsd-anchor"></a>
-					<h3>constructor</h3>
-					<ul class="tsd-signatures tsd-kind-constructor tsd-parent-kind-class tsd-is-overwrite">
-						<li class="tsd-signature tsd-kind-icon">new <wbr>Illegal<wbr>Event<wbr>Number<wbr>Argument<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="illegaleventnumberargument.html" class="tsd-signature-type">IllegalEventNumberArgument</a></li>
-					</ul>
-					<ul class="tsd-descriptions">
-						<li class="tsd-description">
-							<aside class="tsd-sources">
-								<p>Overrides <a href="baseerror.html">BaseError</a>.<a href="baseerror.html#constructor">constructor</a></p>
-								<ul>
-									<li>Defined in <a href="https://github.com/echelon-solutions/aws-event-sourcing/blob/aaa36f0/src/lib/domain.ts#L138">lib/domain.ts:138</a></li>
-								</ul>
-							</aside>
-							<h4 class="tsd-returns-title">Returns <a href="illegaleventnumberargument.html" class="tsd-signature-type">IllegalEventNumberArgument</a></h4>
-						</li>
-					</ul>
-				</section>
-			</section>
-			<section class="tsd-panel-group tsd-member-group tsd-is-inherited">
 				<h2>Properties</h2>
-				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-inherited">
-					<a name="__proto__" class="tsd-anchor"></a>
-					<h3>__proto__</h3>
-					<div class="tsd-signature tsd-kind-icon">__proto__<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Error</span></div>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+					<a name="id" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagOptional">Optional</span> id</h3>
+					<div class="tsd-signature tsd-kind-icon">id<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">string</span></div>
 					<aside class="tsd-sources">
-						<p>Inherited from <a href="baseerror.html">BaseError</a>.<a href="baseerror.html#__proto__">__proto__</a></p>
 						<ul>
-							<li>Defined in <a href="https://github.com/echelon-solutions/aws-event-sourcing/blob/aaa36f0/src/lib/environment.ts#L86">lib/environment.ts:86</a></li>
+							<li>Defined in <a href="https://github.com/echelon-solutions/aws-event-sourcing/blob/aaa36f0/src/lib/domain.ts#L21">lib/domain.ts:21</a></li>
 						</ul>
 					</aside>
 				</section>
-				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-inherited tsd-is-static">
-					<a name="message" class="tsd-anchor"></a>
-					<h3><span class="tsd-flag ts-flagStatic">Static</span> message</h3>
-					<div class="tsd-signature tsd-kind-icon">message<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+					<a name="table" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagOptional">Optional</span> table</h3>
+					<div class="tsd-signature tsd-kind-icon">table<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">string</span></div>
 					<aside class="tsd-sources">
-						<p>Inherited from Error.message</p>
 						<ul>
-							<li>Defined in /Users/khalid/Desktop/repositories/specification.cloud/aws-event-sourcing/node_modules/typedoc/node_modules/typescript/lib/lib.es5.d.ts:886</li>
-						</ul>
-					</aside>
-				</section>
-				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-inherited tsd-is-static">
-					<a name="name" class="tsd-anchor"></a>
-					<h3><span class="tsd-flag ts-flagStatic">Static</span> name</h3>
-					<div class="tsd-signature tsd-kind-icon">name<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
-					<aside class="tsd-sources">
-						<p>Inherited from Error.name</p>
-						<ul>
-							<li>Defined in /Users/khalid/Desktop/repositories/specification.cloud/aws-event-sourcing/node_modules/typedoc/node_modules/typescript/lib/lib.es5.d.ts:885</li>
-						</ul>
-					</aside>
-				</section>
-				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-overwrite tsd-is-inherited tsd-is-static">
-					<a name="stack" class="tsd-anchor"></a>
-					<h3><span class="tsd-flag ts-flagStatic">Static</span> <span class="tsd-flag ts-flagOptional">Optional</span> stack</h3>
-					<div class="tsd-signature tsd-kind-icon">stack<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">string</span></div>
-					<aside class="tsd-sources">
-						<p>Inherited from Error.stack</p>
-						<p>Overrides Error.stack</p>
-						<ul>
-							<li>Defined in /Users/khalid/Desktop/repositories/specification.cloud/aws-event-sourcing/node_modules/typedoc/node_modules/typescript/lib/lib.es5.d.ts:887</li>
+							<li>Defined in <a href="https://github.com/echelon-solutions/aws-event-sourcing/blob/aaa36f0/src/lib/domain.ts#L22">lib/domain.ts:22</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -182,52 +123,43 @@
 			<nav class="tsd-navigation secondary menu-sticky">
 				<ul class="before-current">
 					<li class=" tsd-kind-class tsd-has-type-parameter">
-						<a href="aggregate.html" class="tsd-kind-icon">Aggregate</a>
+						<a href="../classes/aggregate.html" class="tsd-kind-icon">Aggregate</a>
 					</li>
 					<li class=" tsd-kind-class">
-						<a href="baseerror.html" class="tsd-kind-icon">Base<wbr>Error</a>
+						<a href="../classes/baseerror.html" class="tsd-kind-icon">Base<wbr>Error</a>
 					</li>
 					<li class=" tsd-kind-class">
-						<a href="illegaleventargument.html" class="tsd-kind-icon">Illegal<wbr>Event<wbr>Argument</a>
+						<a href="../classes/illegaleventargument.html" class="tsd-kind-icon">Illegal<wbr>Event<wbr>Argument</a>
+					</li>
+					<li class=" tsd-kind-class">
+						<a href="../classes/illegaleventnumberargument.html" class="tsd-kind-icon">Illegal<wbr>Event<wbr>Number<wbr>Argument</a>
+					</li>
+					<li class=" tsd-kind-class">
+						<a href="../classes/propertynotfound.html" class="tsd-kind-icon">Property<wbr>Not<wbr>Found</a>
+					</li>
+					<li class=" tsd-kind-class">
+						<a href="../classes/unroutableeventtype.html" class="tsd-kind-icon">Unroutable<wbr>Event<wbr>Type</a>
 					</li>
 				</ul>
 				<ul class="current">
-					<li class="current tsd-kind-class">
-						<a href="illegaleventnumberargument.html" class="tsd-kind-icon">Illegal<wbr>Event<wbr>Number<wbr>Argument</a>
+					<li class="current tsd-kind-interface">
+						<a href="aggregateoptions.html" class="tsd-kind-icon">Aggregate<wbr>Options</a>
 						<ul>
-							<li class=" tsd-kind-constructor tsd-parent-kind-class tsd-is-overwrite">
-								<a href="illegaleventnumberargument.html#constructor" class="tsd-kind-icon">constructor</a>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="aggregateoptions.html#id" class="tsd-kind-icon">id</a>
 							</li>
-							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-inherited">
-								<a href="illegaleventnumberargument.html#__proto__" class="tsd-kind-icon">__proto__</a>
-							</li>
-							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-inherited tsd-is-static">
-								<a href="illegaleventnumberargument.html#message" class="tsd-kind-icon">message</a>
-							</li>
-							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-inherited tsd-is-static">
-								<a href="illegaleventnumberargument.html#name" class="tsd-kind-icon">name</a>
-							</li>
-							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-overwrite tsd-is-inherited tsd-is-static">
-								<a href="illegaleventnumberargument.html#stack" class="tsd-kind-icon">stack</a>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="aggregateoptions.html#table" class="tsd-kind-icon">table</a>
 							</li>
 						</ul>
 					</li>
 				</ul>
 				<ul class="after-current">
-					<li class=" tsd-kind-class">
-						<a href="propertynotfound.html" class="tsd-kind-icon">Property<wbr>Not<wbr>Found</a>
-					</li>
-					<li class=" tsd-kind-class">
-						<a href="unroutableeventtype.html" class="tsd-kind-icon">Unroutable<wbr>Event<wbr>Type</a>
+					<li class=" tsd-kind-interface">
+						<a href="event.html" class="tsd-kind-icon">Event</a>
 					</li>
 					<li class=" tsd-kind-interface">
-						<a href="../interfaces/aggregateoptions.html" class="tsd-kind-icon">Aggregate<wbr>Options</a>
-					</li>
-					<li class=" tsd-kind-interface">
-						<a href="../interfaces/event.html" class="tsd-kind-icon">Event</a>
-					</li>
-					<li class=" tsd-kind-interface">
-						<a href="../interfaces/resource.html" class="tsd-kind-icon">Resource</a>
+						<a href="resource.html" class="tsd-kind-icon">Resource</a>
 					</li>
 					<li class=" tsd-kind-type-alias">
 						<a href="../globals.html#property" class="tsd-kind-icon">Property</a>

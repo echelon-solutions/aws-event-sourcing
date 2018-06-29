@@ -129,20 +129,14 @@ export class Aggregate<BaseEventType extends Event> implements Resource {
   }
 }
 
-class NoDynamoData extends BaseError {
-  constructor () {
-    super ('No data was returned from AWS DynamoDB.')
-  }
-}
-
-export class ResourceNotFound extends BaseError {
-  constructor (id: string) {
-    super (`The resource with id ${id} does not exist.`)
-  }
-}
-
-class IllegalEventNumberArgument extends BaseError {
+export class IllegalEventNumberArgument extends BaseError {
   constructor () {
     super ('The event is not being applied to a resource with an appropriate version.')
+  }
+}
+
+export class IllegalEventArgument extends BaseError {
+  constructor (event: Event) {
+    super (`Unsupported event detected for event type ${event.type}. Please implement on${event.type}(event: ${event.type.endsWith('Event') ? event.type : event.type + 'Event'}).`)
   }
 }

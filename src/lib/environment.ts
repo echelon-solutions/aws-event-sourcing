@@ -97,6 +97,12 @@ export class PropertyNotFound extends BaseError {
   }
 }
 
+export class UnroutableEventType extends BaseError {
+  constructor () {
+    super ('Unroutable unsupported event type received.')
+  }
+}
+
 /**
  * A Lambda handler router that determines the proper handler to use based on the type of the received event
  */
@@ -109,5 +115,5 @@ export const handlerRouter = (event: any, context: any, callback: any, handlers:
   else if ((event as ScheduledEvent).source === 'aws.events' && handlers.scheduled) handlers.scheduled(event, context, callback)
   else if ((event as SNSEvent).Records && ((event as SNSEvent).Records[0].EventSource === 'aws:sns') && handlers.topic) handlers.topic(event, context, callback)
   else if ((event as DynamoDBStreamEvent).Records && ((event as DynamoDBStreamEvent).Records[0].eventSource === 'aws:dynamodb') && handlers.stream) handlers.stream(event, context, callback)
-  else throw new Error('Unsupported event type received.')
+  else throw new UnroutableEventType()
 }

@@ -8,3 +8,4 @@ cache:
     - node_modules
 script: 
   - npm run prepare-release
+  - npm run cov:send

@@ -130,7 +130,7 @@
 					<div class="tsd-signature tsd-kind-icon">Property<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">"DYNAMODB_TABLE"</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">"AWS_REGION"</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/echelon-solutions/aws-event-sourcing/blob/aaa36f0/src/lib/environment.ts#L9">lib/environment.ts:9</a></li>
+							<li>Defined in <a href="https://github.com/echelon-solutions/aws-event-sourcing/blob/df658d8/src/lib/environment.ts#L9">lib/environment.ts:9</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -143,7 +143,7 @@
 					<div class="tsd-signature tsd-kind-icon">AWS<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">any</span><span class="tsd-signature-symbol"> =&nbsp;(process.env.IS_OFFLINE)? require(&#x27;aws-sdk&#x27;): AWSXRay.captureAWS(require(&#x27;aws-sdk&#x27;))</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/echelon-solutions/aws-event-sourcing/blob/aaa36f0/src/lib/environment.ts#L25">lib/environment.ts:25</a></li>
+							<li>Defined in <a href="https://github.com/echelon-solutions/aws-event-sourcing/blob/df658d8/src/lib/environment.ts#L25">lib/environment.ts:25</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -153,7 +153,7 @@
 					<div class="tsd-signature tsd-kind-icon">default<wbr>Middlewares<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol"> =&nbsp;[(req: express.Request, res: express.Response, next: express.NextFunction) &#x3D;&gt; {xray(&#x27;error&#x27;, &#x27;CLIENT | 404 Not Found&#x27;, true)res.status(404).send()},(error: Error, req: express.Request, res: express.Response, next: express.NextFunction) &#x3D;&gt; {if (error.message &#x3D;&#x3D;&#x3D; &#x27;Invalid request&#x27;) {xray(&#x27;error&#x27;, &#x60;CLIENT | ${error.message}&#x60;, true)res.status(400).json({message: error.message})} else {console.error(error)xray(&#x27;error&#x27;, &#x60;SERVER | ${error.message}&#x60;, true)res.status(500).json({message: &#x27;Internal server error&#x27;})}},AWSXRay.express.closeSegment()]</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/echelon-solutions/aws-event-sourcing/blob/aaa36f0/src/lib/environment.ts#L60">lib/environment.ts:60</a></li>
+							<li>Defined in <a href="https://github.com/echelon-solutions/aws-event-sourcing/blob/df658d8/src/lib/environment.ts#L60">lib/environment.ts:60</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -168,7 +168,7 @@
 					<div class="tsd-signature tsd-kind-icon">dynamo<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">DocumentClient</span><span class="tsd-signature-symbol"> =&nbsp;(process.env.IS_OFFLINE)? new AWS.DynamoDB.DocumentClient({ region: &#x27;localhost&#x27;, endpoint: &#x27;http://localhost:8000&#x27; }) as DynamoDB.DocumentClient: new AWS.DynamoDB.DocumentClient({ apiVersion: &#x27;2012-08-10&#x27;, region: loadProperty(&#x27;AWS_REGION&#x27;) }) as DynamoDB.DocumentClient</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/echelon-solutions/aws-event-sourcing/blob/aaa36f0/src/lib/environment.ts#L29">lib/environment.ts:29</a></li>
+							<li>Defined in <a href="https://github.com/echelon-solutions/aws-event-sourcing/blob/df658d8/src/lib/environment.ts#L29">lib/environment.ts:29</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -178,7 +178,7 @@
 					<div class="tsd-signature tsd-kind-icon">local<wbr>Database<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">any</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/echelon-solutions/aws-event-sourcing/blob/aaa36f0/src/lib/domain.spec.ts#L17">lib/domain.spec.ts:17</a></li>
+							<li>Defined in <a href="https://github.com/echelon-solutions/aws-event-sourcing/blob/df658d8/src/lib/domain.spec.ts#L17">lib/domain.spec.ts:17</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -188,7 +188,7 @@
 					<div class="tsd-signature tsd-kind-icon">table<wbr>Name<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">"domain-test"</span><span class="tsd-signature-symbol"> =&nbsp;process.env.DYNAMODB_TABLE &#x3D; &#x27;domain-test&#x27;</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/echelon-solutions/aws-event-sourcing/blob/aaa36f0/src/lib/domain.spec.ts#L4">lib/domain.spec.ts:4</a></li>
+							<li>Defined in <a href="https://github.com/echelon-solutions/aws-event-sourcing/blob/df658d8/src/lib/domain.spec.ts#L4">lib/domain.spec.ts:4</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -205,7 +205,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/echelon-solutions/aws-event-sourcing/blob/aaa36f0/src/lib/environment.ts#L48">lib/environment.ts:48</a></li>
+									<li>Defined in <a href="https://github.com/echelon-solutions/aws-event-sourcing/blob/df658d8/src/lib/environment.ts#L48">lib/environment.ts:48</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -227,7 +227,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/echelon-solutions/aws-event-sourcing/blob/aaa36f0/src/lib/environment.ts#L109">lib/environment.ts:109</a></li>
+									<li>Defined in <a href="https://github.com/echelon-solutions/aws-event-sourcing/blob/df658d8/src/lib/environment.ts#L109">lib/environment.ts:109</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -278,7 +278,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/echelon-solutions/aws-event-sourcing/blob/aaa36f0/src/lib/environment.ts#L16">lib/environment.ts:16</a></li>
+									<li>Defined in <a href="https://github.com/echelon-solutions/aws-event-sourcing/blob/df658d8/src/lib/environment.ts#L16">lib/environment.ts:16</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -301,7 +301,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/echelon-solutions/aws-event-sourcing/blob/aaa36f0/src/lib/environment.ts#L11">lib/environment.ts:11</a></li>
+									<li>Defined in <a href="https://github.com/echelon-solutions/aws-event-sourcing/blob/df658d8/src/lib/environment.ts#L11">lib/environment.ts:11</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -327,7 +327,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/echelon-solutions/aws-event-sourcing/blob/aaa36f0/src/lib/environment.ts#L36">lib/environment.ts:36</a></li>
+									<li>Defined in <a href="https://github.com/echelon-solutions/aws-event-sourcing/blob/df658d8/src/lib/environment.ts#L36">lib/environment.ts:36</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">

@@ -2,8 +2,7 @@
 
 A straightforward way to build event based applications with AWS Lambda.
 
-- [![Build Status](https://travis-ci.org/echelon-solutions/aws-event-sourcing.svg?branch=master)](https://travis-ci.org/echelon-solutions/aws-event-sourcing?branch=master)
-- [![Code Coverage](https://codecov.io/gh/echelon-solutions/aws-event-sourcing/branch/master/graph/badge.svg)](https://codecov.io/gh/echelon-solutions/aws-event-sourcing)
+[![Build Status](https://travis-ci.org/echelon-solutions/aws-event-sourcing.svg?branch=master)](https://travis-ci.org/echelon-solutions/aws-event-sourcing?branch=master) [![Code Coverage](https://codecov.io/gh/echelon-solutions/aws-event-sourcing/branch/master/graph/badge.svg)](https://codecov.io/gh/echelon-solutions/aws-event-sourcing)
 
 ## Goals
 

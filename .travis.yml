@@ -7,5 +7,5 @@ cache:
   directories:
     - node_modules
 script: 
-  - npm run prepare-release
+  - npm run all
   - npm run cov:send

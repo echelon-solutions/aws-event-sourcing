@@ -32,7 +32,7 @@ provider:
 functions:
 
   deploys:
-    handler: src/sample/handler/deploys.handler
+    handler: src/handler/deploys.handler
     environment:
       DYNAMODB_TABLE: ${self:custom.deployTable}
       AWS_XRAY_TRACING_NAME: ${self:service}-${opt:stage, self:provider.stage}-deploys-service
@@ -72,7 +72,7 @@ functions:
           cors: true
 
   content:
-    handler: src/sample/handler/content.handler
+    handler: src/handler/content.handler
     environment:
       DYNAMODB_TABLE: ${self:custom.contentTable}
       AWS_XRAY_TRACING_NAME: ${self:service}-${opt:stage, self:provider.stage}-content-service
@@ -112,7 +112,7 @@ functions:
           cors: true
 
   notifications:
-    handler: src/sample/handler/notifications.handler
+    handler: src/handler/notifications.handler
     environment:
       AWS_XRAY_TRACING_NAME: ${self:service}-${opt:stage, self:provider.stage}-notifications-service
     iamRoleStatements:

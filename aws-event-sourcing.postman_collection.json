@@ -1,0 +1,81 @@
+{
+	"variables": [],
+	"info": {
+		"name": "aws-event-sourcing",
+		"_postman_id": "a8f48f98-1e5e-5eb1-e900-1ea5c3208b65",
+		"description": "",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "deploys",
+			"description": "",
+			"item": [
+				{
+					"name": "{{base}}/deploys",
+					"request": {
+						"url": "{{base}}/deploys",
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "{{base}}/deploys",
+					"request": {
+						"url": "{{base}}/deploys",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"specification\": \"test\"\n}"
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "{{base}}/deploys/:id",
+					"request": {
+						"url": "{{base}}/deploys/123c82dc-e01a-4f08-9422-de1fea5d0e53",
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "{{base}}/deploys/:id/events",
+					"request": {
+						"url": "{{base}}/deploys/123c82dc-e01a-4f08-9422-de1fea5d0e53/events",
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "{{base}}/deploys/:id",
+					"request": {
+						"url": "{{base}}/deploys/25e2cd51-4c7d-4ab6-9538-c71b0940e56f",
+						"method": "DELETE",
+						"header": [],
+						"body": {},
+						"description": ""
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}

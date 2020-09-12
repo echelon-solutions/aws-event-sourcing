@@ -2,11 +2,11 @@
 process.env.IS_OFFLINE = 'true'
 
 /* tslint:disable:no-expression-statement */
-import { test, beforeEach } from 'ava'
+import test from 'ava'
 import request from 'supertest'
 import * as environment from './environment'
 
-beforeEach('setup', async t => {
+test.beforeEach('setup', async t => {
   process.env.IS_OFFLINE = 'true'
   process.env.DYNAMODB_TABLE = 'some-table'
 })

@@ -4,19 +4,19 @@ process.env.IS_OFFLINE = 'true'
 const tableName = process.env.DYNAMODB_TABLE = 'domain-test'
 
 /* tslint:disable:no-expression-statement */
-import { test, before, after, beforeEach } from 'ava'
+import test from 'ava'
 import DynamoDbLocal from 'dynamodb-local'
 import { DynamoDB } from 'aws-sdk'
 import * as domain from './domain'
 
-beforeEach('setup', async t => {
+test.beforeEach('setup', async t => {
   process.env.IS_OFFLINE = 'true'
 })
 
 /* tslint:disable:no-let */
 let localDatabase: any
 
-before('setup', async t => {
+test.before('setup', async t => {
   localDatabase = await DynamoDbLocal.launch(8000)
   const client = new DynamoDB({ region: 'localhost', endpoint: 'http://localhost:8000' })
   await client.createTable({
@@ -166,9 +166,9 @@ test('We can fetch an aggregate by id', async t => {
   }
 })
 
-test('We should return undefined when fetching with a nonexistent id', async t => {
+test('We should return ResourceNotFound when fetching with a nonexistent id', async t => {
   const fetch = await domain.Aggregate.findOne<domain.Event, domain.Aggregate<domain.Event>>(domain.Aggregate, 'some-nonexistent-id')
-  if (!fetch && fetch === undefined) t.pass()
+  if (fetch instanceof domain.ResourceNotFound) t.pass()
   else t.fail()
 })
 
@@ -186,6 +186,6 @@ test('We can fetch all aggregates', async t => {
   else t.pass()
 })
 
-after.always('teardown', async t => {
+test.after.always('teardown', async t => {
   await DynamoDbLocal.stop(localDatabase)
 })

@@ -1,0 +1,11 @@
+# package directories
+node_modules
+
+# serverless directories
+.serverless
+
+# build directories
+.build
+
+# generated types
+*.gen.d.ts

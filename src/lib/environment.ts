@@ -1,5 +1,5 @@
 import { DynamoDB, S3 } from 'aws-sdk'
-import * as AWSXRay from 'aws-xray-sdk'
+import AWSXRay from 'aws-xray-sdk'
 /* tslint:disable:no-implicit-dependencies */
 import { APIGatewayProxyHandler, ScheduledHandler, SNSHandler, DynamoDBStreamHandler, APIGatewayEvent, ScheduledEvent, SNSEvent, DynamoDBStreamEvent } from 'aws-lambda'
 import express from 'express'
@@ -37,8 +37,8 @@ export const s3 = new AWS.S3({ apiVersion: '2006-03-01', region: loadProperty('A
  */
 export function xray (key: string, value: string, searchable: boolean): void {
   if (!process.env.IS_OFFLINE) {
-    if (searchable) AWSXRay.getSegment().addAnnotation(key, value)
-    else AWSXRay.getSegment().addMetadata(key, value)
+    if (searchable) AWSXRay.getSegment()?.addAnnotation(key, value)
+    else AWSXRay.getSegment()?.addMetadata(key, value)
   }
 }
 

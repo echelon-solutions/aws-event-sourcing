@@ -2,8 +2,6 @@ service: s4-api
 
 custom:
   deployTable: ${self:service}-${opt:stage, self:provider.stage}-deployTable
-  contentTable: ${self:service}-${opt:stage, self:provider.stage}-contentTable
-  stackPrefix: ${self:service}-${opt:stage, self:provider.stage}-
   dynamodb:
     start:
       inMemory: true
@@ -25,7 +23,6 @@ provider:
   memorySize: 1024
   timeout: 6
   environment:
-    STACK_PREFIX: ${self:custom.stackPrefix}
     AWS_XRAY_TRACING_NAME: ${self:service}-${opt:stage, self:provider.stage}-UNTITLED-service
   tracing: ${self:custom.${opt:stage, self:provider.stage}.tracing, 'true'}
 
@@ -71,46 +68,6 @@ functions:
           method: delete
           cors: true
 
-  content:
-    handler: src/handler/content.handler
-    environment:
-      DYNAMODB_TABLE: ${self:custom.contentTable}
-      AWS_XRAY_TRACING_NAME: ${self:service}-${opt:stage, self:provider.stage}-content-service
-    iamRoleStatements:
-      - Effect: Allow
-        Action:
-          - xray:PutTraceSegments
-          - xray:PutTelemetryRecords
-        Resource: "*"
-      - Effect: Allow
-        Action:
-          - dynamodb:Query
-          - dynamodb:Scan
-          - dynamodb:GetItem
-          - dynamodb:PutItem
-        Resource: { "Fn::Join" : [ ":", [ "arn:aws:dynamodb:${opt:region, self:provider.region}", { "Ref" : "AWS::AccountId" }, "table/${self:custom.contentTable}" ] ] }
-    events:
-      - http:
-          path: content
-          method: get
-          cors: true
-      - http:
-          path: content
-          method: post
-          cors: true
-      - http:
-          path: content/{id}
-          method: get
-          cors: true
-      - http:
-          path: content/{id}/events
-          method: get
-          cors: true
-      - http:
-          path: content/{id}
-          method: delete
-          cors: true
-
   notifications:
     handler: src/handler/notifications.handler
     environment:
@@ -127,12 +84,6 @@ functions:
           arn:
             Fn::GetAtt:
               - DeployTable
-              - StreamArn
-      - stream:
-          type: dynamodb
-          arn:
-            Fn::GetAtt:
-              - ContentTable
               - StreamArn
 
 resources:
@@ -157,23 +108,3 @@ resources:
         StreamSpecification:
           StreamViewType: NEW_IMAGE
         TableName: ${self:custom.deployTable}
-    ContentTable:
-      Type: 'AWS::DynamoDB::Table'
-      DeletionPolicy: ${self:custom.${opt:stage, self:provider.stage}.dataDeletionPolicy, 'Retain'}
-      Properties:
-        AttributeDefinitions:
-          - AttributeName: id
-            AttributeType: S
-          - AttributeName: number
-            AttributeType: N
-        KeySchema:
-          - AttributeName: id
-            KeyType: HASH
-          - AttributeName: number
-            KeyType: RANGE
-        ProvisionedThroughput:
-          ReadCapacityUnits: 1
-          WriteCapacityUnits: 1
-        StreamSpecification:
-          StreamViewType: NEW_IMAGE
-        TableName: ${self:custom.contentTable}

@@ -63,7 +63,8 @@
     "serverless": "Run serverless deployment commands"
   },
   "engines": {
-    "node": ">=8.9"
+    "node": ">=12",
+    "npm": ">=6"
   },
   "dependencies": {
     "aws-sdk": "^2.751.0",

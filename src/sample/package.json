@@ -16,7 +16,6 @@
     "@types/node": "^10.3.2",
     "@types/uuid": "^3.4.3",
     "aws-sdk": "^2.255.1",
-    "loadtest": "^3.0.3",
     "serverless": "^1.27.3",
     "serverless-dynamodb-local": "^0.2.30",
     "serverless-iam-roles-per-function": "^1.0.1",

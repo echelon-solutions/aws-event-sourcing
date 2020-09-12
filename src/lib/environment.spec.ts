@@ -62,17 +62,15 @@ test('The default express middlewares return an HTTP 400 for an Invalid request 
   t.is(response.status, 400)
 })
 
-/*
 test('The default express middlewares return an HTTP 500 for an error', async t => {
   const app = environment.defaultApp()
   app.get('/', (req, res, next) => {
-    throw new Error('Some error')
+    throw new Error('An expected fake test error')
   })
   app.use(environment.defaultMiddlewares)
   const response = await request(app).get('/').send()
   t.is(response.status, 500)
 })
-*/
 
 test('The handler router can route an API Gateway event', async t => {
   /* tslint:disable:no-let */

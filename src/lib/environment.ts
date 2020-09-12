@@ -115,9 +115,9 @@ export const handlerRouter = (event: any, context: any, callback: any, handlers:
   readonly scheduled?: ScheduledHandler,
   readonly topic?: SNSHandler,
   readonly stream?: DynamoDBStreamHandler }) => {
-  if ((event as APIGatewayEvent).httpMethod && handlers.api) handlers.api(event, context, callback)
-  else if ((event as ScheduledEvent).source === 'aws.events' && handlers.scheduled) handlers.scheduled(event, context, callback)
-  else if ((event as SNSEvent).Records && ((event as SNSEvent).Records[0].EventSource === 'aws:sns') && handlers.topic) handlers.topic(event, context, callback)
-  else if ((event as DynamoDBStreamEvent).Records && ((event as DynamoDBStreamEvent).Records[0].eventSource === 'aws:dynamodb') && handlers.stream) handlers.stream(event, context, callback)
+  if ((event as APIGatewayEvent).httpMethod && handlers.api) return handlers.api(event, context, callback)
+  else if ((event as ScheduledEvent).source === 'aws.events' && handlers.scheduled) return handlers.scheduled(event, context, callback)
+  else if ((event as SNSEvent).Records && ((event as SNSEvent).Records[0].EventSource === 'aws:sns') && handlers.topic) return handlers.topic(event, context, callback)
+  else if ((event as DynamoDBStreamEvent).Records && ((event as DynamoDBStreamEvent).Records[0].eventSource === 'aws:dynamodb') && handlers.stream) return handlers.stream(event, context, callback)
   else throw new UnroutableEventType()
 }

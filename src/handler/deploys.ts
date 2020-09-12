@@ -96,7 +96,7 @@ app.use(defaultMiddlewares)
 export const apiHandler = Serverless(app)
 
 export const handler = (event: any, context: any, callback: any) => {
-  handlerRouter(event, context, callback, {
+  return handlerRouter(event, context, callback, {
     api: apiHandler
   })
 }

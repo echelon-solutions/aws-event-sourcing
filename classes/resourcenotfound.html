@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>Resource | @echelon-solutions/aws-event-sourcing</title>
+	<title>ResourceNotFound | @echelon-solutions/aws-event-sourcing</title>
 	<meta name="description" content="Documentation for @echelon-solutions/aws-event-sourcing">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="../assets/css/main.css">
@@ -56,41 +56,27 @@
 					<a href="../globals.html">Globals</a>
 				</li>
 				<li>
-					<a href="resource.html">Resource</a>
+					<a href="resourcenotfound.html">ResourceNotFound</a>
 				</li>
 			</ul>
-			<h1>Interface Resource</h1>
+			<h1>Class ResourceNotFound</h1>
 		</div>
 	</div>
 </header>
 <div class="container container-main">
 	<div class="row">
 		<div class="col-8 col-content">
-			<section class="tsd-panel tsd-comment">
-				<div class="tsd-comment tsd-typography">
-					<div class="lead">
-						<p>A resource is uniquely identifiable.</p>
-					</div>
-				</div>
-			</section>
 			<section class="tsd-panel tsd-hierarchy">
 				<h3>Hierarchy</h3>
 				<ul class="tsd-hierarchy">
 					<li>
-						<span class="target">Resource</span>
+						<a href="baseerror.html" class="tsd-signature-type">BaseError</a>
 						<ul class="tsd-hierarchy">
 							<li>
-								<a href="deployresource.html" class="tsd-signature-type">DeployResource</a>
+								<span class="target">ResourceNotFound</span>
 							</li>
 						</ul>
 					</li>
-				</ul>
-			</section>
-			<section class="tsd-panel">
-				<h3>Implemented by</h3>
-				<ul class="tsd-hierarchy">
-					<li><a href="../classes/aggregate.html" class="tsd-signature-type">Aggregate</a></li>
-					<li><a href="../classes/deploy.html" class="tsd-signature-type">Deploy</a></li>
 				</ul>
 			</section>
 			<section class="tsd-panel-group tsd-index-group">
@@ -98,23 +84,93 @@
 				<section class="tsd-panel tsd-index-panel">
 					<div class="tsd-index-content">
 						<section class="tsd-index-section ">
+							<h3>Constructors</h3>
+							<ul class="tsd-index-list">
+								<li class="tsd-kind-constructor tsd-parent-kind-class tsd-is-overwrite"><a href="resourcenotfound.html#constructor" class="tsd-kind-icon">constructor</a></li>
+							</ul>
+						</section>
+						<section class="tsd-index-section tsd-is-inherited">
 							<h3>Properties</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="resource.html#id" class="tsd-kind-icon">id</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited"><a href="resourcenotfound.html#__proto__" class="tsd-kind-icon">__proto__</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited"><a href="resourcenotfound.html#message" class="tsd-kind-icon">message</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited"><a href="resourcenotfound.html#name" class="tsd-kind-icon">name</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited"><a href="resourcenotfound.html#stack" class="tsd-kind-icon">stack</a></li>
 							</ul>
 						</section>
 					</div>
 				</section>
 			</section>
 			<section class="tsd-panel-group tsd-member-group ">
+				<h2>Constructors</h2>
+				<section class="tsd-panel tsd-member tsd-kind-constructor tsd-parent-kind-class tsd-is-overwrite">
+					<a name="constructor" class="tsd-anchor"></a>
+					<h3>constructor</h3>
+					<ul class="tsd-signatures tsd-kind-constructor tsd-parent-kind-class tsd-is-overwrite">
+						<li class="tsd-signature tsd-kind-icon">new <wbr>Resource<wbr>Not<wbr>Found<span class="tsd-signature-symbol">(</span>id<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="resourcenotfound.html" class="tsd-signature-type">ResourceNotFound</a></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<p>Overrides <a href="baseerror.html">BaseError</a>.<a href="baseerror.html#constructor">constructor</a></p>
+								<ul>
+									<li>Defined in <a href="https://github.com/echelon-solutions/aws-event-sourcing/blob/0ed7683/src/lib/domain.ts#L149">src/lib/domain.ts:149</a></li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>id: <span class="tsd-signature-type">string</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <a href="resourcenotfound.html" class="tsd-signature-type">ResourceNotFound</a></h4>
+						</li>
+					</ul>
+				</section>
+			</section>
+			<section class="tsd-panel-group tsd-member-group tsd-is-inherited">
 				<h2>Properties</h2>
-				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
-					<a name="id" class="tsd-anchor"></a>
-					<h3><span class="tsd-flag ts-flagReadonly">Readonly</span> id</h3>
-					<div class="tsd-signature tsd-kind-icon">id<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-inherited">
+					<a name="__proto__" class="tsd-anchor"></a>
+					<h3>__proto__</h3>
+					<div class="tsd-signature tsd-kind-icon">__proto__<span class="tsd-signature-symbol">:</span> <a href="baseerror.html#error" class="tsd-signature-type">Error</a></div>
 					<aside class="tsd-sources">
+						<p>Inherited from <a href="baseerror.html">BaseError</a>.<a href="baseerror.html#__proto__">__proto__</a></p>
 						<ul>
-							<li>Defined in <a href="https://github.com/echelon-solutions/aws-event-sourcing/blob/0ed7683/src/lib/domain.ts#L8">src/lib/domain.ts:8</a></li>
+							<li>Defined in <a href="https://github.com/echelon-solutions/aws-event-sourcing/blob/0ed7683/src/lib/environment.ts#L90">src/lib/environment.ts:90</a></li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-inherited">
+					<a name="message" class="tsd-anchor"></a>
+					<h3>message</h3>
+					<div class="tsd-signature tsd-kind-icon">message<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
+					<aside class="tsd-sources">
+						<p>Inherited from <a href="baseerror.html">BaseError</a>.<a href="baseerror.html#message">message</a></p>
+						<ul>
+							<li>Defined in node_modules/typescript/lib/lib.es5.d.ts:974</li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-inherited">
+					<a name="name" class="tsd-anchor"></a>
+					<h3>name</h3>
+					<div class="tsd-signature tsd-kind-icon">name<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
+					<aside class="tsd-sources">
+						<p>Inherited from <a href="baseerror.html">BaseError</a>.<a href="baseerror.html#name">name</a></p>
+						<ul>
+							<li>Defined in node_modules/typescript/lib/lib.es5.d.ts:973</li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-inherited">
+					<a name="stack" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagOptional">Optional</span> stack</h3>
+					<div class="tsd-signature tsd-kind-icon">stack<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">string</span></div>
+					<aside class="tsd-sources">
+						<p>Inherited from <a href="baseerror.html">BaseError</a>.<a href="baseerror.html#stack">stack</a></p>
+						<ul>
+							<li>Defined in node_modules/typescript/lib/lib.es5.d.ts:975</li>
 						</ul>
 					</aside>
 				</section>
@@ -131,59 +187,71 @@
 			<nav class="tsd-navigation secondary menu-sticky">
 				<ul class="before-current">
 					<li class=" tsd-kind-class tsd-has-type-parameter">
-						<a href="../classes/aggregate.html" class="tsd-kind-icon">Aggregate</a>
+						<a href="aggregate.html" class="tsd-kind-icon">Aggregate</a>
 					</li>
 					<li class=" tsd-kind-class">
-						<a href="../classes/baseerror.html" class="tsd-kind-icon">Base<wbr>Error</a>
+						<a href="baseerror.html" class="tsd-kind-icon">Base<wbr>Error</a>
 					</li>
 					<li class=" tsd-kind-class">
-						<a href="../classes/deploy.html" class="tsd-kind-icon">Deploy</a>
+						<a href="deploy.html" class="tsd-kind-icon">Deploy</a>
 					</li>
 					<li class=" tsd-kind-class">
-						<a href="../classes/illegaleventargument.html" class="tsd-kind-icon">Illegal<wbr>Event<wbr>Argument</a>
+						<a href="illegaleventargument.html" class="tsd-kind-icon">Illegal<wbr>Event<wbr>Argument</a>
 					</li>
 					<li class=" tsd-kind-class">
-						<a href="../classes/illegaleventnumberargument.html" class="tsd-kind-icon">Illegal<wbr>Event<wbr>Number<wbr>Argument</a>
+						<a href="illegaleventnumberargument.html" class="tsd-kind-icon">Illegal<wbr>Event<wbr>Number<wbr>Argument</a>
 					</li>
 					<li class=" tsd-kind-class">
-						<a href="../classes/propertynotfound.html" class="tsd-kind-icon">Property<wbr>Not<wbr>Found</a>
-					</li>
-					<li class=" tsd-kind-class">
-						<a href="../classes/resourcenotfound.html" class="tsd-kind-icon">Resource<wbr>Not<wbr>Found</a>
-					</li>
-					<li class=" tsd-kind-class">
-						<a href="../classes/unroutableeventtype.html" class="tsd-kind-icon">Unroutable<wbr>Event<wbr>Type</a>
-					</li>
-					<li class=" tsd-kind-interface">
-						<a href="aggregateoptions.html" class="tsd-kind-icon">Aggregate<wbr>Options</a>
-					</li>
-					<li class=" tsd-kind-interface">
-						<a href="deploycreatedevent.html" class="tsd-kind-icon">Deploy<wbr>Created<wbr>Event</a>
-					</li>
-					<li class=" tsd-kind-interface">
-						<a href="deploydeletedevent.html" class="tsd-kind-icon">Deploy<wbr>Deleted<wbr>Event</a>
-					</li>
-					<li class=" tsd-kind-interface">
-						<a href="deployevent.html" class="tsd-kind-icon">Deploy<wbr>Event</a>
-					</li>
-					<li class=" tsd-kind-interface">
-						<a href="deployresource.html" class="tsd-kind-icon">Deploy<wbr>Resource</a>
-					</li>
-					<li class=" tsd-kind-interface">
-						<a href="event.html" class="tsd-kind-icon">Event</a>
+						<a href="propertynotfound.html" class="tsd-kind-icon">Property<wbr>Not<wbr>Found</a>
 					</li>
 				</ul>
 				<ul class="current">
-					<li class="current tsd-kind-interface">
-						<a href="resource.html" class="tsd-kind-icon">Resource</a>
+					<li class="current tsd-kind-class">
+						<a href="resourcenotfound.html" class="tsd-kind-icon">Resource<wbr>Not<wbr>Found</a>
 						<ul>
-							<li class=" tsd-kind-property tsd-parent-kind-interface">
-								<a href="resource.html#id" class="tsd-kind-icon">id</a>
+							<li class=" tsd-kind-constructor tsd-parent-kind-class tsd-is-overwrite">
+								<a href="resourcenotfound.html#constructor" class="tsd-kind-icon">constructor</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-inherited">
+								<a href="resourcenotfound.html#__proto__" class="tsd-kind-icon">__proto__</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-inherited">
+								<a href="resourcenotfound.html#message" class="tsd-kind-icon">message</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-inherited">
+								<a href="resourcenotfound.html#name" class="tsd-kind-icon">name</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-inherited">
+								<a href="resourcenotfound.html#stack" class="tsd-kind-icon">stack</a>
 							</li>
 						</ul>
 					</li>
 				</ul>
 				<ul class="after-current">
+					<li class=" tsd-kind-class">
+						<a href="unroutableeventtype.html" class="tsd-kind-icon">Unroutable<wbr>Event<wbr>Type</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="../interfaces/aggregateoptions.html" class="tsd-kind-icon">Aggregate<wbr>Options</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="../interfaces/deploycreatedevent.html" class="tsd-kind-icon">Deploy<wbr>Created<wbr>Event</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="../interfaces/deploydeletedevent.html" class="tsd-kind-icon">Deploy<wbr>Deleted<wbr>Event</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="../interfaces/deployevent.html" class="tsd-kind-icon">Deploy<wbr>Event</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="../interfaces/deployresource.html" class="tsd-kind-icon">Deploy<wbr>Resource</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="../interfaces/event.html" class="tsd-kind-icon">Event</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="../interfaces/resource.html" class="tsd-kind-icon">Resource</a>
+					</li>
 					<li class=" tsd-kind-type-alias">
 						<a href="../globals.html#property" class="tsd-kind-icon">Property</a>
 					</li>

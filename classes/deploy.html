@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>Aggregate | @echelon-solutions/aws-event-sourcing</title>
+	<title>Deploy | @echelon-solutions/aws-event-sourcing</title>
 	<meta name="description" content="Documentation for @echelon-solutions/aws-event-sourcing">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="../assets/css/main.css">
@@ -56,32 +56,24 @@
 					<a href="../globals.html">Globals</a>
 				</li>
 				<li>
-					<a href="aggregate.html">Aggregate</a>
+					<a href="deploy.html">Deploy</a>
 				</li>
 			</ul>
-			<h1>Class Aggregate&lt;BaseEventType&gt;</h1>
+			<h1>Class Deploy</h1>
 		</div>
 	</div>
 </header>
 <div class="container container-main">
 	<div class="row">
 		<div class="col-8 col-content">
-			<section class="tsd-panel tsd-type-parameters">
-				<h3>Type parameters</h3>
-				<ul class="tsd-type-parameters">
-					<li>
-						<h4>BaseEventType<span class="tsd-signature-symbol">: </span><a href="../interfaces/event.html" class="tsd-signature-type">Event</a></h4>
-					</li>
-				</ul>
-			</section>
 			<section class="tsd-panel tsd-hierarchy">
 				<h3>Hierarchy</h3>
 				<ul class="tsd-hierarchy">
 					<li>
-						<span class="target">Aggregate</span>
+						<a href="aggregate.html" class="tsd-signature-type">Aggregate</a><span class="tsd-signature-symbol">&lt;</span><a href="../interfaces/deployevent.html" class="tsd-signature-type">DeployEvent</a><span class="tsd-signature-symbol">&gt;</span>
 						<ul class="tsd-hierarchy">
 							<li>
-								<a href="deploy.html" class="tsd-signature-type">Deploy</a>
+								<span class="target">Deploy</span>
 							</li>
 						</ul>
 					</li>
@@ -91,6 +83,7 @@
 				<h3>Implements</h3>
 				<ul class="tsd-hierarchy">
 					<li><a href="../interfaces/resource.html" class="tsd-signature-type">Resource</a></li>
+					<li><a href="../interfaces/deployresource.html" class="tsd-signature-type">DeployResource</a></li>
 				</ul>
 			</section>
 			<section class="tsd-panel-group tsd-index-group">
@@ -100,27 +93,29 @@
 						<section class="tsd-index-section ">
 							<h3>Constructors</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-constructor tsd-parent-kind-class"><a href="aggregate.html#constructor" class="tsd-kind-icon">constructor</a></li>
+								<li class="tsd-kind-constructor tsd-parent-kind-class tsd-is-overwrite"><a href="deploy.html#constructor" class="tsd-kind-icon">constructor</a></li>
 							</ul>
 						</section>
 						<section class="tsd-index-section ">
 							<h3>Properties</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-property tsd-parent-kind-class"><a href="aggregate.html#id" class="tsd-kind-icon">id</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><a href="aggregate.html#table" class="tsd-kind-icon">table</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-class"><a href="aggregate.html#version" class="tsd-kind-icon">version</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited"><a href="deploy.html#id" class="tsd-kind-icon">id</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class"><a href="deploy.html#specification" class="tsd-kind-icon">specification</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class"><a href="deploy.html#status" class="tsd-kind-icon">status</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited"><a href="deploy.html#version" class="tsd-kind-icon">version</a></li>
 							</ul>
 						</section>
 						<section class="tsd-index-section ">
 							<h3>Methods</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-private"><a href="aggregate.html#apply" class="tsd-kind-icon">apply</a></li>
-								<li class="tsd-kind-method tsd-parent-kind-class"><a href="aggregate.html#commit" class="tsd-kind-icon">commit</a></li>
-								<li class="tsd-kind-method tsd-parent-kind-class"><a href="aggregate.html#events" class="tsd-kind-icon">events</a></li>
-								<li class="tsd-kind-method tsd-parent-kind-class"><a href="aggregate.html#hydrate" class="tsd-kind-icon">hydrate</a></li>
-								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-protected"><a href="aggregate.html#onevent" class="tsd-kind-icon">on<wbr>Event</a></li>
-								<li class="tsd-kind-method tsd-parent-kind-class tsd-has-type-parameter tsd-is-static"><a href="aggregate.html#findall" class="tsd-kind-icon">find<wbr>All</a></li>
-								<li class="tsd-kind-method tsd-parent-kind-class tsd-has-type-parameter tsd-is-static"><a href="aggregate.html#findone" class="tsd-kind-icon">find<wbr>One</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited"><a href="deploy.html#commit" class="tsd-kind-icon">commit</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited"><a href="deploy.html#events" class="tsd-kind-icon">events</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited"><a href="deploy.html#hydrate" class="tsd-kind-icon">hydrate</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-protected"><a href="deploy.html#ondeploycreated" class="tsd-kind-icon">on<wbr>Deploy<wbr>Created</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-protected"><a href="deploy.html#ondeploydeleted" class="tsd-kind-icon">on<wbr>Deploy<wbr>Deleted</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited tsd-is-protected"><a href="deploy.html#onevent" class="tsd-kind-icon">on<wbr>Event</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-has-type-parameter tsd-is-inherited tsd-is-static"><a href="deploy.html#findall" class="tsd-kind-icon">find<wbr>All</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-has-type-parameter tsd-is-inherited tsd-is-static"><a href="deploy.html#findone" class="tsd-kind-icon">find<wbr>One</a></li>
 							</ul>
 						</section>
 					</div>
@@ -128,64 +123,73 @@
 			</section>
 			<section class="tsd-panel-group tsd-member-group ">
 				<h2>Constructors</h2>
-				<section class="tsd-panel tsd-member tsd-kind-constructor tsd-parent-kind-class">
+				<section class="tsd-panel tsd-member tsd-kind-constructor tsd-parent-kind-class tsd-is-overwrite">
 					<a name="constructor" class="tsd-anchor"></a>
 					<h3>constructor</h3>
-					<ul class="tsd-signatures tsd-kind-constructor tsd-parent-kind-class">
-						<li class="tsd-signature tsd-kind-icon">new <wbr>Aggregate<span class="tsd-signature-symbol">(</span>options<span class="tsd-signature-symbol">?: </span><a href="../interfaces/aggregateoptions.html" class="tsd-signature-type">AggregateOptions</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="aggregate.html" class="tsd-signature-type">Aggregate</a></li>
+					<ul class="tsd-signatures tsd-kind-constructor tsd-parent-kind-class tsd-is-overwrite">
+						<li class="tsd-signature tsd-kind-icon">new <wbr>Deploy<span class="tsd-signature-symbol">(</span>options<span class="tsd-signature-symbol">?: </span><a href="../interfaces/aggregateoptions.html" class="tsd-signature-type">AggregateOptions</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="deploy.html" class="tsd-signature-type">Deploy</a></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
+								<p>Overrides <a href="aggregate.html">Aggregate</a>.<a href="aggregate.html#constructor">constructor</a></p>
 								<ul>
-									<li>Defined in <a href="https://github.com/echelon-solutions/aws-event-sourcing/blob/0ed7683/src/lib/domain.ts#L51">src/lib/domain.ts:51</a></li>
+									<li>Defined in <a href="https://github.com/echelon-solutions/aws-event-sourcing/blob/0ed7683/src/handler/deploys.ts#L31">src/handler/deploys.ts:31</a></li>
 								</ul>
 							</aside>
-							<div class="tsd-comment tsd-typography">
-								<div class="lead">
-									<p>Instantiate an aggregate instance, optionally passing in a resource id
-									to reference an existing resource.</p>
-								</div>
-							</div>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
 									<h5><span class="tsd-flag ts-flagOptional">Optional</span> options: <a href="../interfaces/aggregateoptions.html" class="tsd-signature-type">AggregateOptions</a></h5>
 								</li>
 							</ul>
-							<h4 class="tsd-returns-title">Returns <a href="aggregate.html" class="tsd-signature-type">Aggregate</a></h4>
+							<h4 class="tsd-returns-title">Returns <a href="deploy.html" class="tsd-signature-type">Deploy</a></h4>
 						</li>
 					</ul>
 				</section>
 			</section>
 			<section class="tsd-panel-group tsd-member-group ">
 				<h2>Properties</h2>
-				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-inherited">
 					<a name="id" class="tsd-anchor"></a>
 					<h3><span class="tsd-flag ts-flagReadonly">Readonly</span> id</h3>
 					<div class="tsd-signature tsd-kind-icon">id<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
 					<aside class="tsd-sources">
-						<p>Implementation of <a href="../interfaces/resource.html">Resource</a>.<a href="../interfaces/resource.html#id">id</a></p>
+						<p>Implementation of <a href="../interfaces/deployresource.html">DeployResource</a>.<a href="../interfaces/deployresource.html#id">id</a></p>
+						<p>Inherited from <a href="aggregate.html">Aggregate</a>.<a href="aggregate.html#id">id</a></p>
 						<ul>
 							<li>Defined in <a href="https://github.com/echelon-solutions/aws-event-sourcing/blob/0ed7683/src/lib/domain.ts#L49">src/lib/domain.ts:49</a></li>
 						</ul>
 					</aside>
 				</section>
-				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-private">
-					<a name="table" class="tsd-anchor"></a>
-					<h3><span class="tsd-flag ts-flagPrivate">Private</span> table</h3>
-					<div class="tsd-signature tsd-kind-icon">table<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
+					<a name="specification" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagOptional">Optional</span> specification</h3>
+					<div class="tsd-signature tsd-kind-icon">specification<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">string</span></div>
 					<aside class="tsd-sources">
+						<p>Implementation of <a href="../interfaces/deployresource.html">DeployResource</a>.<a href="../interfaces/deployresource.html#specification">specification</a></p>
 						<ul>
-							<li>Defined in <a href="https://github.com/echelon-solutions/aws-event-sourcing/blob/0ed7683/src/lib/domain.ts#L51">src/lib/domain.ts:51</a></li>
+							<li>Defined in <a href="https://github.com/echelon-solutions/aws-event-sourcing/blob/0ed7683/src/handler/deploys.ts#L31">src/handler/deploys.ts:31</a></li>
 						</ul>
 					</aside>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
+					<a name="status" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagOptional">Optional</span> status</h3>
+					<div class="tsd-signature tsd-kind-icon">status<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">"processing"</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">"success"</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">"failed"</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">"deleted"</span></div>
+					<aside class="tsd-sources">
+						<p>Implementation of <a href="../interfaces/deployresource.html">DeployResource</a>.<a href="../interfaces/deployresource.html#status">status</a></p>
+						<ul>
+							<li>Defined in <a href="https://github.com/echelon-solutions/aws-event-sourcing/blob/0ed7683/src/handler/deploys.ts#L30">src/handler/deploys.ts:30</a></li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-inherited">
 					<a name="version" class="tsd-anchor"></a>
 					<h3>version</h3>
 					<div class="tsd-signature tsd-kind-icon">version<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
 					<aside class="tsd-sources">
+						<p>Inherited from <a href="aggregate.html">Aggregate</a>.<a href="aggregate.html#version">version</a></p>
 						<ul>
 							<li>Defined in <a href="https://github.com/echelon-solutions/aws-event-sourcing/blob/0ed7683/src/lib/domain.ts#L50">src/lib/domain.ts:50</a></li>
 						</ul>
@@ -194,38 +198,16 @@
 			</section>
 			<section class="tsd-panel-group tsd-member-group ">
 				<h2>Methods</h2>
-				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-private">
-					<a name="apply" class="tsd-anchor"></a>
-					<h3><span class="tsd-flag ts-flagPrivate">Private</span> apply</h3>
-					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-private">
-						<li class="tsd-signature tsd-kind-icon">apply<span class="tsd-signature-symbol">(</span>events<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">BaseEventType</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
-					</ul>
-					<ul class="tsd-descriptions">
-						<li class="tsd-description">
-							<aside class="tsd-sources">
-								<ul>
-									<li>Defined in <a href="https://github.com/echelon-solutions/aws-event-sourcing/blob/0ed7683/src/lib/domain.ts#L124">src/lib/domain.ts:124</a></li>
-								</ul>
-							</aside>
-							<h4 class="tsd-parameters-title">Parameters</h4>
-							<ul class="tsd-parameters">
-								<li>
-									<h5>events: <span class="tsd-signature-type">BaseEventType</span><span class="tsd-signature-symbol">[]</span></h5>
-								</li>
-							</ul>
-							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
-						</li>
-					</ul>
-				</section>
-				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
 					<a name="commit" class="tsd-anchor"></a>
 					<h3>commit</h3>
-					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
 						<li class="tsd-signature tsd-kind-icon">commit<span class="tsd-signature-symbol">(</span>event<span class="tsd-signature-symbol">: </span><a href="../interfaces/event.html" class="tsd-signature-type">Event</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
+								<p>Inherited from <a href="aggregate.html">Aggregate</a>.<a href="aggregate.html#commit">commit</a></p>
 								<ul>
 									<li>Defined in <a href="https://github.com/echelon-solutions/aws-event-sourcing/blob/0ed7683/src/lib/domain.ts#L76">src/lib/domain.ts:76</a></li>
 								</ul>
@@ -240,32 +222,34 @@
 						</li>
 					</ul>
 				</section>
-				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
 					<a name="events" class="tsd-anchor"></a>
 					<h3>events</h3>
-					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-						<li class="tsd-signature tsd-kind-icon">events<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">BaseEventType</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">&gt;</span></li>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
+						<li class="tsd-signature tsd-kind-icon">events<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><a href="../interfaces/deployevent.html" class="tsd-signature-type">DeployEvent</a><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">&gt;</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
+								<p>Inherited from <a href="aggregate.html">Aggregate</a>.<a href="aggregate.html#events">events</a></p>
 								<ul>
 									<li>Defined in <a href="https://github.com/echelon-solutions/aws-event-sourcing/blob/0ed7683/src/lib/domain.ts#L62">src/lib/domain.ts:62</a></li>
 								</ul>
 							</aside>
-							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">BaseEventType</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">&gt;</span></h4>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><a href="../interfaces/deployevent.html" class="tsd-signature-type">DeployEvent</a><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">&gt;</span></h4>
 						</li>
 					</ul>
 				</section>
-				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
 					<a name="hydrate" class="tsd-anchor"></a>
 					<h3>hydrate</h3>
-					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-						<li class="tsd-signature tsd-kind-icon">hydrate<span class="tsd-signature-symbol">(</span>hydrateFromEvents<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">BaseEventType</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span></li>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
+						<li class="tsd-signature tsd-kind-icon">hydrate<span class="tsd-signature-symbol">(</span>hydrateFromEvents<span class="tsd-signature-symbol">?: </span><a href="../interfaces/deployevent.html" class="tsd-signature-type">DeployEvent</a><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
+								<p>Inherited from <a href="aggregate.html">Aggregate</a>.<a href="aggregate.html#hydrate">hydrate</a></p>
 								<ul>
 									<li>Defined in <a href="https://github.com/echelon-solutions/aws-event-sourcing/blob/0ed7683/src/lib/domain.ts#L72">src/lib/domain.ts:72</a></li>
 								</ul>
@@ -273,7 +257,7 @@
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
-									<h5><span class="tsd-flag ts-flagOptional">Optional</span> hydrateFromEvents: <span class="tsd-signature-type">BaseEventType</span><span class="tsd-signature-symbol">[]</span></h5>
+									<h5><span class="tsd-flag ts-flagOptional">Optional</span> hydrateFromEvents: <a href="../interfaces/deployevent.html" class="tsd-signature-type">DeployEvent</a><span class="tsd-signature-symbol">[]</span></h5>
 								</li>
 							</ul>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span></h4>
@@ -281,14 +265,61 @@
 					</ul>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-protected">
+					<a name="ondeploycreated" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagProtected">Protected</span> on<wbr>Deploy<wbr>Created</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-protected">
+						<li class="tsd-signature tsd-kind-icon">on<wbr>Deploy<wbr>Created<span class="tsd-signature-symbol">(</span>event<span class="tsd-signature-symbol">: </span><a href="../interfaces/deploycreatedevent.html" class="tsd-signature-type">DeployCreatedEvent</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/echelon-solutions/aws-event-sourcing/blob/0ed7683/src/handler/deploys.ts#L35">src/handler/deploys.ts:35</a></li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>event: <a href="../interfaces/deploycreatedevent.html" class="tsd-signature-type">DeployCreatedEvent</a></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-protected">
+					<a name="ondeploydeleted" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagProtected">Protected</span> on<wbr>Deploy<wbr>Deleted</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-protected">
+						<li class="tsd-signature tsd-kind-icon">on<wbr>Deploy<wbr>Deleted<span class="tsd-signature-symbol">(</span>event<span class="tsd-signature-symbol">: </span><a href="../interfaces/deploydeletedevent.html" class="tsd-signature-type">DeployDeletedEvent</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/echelon-solutions/aws-event-sourcing/blob/0ed7683/src/handler/deploys.ts#L43">src/handler/deploys.ts:43</a></li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>event: <a href="../interfaces/deploydeletedevent.html" class="tsd-signature-type">DeployDeletedEvent</a></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-inherited tsd-is-protected">
 					<a name="onevent" class="tsd-anchor"></a>
 					<h3><span class="tsd-flag ts-flagProtected">Protected</span> on<wbr>Event</h3>
-					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-protected">
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-inherited tsd-is-protected">
 						<li class="tsd-signature tsd-kind-icon">on<wbr>Event<span class="tsd-signature-symbol">(</span>event<span class="tsd-signature-symbol">: </span><a href="../interfaces/event.html" class="tsd-signature-type">Event</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
+								<p>Inherited from <a href="aggregate.html">Aggregate</a>.<a href="aggregate.html#onevent">onEvent</a></p>
 								<ul>
 									<li>Defined in <a href="https://github.com/echelon-solutions/aws-event-sourcing/blob/0ed7683/src/lib/domain.ts#L120">src/lib/domain.ts:120</a></li>
 								</ul>
@@ -303,15 +334,16 @@
 						</li>
 					</ul>
 				</section>
-				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-has-type-parameter tsd-is-static">
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-has-type-parameter tsd-is-inherited tsd-is-static">
 					<a name="findall" class="tsd-anchor"></a>
 					<h3><span class="tsd-flag ts-flagStatic">Static</span> find<wbr>All</h3>
-					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-has-type-parameter tsd-is-static">
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-has-type-parameter tsd-is-inherited tsd-is-static">
 						<li class="tsd-signature tsd-kind-icon">find<wbr>All&lt;BaseEventType, AggregateImplementation&gt;<span class="tsd-signature-symbol">(</span>type<span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">{}</span>, table<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">AggregateImplementation</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">&gt;</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
+								<p>Inherited from <a href="aggregate.html">Aggregate</a>.<a href="aggregate.html#findall">findAll</a></p>
 								<ul>
 									<li>Defined in <a href="https://github.com/echelon-solutions/aws-event-sourcing/blob/0ed7683/src/lib/domain.ts#L30">src/lib/domain.ts:30</a></li>
 								</ul>
@@ -322,7 +354,7 @@
 									<h4>BaseEventType<span class="tsd-signature-symbol">: </span><a href="../interfaces/event.html" class="tsd-signature-type">Event</a></h4>
 								</li>
 								<li>
-									<h4>AggregateImplementation<span class="tsd-signature-symbol">: </span><a href="aggregate.html" class="tsd-signature-type">Aggregate</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">BaseEventType</span><span class="tsd-signature-symbol">&gt;</span></h4>
+									<h4>AggregateImplementation<span class="tsd-signature-symbol">: </span><a href="aggregate.html" class="tsd-signature-type">Aggregate</a><span class="tsd-signature-symbol">&lt;</span><a href="../interfaces/deployevent.html" class="tsd-signature-type">DeployEvent</a><span class="tsd-signature-symbol">&gt;</span></h4>
 								</li>
 							</ul>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -340,15 +372,16 @@
 						</li>
 					</ul>
 				</section>
-				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-has-type-parameter tsd-is-static">
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-has-type-parameter tsd-is-inherited tsd-is-static">
 					<a name="findone" class="tsd-anchor"></a>
 					<h3><span class="tsd-flag ts-flagStatic">Static</span> find<wbr>One</h3>
-					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-has-type-parameter tsd-is-static">
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-has-type-parameter tsd-is-inherited tsd-is-static">
 						<li class="tsd-signature tsd-kind-icon">find<wbr>One&lt;BaseEventType, AggregateImplementation&gt;<span class="tsd-signature-symbol">(</span>type<span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">{}</span>, id<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, table<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">AggregateImplementation</span><span class="tsd-signature-symbol"> | </span><a href="resourcenotfound.html" class="tsd-signature-type">ResourceNotFound</a><span class="tsd-signature-symbol">&gt;</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
+								<p>Inherited from <a href="aggregate.html">Aggregate</a>.<a href="aggregate.html#findone">findOne</a></p>
 								<ul>
 									<li>Defined in <a href="https://github.com/echelon-solutions/aws-event-sourcing/blob/0ed7683/src/lib/domain.ts#L25">src/lib/domain.ts:25</a></li>
 								</ul>
@@ -359,7 +392,7 @@
 									<h4>BaseEventType<span class="tsd-signature-symbol">: </span><a href="../interfaces/event.html" class="tsd-signature-type">Event</a></h4>
 								</li>
 								<li>
-									<h4>AggregateImplementation<span class="tsd-signature-symbol">: </span><a href="aggregate.html" class="tsd-signature-type">Aggregate</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">BaseEventType</span><span class="tsd-signature-symbol">&gt;</span></h4>
+									<h4>AggregateImplementation<span class="tsd-signature-symbol">: </span><a href="aggregate.html" class="tsd-signature-type">Aggregate</a><span class="tsd-signature-symbol">&lt;</span><a href="../interfaces/deployevent.html" class="tsd-signature-type">DeployEvent</a><span class="tsd-signature-symbol">&gt;</span></h4>
 								</li>
 							</ul>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -392,54 +425,60 @@
 			</nav>
 			<nav class="tsd-navigation secondary menu-sticky">
 				<ul class="before-current">
+					<li class=" tsd-kind-class tsd-has-type-parameter">
+						<a href="aggregate.html" class="tsd-kind-icon">Aggregate</a>
+					</li>
+					<li class=" tsd-kind-class">
+						<a href="baseerror.html" class="tsd-kind-icon">Base<wbr>Error</a>
+					</li>
 				</ul>
 				<ul class="current">
-					<li class="current tsd-kind-class tsd-has-type-parameter">
-						<a href="aggregate.html" class="tsd-kind-icon">Aggregate</a>
+					<li class="current tsd-kind-class">
+						<a href="deploy.html" class="tsd-kind-icon">Deploy</a>
 						<ul>
-							<li class=" tsd-kind-constructor tsd-parent-kind-class">
-								<a href="aggregate.html#constructor" class="tsd-kind-icon">constructor</a>
+							<li class=" tsd-kind-constructor tsd-parent-kind-class tsd-is-overwrite">
+								<a href="deploy.html#constructor" class="tsd-kind-icon">constructor</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-inherited">
+								<a href="deploy.html#id" class="tsd-kind-icon">id</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-class">
-								<a href="aggregate.html#id" class="tsd-kind-icon">id</a>
-							</li>
-							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-private">
-								<a href="aggregate.html#table" class="tsd-kind-icon">table</a>
+								<a href="deploy.html#specification" class="tsd-kind-icon">specification</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-class">
-								<a href="aggregate.html#version" class="tsd-kind-icon">version</a>
+								<a href="deploy.html#status" class="tsd-kind-icon">status</a>
 							</li>
-							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-private">
-								<a href="aggregate.html#apply" class="tsd-kind-icon">apply</a>
+							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-inherited">
+								<a href="deploy.html#version" class="tsd-kind-icon">version</a>
 							</li>
-							<li class=" tsd-kind-method tsd-parent-kind-class">
-								<a href="aggregate.html#commit" class="tsd-kind-icon">commit</a>
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
+								<a href="deploy.html#commit" class="tsd-kind-icon">commit</a>
 							</li>
-							<li class=" tsd-kind-method tsd-parent-kind-class">
-								<a href="aggregate.html#events" class="tsd-kind-icon">events</a>
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
+								<a href="deploy.html#events" class="tsd-kind-icon">events</a>
 							</li>
-							<li class=" tsd-kind-method tsd-parent-kind-class">
-								<a href="aggregate.html#hydrate" class="tsd-kind-icon">hydrate</a>
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
+								<a href="deploy.html#hydrate" class="tsd-kind-icon">hydrate</a>
 							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-protected">
-								<a href="aggregate.html#onevent" class="tsd-kind-icon">on<wbr>Event</a>
+								<a href="deploy.html#ondeploycreated" class="tsd-kind-icon">on<wbr>Deploy<wbr>Created</a>
 							</li>
-							<li class=" tsd-kind-method tsd-parent-kind-class tsd-has-type-parameter tsd-is-static">
-								<a href="aggregate.html#findall" class="tsd-kind-icon">find<wbr>All</a>
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-protected">
+								<a href="deploy.html#ondeploydeleted" class="tsd-kind-icon">on<wbr>Deploy<wbr>Deleted</a>
 							</li>
-							<li class=" tsd-kind-method tsd-parent-kind-class tsd-has-type-parameter tsd-is-static">
-								<a href="aggregate.html#findone" class="tsd-kind-icon">find<wbr>One</a>
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-inherited tsd-is-protected">
+								<a href="deploy.html#onevent" class="tsd-kind-icon">on<wbr>Event</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-has-type-parameter tsd-is-inherited tsd-is-static">
+								<a href="deploy.html#findall" class="tsd-kind-icon">find<wbr>All</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-has-type-parameter tsd-is-inherited tsd-is-static">
+								<a href="deploy.html#findone" class="tsd-kind-icon">find<wbr>One</a>
 							</li>
 						</ul>
 					</li>
 				</ul>
 				<ul class="after-current">
-					<li class=" tsd-kind-class">
-						<a href="baseerror.html" class="tsd-kind-icon">Base<wbr>Error</a>
-					</li>
-					<li class=" tsd-kind-class">
-						<a href="deploy.html" class="tsd-kind-icon">Deploy</a>
-					</li>
 					<li class=" tsd-kind-class">
 						<a href="illegaleventargument.html" class="tsd-kind-icon">Illegal<wbr>Event<wbr>Argument</a>
 					</li>

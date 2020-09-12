@@ -4,7 +4,7 @@
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<title>@echelon-solutions/aws-event-sourcing</title>
-	<meta name="description" content="">
+	<meta name="description" content="Documentation for @echelon-solutions/aws-event-sourcing">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="assets/css/main.css">
 </head>
@@ -13,7 +13,7 @@
 	<div class="tsd-page-toolbar">
 		<div class="container">
 			<div class="table-wrap">
-				<div class="table-cell" id="tsd-search" data-index="assets/js/search.js" data-base=".">
+				<div class="table-cell" id="tsd-search" data-index="assets/js/search.json" data-base=".">
 					<div class="field">
 						<label for="tsd-search-field" class="tsd-widget search no-caption">Search</label>
 						<input id="tsd-search-field" type="text" />
@@ -56,7 +56,7 @@
 					<a href="globals.html">Globals</a>
 				</li>
 			</ul>
-			<h1> @echelon-solutions/aws-event-sourcing</h1>
+			<h1>@echelon-solutions/aws-event-sourcing</h1>
 		</div>
 	</div>
 </header>
@@ -64,10 +64,14 @@
 	<div class="row">
 		<div class="col-8 col-content">
 			<div class="tsd-panel tsd-typography">
-				<h1 id="aws-event-sourcing">aws-event-sourcing</h1>
+				<a href="#aws-event-sourcing" id="aws-event-sourcing" style="color: inherit; text-decoration: none;">
+					<h1>aws-event-sourcing</h1>
+				</a>
 				<p>A straightforward way to build event based applications with AWS Lambda.</p>
-				<p><a href="https://travis-ci.org/echelon-solutions/aws-event-sourcing?branch=master"><img src="https://travis-ci.org/echelon-solutions/aws-event-sourcing.svg?branch=master" alt="Build Status"></a> <a href="https://codecov.io/gh/echelon-solutions/aws-event-sourcing"><img src="https://codecov.io/gh/echelon-solutions/aws-event-sourcing/branch/master/graph/badge.svg" alt="Code Coverage"></a></p>
-				<h2 id="goals">Goals</h2>
+				<p><a href="https://travis-ci.org/echelon-solutions/aws-event-sourcing?branch=master"><img src="https://travis-ci.org/echelon-solutions/aws-event-sourcing.svg?branch=master" alt="Build Status"></a> <a href="https://codecov.io/gh/echelon-solutions/aws-event-sourcing"><img src="https://codecov.io/gh/echelon-solutions/aws-event-sourcing/branch/master/graph/badge.svg" alt="Code Coverage"></a> <a href="https://www.npmjs.com/package/@echelon-solutions/aws-event-sourcing"><img src="https://img.shields.io/npm/v/@echelon-solutions/aws-event-sourcing.svg" alt="npm (scoped)"></a></p>
+				<a href="#goals" id="goals" style="color: inherit; text-decoration: none;">
+					<h2>Goals</h2>
+				</a>
 				<ul>
 					<li>Events should be processed in order</li>
 					<li>Events should be immutable</li>
@@ -81,37 +85,44 @@
 					<li>The system should scale easily</li>
 					<li>The system should be fault-tolerant</li>
 				</ul>
-				<h2 id="stack">Stack</h2>
+				<a href="#stack" id="stack" style="color: inherit; text-decoration: none;">
+					<h2>Stack</h2>
+				</a>
 				<ul>
 					<li>Language [ Node, Typescript ]</li>
 					<li>Framework [ Serverless ]</li>
 					<li>Cloud (AWS) [ API Gateway, Lambda, DynamoDB ]</li>
 				</ul>
-				<h2 id="concepts">Concepts</h2>
+				<a href="#concepts" id="concepts" style="color: inherit; text-decoration: none;">
+					<h2>Concepts</h2>
+				</a>
 				<p>This design makes an assumption that everything in a system can be classified as either a <code>Resource</code> or an <code>Event</code>.</p>
-				<h3 id="resource">Resource</h3>
+				<a href="#resource" id="resource" style="color: inherit; text-decoration: none;">
+					<h3>Resource</h3>
+				</a>
 				<p>A resource definition extends the <code>Resource</code> interface.</p>
 				<p>A resource is uniquely identifiable by UUID.</p>
-				<pre><code class="lang-typescript"><span class="hljs-keyword">export</span> <span class="hljs-keyword">interface</span> Resource {
+				<pre><code class="language-typescript"><span class="hljs-keyword">export</span> <span class="hljs-keyword">interface</span> Resource {
   id: <span class="hljs-built_in">string</span>
-}
-</code></pre>
-				<h3 id="event">Event</h3>
+}</code></pre>
+				<a href="#event" id="event" style="color: inherit; text-decoration: none;">
+					<h3>Event</h3>
+				</a>
 				<p>An event definition extends the <code>Event</code> interface.</p>
 				<p>An event has an event number, a type, and a creation date.</p>
-				<pre><code class="lang-typescript"><span class="hljs-keyword">export</span> <span class="hljs-keyword">interface</span> Event {
+				<pre><code class="language-typescript"><span class="hljs-keyword">export</span> <span class="hljs-keyword">interface</span> Event {
   <span class="hljs-built_in">number</span>: <span class="hljs-built_in">number</span>
   <span class="hljs-keyword">type</span>: <span class="hljs-built_in">string</span>
   created: <span class="hljs-built_in">string</span>
-}
-</code></pre>
-				<h3 id="aggregate">Aggregate</h3>
+}</code></pre>
+				<a href="#aggregate" id="aggregate" style="color: inherit; text-decoration: none;">
+					<h3>Aggregate</h3>
+				</a>
 				<p>Learning from DDD (domain driven design) and ES (event sourcing), we  group a resource and its events into a domain <code>Aggregate</code>.</p>
 				<p>The <code>Aggregate</code> is responsible for reading and applying the events for a resource. This is called &quot;hydrating&quot; the resource, and is how we calculate the current state.</p>
-				<pre><code class="lang-typescript"><span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> Aggregate&lt;BaseEventType <span class="hljs-keyword">extends</span> Event&gt; <span class="hljs-keyword">implements</span> Resource {
+				<pre><code class="language-typescript"><span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> Aggregate&lt;BaseEventType <span class="hljs-keyword">extends</span> Event&gt; <span class="hljs-keyword">implements</span> Resource {
   ...
-}
-</code></pre>
+}</code></pre>
 				<p>The aggregate exposes the following methods.</p>
 				<ul>
 					<li><code>findOne</code> | retrieve a resource by resource id with up-to-date state</li>
@@ -121,58 +132,57 @@
 					<li><code>apply</code> | call the appropriate handler to handle the event type and apply state changes to the resource</li>
 					<li><code>commit</code> | retrieve up-to-date event history, attempt to apply an event, then publish the new event</li>
 				</ul>
-				<h2 id="implementation">Implementation</h2>
+				<a href="#implementation" id="implementation" style="color: inherit; text-decoration: none;">
+					<h2>Implementation</h2>
+				</a>
 				<p>To implement the pattern above, we begin by defining the resource, the events that manipulate it, and the aggregate that is responsible for applying events and calculating state.</p>
 				<p>Let&#39;s look at this in the context of the online shopping business domain.</p>
-				<h3 id="shopping-example">Shopping Example</h3>
+				<a href="#shopping-example" id="shopping-example" style="color: inherit; text-decoration: none;">
+					<h3>Shopping Example</h3>
+				</a>
 				<p>In most online ordering systems, there is a concept of a shopping cart. We want our site to be highly available, but we don&#39;t want to allow purchases of a product if we don&#39;t have any more of it left in our warehouse.</p>
 				<p>In this domain, our resource is the &quot;Product&quot;, so let&#39;s define it along with its attributes.</p>
-				<pre><code class="lang-typescript"><span class="hljs-keyword">interface</span> ProductResource <span class="hljs-keyword">extends</span> Resource {
-  status?: <span class="hljs-string">'available'</span> | <span class="hljs-string">'sold-out'</span>
+				<pre><code class="language-typescript"><span class="hljs-keyword">interface</span> ProductResource <span class="hljs-keyword">extends</span> Resource {
+  status?: <span class="hljs-string">&#x27;available&#x27;</span> | <span class="hljs-string">&#x27;sold-out&#x27;</span>
   quantity?: <span class="hljs-built_in">number</span>
-}
-</code></pre>
+}</code></pre>
 				<p>Here we&#39;ve defined a uniquely identifiable <code>ProductResource</code> that has
 				a specific quantity, which lets us know how much of that product we have left in our warehouse.</p>
 				<p>There are several things that can happen during the shopping experience, both online and in our business. Let&#39;s define a base event type that shows us what events are possible.</p>
-				<pre><code class="lang-typescript"><span class="hljs-keyword">interface</span> ProductEvent <span class="hljs-keyword">extends</span> Event {
-  <span class="hljs-keyword">type</span>: <span class="hljs-string">'ProductReserved'</span> | <span class="hljs-string">'ProductRestocked'</span>
-}
-</code></pre>
+				<pre><code class="language-typescript"><span class="hljs-keyword">interface</span> ProductEvent <span class="hljs-keyword">extends</span> Event {
+  <span class="hljs-keyword">type</span>: <span class="hljs-string">&#x27;ProductReserved&#x27;</span> | <span class="hljs-string">&#x27;ProductRestocked&#x27;</span>
+}</code></pre>
 				<p>Before the customer checks out, we reserve the product for his/her purchase with a <code>ProductReservedEvent</code>. This should decrement the quantity available of the <code>Product</code> by 1.</p>
-				<pre><code class="lang-typescript"><span class="hljs-keyword">interface</span> ProductReservedEvent <span class="hljs-keyword">extends</span> ProductEvent {
-  <span class="hljs-keyword">type</span>: <span class="hljs-string">'ProductReserved'</span>
-}
-</code></pre>
+				<pre><code class="language-typescript"><span class="hljs-keyword">interface</span> ProductReservedEvent <span class="hljs-keyword">extends</span> ProductEvent {
+  <span class="hljs-keyword">type</span>: <span class="hljs-string">&#x27;ProductReserved&#x27;</span>
+}</code></pre>
 				<p>Also, at any time we may restock that specific product in our warehouse with a <code>ProductRestockedEvent</code>. This should increment the quantity available of the <code>Product</code>.</p>
-				<pre><code class="lang-typescript"><span class="hljs-keyword">interface</span> ProductRestockedEvent <span class="hljs-keyword">extends</span> ProductEvent {
-  <span class="hljs-keyword">type</span>: <span class="hljs-string">'ProductRestocked'</span>
+				<pre><code class="language-typescript"><span class="hljs-keyword">interface</span> ProductRestockedEvent <span class="hljs-keyword">extends</span> ProductEvent {
+  <span class="hljs-keyword">type</span>: <span class="hljs-string">&#x27;ProductRestocked&#x27;</span>
   amount: <span class="hljs-built_in">number</span>
-}
-</code></pre>
+}</code></pre>
 				<p>We are almost done. All that is left is to implement our state changing business domain logic inside of the <code>Product</code> aggregate.</p>
-				<pre><code class="lang-typescript"><span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> Product <span class="hljs-keyword">extends</span> Aggregate&lt;ProductEvent&gt; <span class="hljs-keyword">implements</span> ProductResource {
-  status?: <span class="hljs-string">'available'</span> | <span class="hljs-string">'sold-out'</span>
+				<pre><code class="language-typescript"><span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> Product <span class="hljs-keyword">extends</span> Aggregate&lt;ProductEvent&gt; <span class="hljs-keyword">implements</span> ProductResource {
+  status?: <span class="hljs-string">&#x27;available&#x27;</span> | <span class="hljs-string">&#x27;sold-out&#x27;</span>
   quantity?: <span class="hljs-built_in">number</span>
   <span class="hljs-keyword">constructor</span> (<span class="hljs-params">id?: <span class="hljs-built_in">string</span></span>) {
-    <span class="hljs-keyword">super</span> (id)
+    <span class="hljs-built_in">super</span> (id)
   }
   onProductReserved (event: ProductReservedEvent) {
-    <span class="hljs-keyword">if</span> (!<span class="hljs-keyword">this</span>.quantity || <span class="hljs-keyword">this</span>.status === <span class="hljs-string">'sold-out'</span>) <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> <span class="hljs-built_in">Error</span>(<span class="hljs-string">'Failed to apply the event.'</span>)
-    <span class="hljs-keyword">this</span>.quantity -= <span class="hljs-number">1</span>
-    <span class="hljs-keyword">this</span>.status = (<span class="hljs-keyword">this</span>.quantity &gt; <span class="hljs-number">0</span>) ? <span class="hljs-string">'available'</span> : <span class="hljs-string">'sold-out'</span>
+    <span class="hljs-keyword">if</span> (!<span class="hljs-built_in">this</span>.quantity || <span class="hljs-built_in">this</span>.status === <span class="hljs-string">&#x27;sold-out&#x27;</span>) <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> <span class="hljs-built_in">Error</span>(<span class="hljs-string">&#x27;Failed to apply the event.&#x27;</span>)
+    <span class="hljs-built_in">this</span>.quantity -= <span class="hljs-number">1</span>
+    <span class="hljs-built_in">this</span>.status = (<span class="hljs-built_in">this</span>.quantity &gt; <span class="hljs-number">0</span>) ? <span class="hljs-string">&#x27;available&#x27;</span> : <span class="hljs-string">&#x27;sold-out&#x27;</span>
   }
   onProductRestocked (event: ProductRestockedEvent) {
-    <span class="hljs-keyword">if</span> (event.amount === <span class="hljs-number">0</span>) <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> <span class="hljs-built_in">Error</span>(<span class="hljs-string">'Failed to apply the event.'</span>)
-    <span class="hljs-keyword">if</span> (!<span class="hljs-keyword">this</span>.quantity) <span class="hljs-keyword">this</span>.quantity = <span class="hljs-number">0</span>
-    <span class="hljs-keyword">this</span>.quantity += event.amount
-    <span class="hljs-keyword">this</span>.status = <span class="hljs-string">'available'</span>
+    <span class="hljs-keyword">if</span> (event.amount === <span class="hljs-number">0</span>) <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> <span class="hljs-built_in">Error</span>(<span class="hljs-string">&#x27;Failed to apply the event.&#x27;</span>)
+    <span class="hljs-keyword">if</span> (!<span class="hljs-built_in">this</span>.quantity) <span class="hljs-built_in">this</span>.quantity = <span class="hljs-number">0</span>
+    <span class="hljs-built_in">this</span>.quantity += event.amount
+    <span class="hljs-built_in">this</span>.status = <span class="hljs-string">&#x27;available&#x27;</span>
   }
-}
-</code></pre>
+}</code></pre>
 				<p>And... we&#39;re done. we can now interface with the <code>Product</code> domain aggregate through its various methods. Let&#39;s expose an API that receives commands, loads the aggregate, and tries to apply new events.</p>
-				<pre><code class="lang-typescript">...
-app.post(<span class="hljs-string">'/products/{id}/buy'</span>, <span class="hljs-keyword">async</span> (req, res, next) =&gt; 
+				<pre><code class="language-typescript">...
+app.post(<span class="hljs-string">&#x27;/products/{id}/buy&#x27;</span>, <span class="hljs-keyword">async</span> (req, res, next) =&gt; 
   <span class="hljs-comment">// Create a new aggregate instance with the product id</span>
   <span class="hljs-keyword">let</span> product = <span class="hljs-keyword">new</span> Product(req.params.id)
   <span class="hljs-comment">// Hydrate the aggregate (get the latest events and state)</span>
@@ -180,7 +190,7 @@ app.post(<span class="hljs-string">'/products/{id}/buy'</span>, <span class="hlj
   <span class="hljs-comment">// Create the new event</span>
   <span class="hljs-keyword">let</span> event: ProductReservedEvent = {
     <span class="hljs-built_in">number</span>: product.version + <span class="hljs-number">1</span>,
-    <span class="hljs-keyword">type</span>: <span class="hljs-string">'ProductReserved'</span>,
+    <span class="hljs-keyword">type</span>: <span class="hljs-string">&#x27;ProductReserved&#x27;</span>,
     created: <span class="hljs-keyword">new</span> <span class="hljs-built_in">Date</span>().toISOString()
   }
   <span class="hljs-comment">// Commit the event to the Product aggregate</span>
@@ -188,10 +198,11 @@ app.post(<span class="hljs-string">'/products/{id}/buy'</span>, <span class="hlj
   <span class="hljs-comment">// Send back a success status to the API client</span>
   res.status(<span class="hljs-number">200</span>).send()
 })
-...
-</code></pre>
+...</code></pre>
 				<p>For a fully working and deployable project that demonstrates the shopping example above, browse to <code>./examples/shopping/</code> in this repository.</p>
-				<h2 id="what-why-">What? Why?</h2>
+				<a href="#what-why" id="what-why" style="color: inherit; text-decoration: none;">
+					<h2>What? Why?</h2>
+				</a>
 				<p>It doesn&#39;t look like we did much here. But actually, we achieved all of our goals with minimal code and complexity. Using other languages and frameworks, what we&#39;ve built would have surmounted to hundreds of lines of code and infrastructure that is hard to understand and maintain.</p>
 				<p>Here are the goals again, with an explanation for how we accomplished each one.</p>
 				<blockquote>
@@ -248,12 +259,6 @@ app.post(<span class="hljs-string">'/products/{id}/buy'</span>, <span class="hlj
 					<li class="globals  ">
 						<a href="globals.html"><em>Globals</em></a>
 					</li>
-					<li class=" tsd-kind-module tsd-is-not-exported">
-						<a href="modules/_aws_xray_sdk_.html">"aws-<wbr>xray-<wbr>sdk"</a>
-					</li>
-					<li class=" tsd-kind-module tsd-is-not-exported">
-						<a href="modules/_supertest_.html">"supertest"</a>
-					</li>
 				</ul>
 			</nav>
 			<nav class="tsd-navigation secondary menu-sticky">
@@ -265,6 +270,9 @@ app.post(<span class="hljs-string">'/products/{id}/buy'</span>, <span class="hlj
 						<a href="classes/baseerror.html" class="tsd-kind-icon">Base<wbr>Error</a>
 					</li>
 					<li class=" tsd-kind-class">
+						<a href="classes/deploy.html" class="tsd-kind-icon">Deploy</a>
+					</li>
+					<li class=" tsd-kind-class">
 						<a href="classes/illegaleventargument.html" class="tsd-kind-icon">Illegal<wbr>Event<wbr>Argument</a>
 					</li>
 					<li class=" tsd-kind-class">
@@ -274,10 +282,25 @@ app.post(<span class="hljs-string">'/products/{id}/buy'</span>, <span class="hlj
 						<a href="classes/propertynotfound.html" class="tsd-kind-icon">Property<wbr>Not<wbr>Found</a>
 					</li>
 					<li class=" tsd-kind-class">
+						<a href="classes/resourcenotfound.html" class="tsd-kind-icon">Resource<wbr>Not<wbr>Found</a>
+					</li>
+					<li class=" tsd-kind-class">
 						<a href="classes/unroutableeventtype.html" class="tsd-kind-icon">Unroutable<wbr>Event<wbr>Type</a>
 					</li>
 					<li class=" tsd-kind-interface">
 						<a href="interfaces/aggregateoptions.html" class="tsd-kind-icon">Aggregate<wbr>Options</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/deploycreatedevent.html" class="tsd-kind-icon">Deploy<wbr>Created<wbr>Event</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/deploydeletedevent.html" class="tsd-kind-icon">Deploy<wbr>Deleted<wbr>Event</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/deployevent.html" class="tsd-kind-icon">Deploy<wbr>Event</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/deployresource.html" class="tsd-kind-icon">Deploy<wbr>Resource</a>
 					</li>
 					<li class=" tsd-kind-interface">
 						<a href="interfaces/event.html" class="tsd-kind-icon">Event</a>
@@ -288,8 +311,14 @@ app.post(<span class="hljs-string">'/products/{id}/buy'</span>, <span class="hlj
 					<li class=" tsd-kind-type-alias">
 						<a href="globals.html#property" class="tsd-kind-icon">Property</a>
 					</li>
-					<li class=" tsd-kind-variable tsd-is-not-exported">
+					<li class=" tsd-kind-variable">
 						<a href="globals.html#aws" class="tsd-kind-icon">AWS</a>
+					</li>
+					<li class=" tsd-kind-variable">
+						<a href="globals.html#apihandler" class="tsd-kind-icon">api<wbr>Handler</a>
+					</li>
+					<li class=" tsd-kind-variable">
+						<a href="globals.html#app" class="tsd-kind-icon">app</a>
 					</li>
 					<li class=" tsd-kind-variable">
 						<a href="globals.html#defaultmiddlewares" class="tsd-kind-icon">default<wbr>Middlewares</a>
@@ -297,14 +326,20 @@ app.post(<span class="hljs-string">'/products/{id}/buy'</span>, <span class="hlj
 					<li class=" tsd-kind-variable">
 						<a href="globals.html#dynamo" class="tsd-kind-icon">dynamo</a>
 					</li>
-					<li class=" tsd-kind-variable tsd-is-not-exported">
+					<li class=" tsd-kind-variable">
 						<a href="globals.html#localdatabase" class="tsd-kind-icon">local<wbr>Database</a>
 					</li>
-					<li class=" tsd-kind-variable tsd-is-not-exported">
+					<li class=" tsd-kind-variable">
+						<a href="globals.html#s3" class="tsd-kind-icon">s3</a>
+					</li>
+					<li class=" tsd-kind-variable">
 						<a href="globals.html#tablename" class="tsd-kind-icon">table<wbr>Name</a>
 					</li>
 					<li class=" tsd-kind-function">
 						<a href="globals.html#defaultapp" class="tsd-kind-icon">default<wbr>App</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="globals.html#handler" class="tsd-kind-icon">handler</a>
 					</li>
 					<li class=" tsd-kind-function">
 						<a href="globals.html#handlerrouter" class="tsd-kind-icon">handler<wbr>Router</a>
@@ -314,6 +349,9 @@ app.post(<span class="hljs-string">'/products/{id}/buy'</span>, <span class="hlj
 					</li>
 					<li class=" tsd-kind-function">
 						<a href="globals.html#loadpropertyoptional" class="tsd-kind-icon">load<wbr>Property<wbr>Optional</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="globals.html#streamhandler" class="tsd-kind-icon">stream<wbr>Handler</a>
 					</li>
 					<li class=" tsd-kind-function">
 						<a href="globals.html#xray" class="tsd-kind-icon">xray</a>
@@ -328,65 +366,34 @@ app.post(<span class="hljs-string">'/products/{id}/buy'</span>, <span class="hlj
 		<h2>Legend</h2>
 		<div class="tsd-legend-group">
 			<ul class="tsd-legend">
-				<li class="tsd-kind-module"><span class="tsd-kind-icon">Module</span></li>
-				<li class="tsd-kind-object-literal"><span class="tsd-kind-icon">Object literal</span></li>
-				<li class="tsd-kind-variable"><span class="tsd-kind-icon">Variable</span></li>
-				<li class="tsd-kind-function"><span class="tsd-kind-icon">Function</span></li>
-				<li class="tsd-kind-function tsd-has-type-parameter"><span class="tsd-kind-icon">Function with type parameter</span></li>
-				<li class="tsd-kind-index-signature"><span class="tsd-kind-icon">Index signature</span></li>
-				<li class="tsd-kind-type-alias"><span class="tsd-kind-icon">Type alias</span></li>
-			</ul>
-			<ul class="tsd-legend">
-				<li class="tsd-kind-enum"><span class="tsd-kind-icon">Enumeration</span></li>
-				<li class="tsd-kind-enum-member"><span class="tsd-kind-icon">Enumeration member</span></li>
-				<li class="tsd-kind-property tsd-parent-kind-enum"><span class="tsd-kind-icon">Property</span></li>
-				<li class="tsd-kind-method tsd-parent-kind-enum"><span class="tsd-kind-icon">Method</span></li>
-			</ul>
-			<ul class="tsd-legend">
-				<li class="tsd-kind-interface"><span class="tsd-kind-icon">Interface</span></li>
-				<li class="tsd-kind-interface tsd-has-type-parameter"><span class="tsd-kind-icon">Interface with type parameter</span></li>
-				<li class="tsd-kind-constructor tsd-parent-kind-interface"><span class="tsd-kind-icon">Constructor</span></li>
-				<li class="tsd-kind-property tsd-parent-kind-interface"><span class="tsd-kind-icon">Property</span></li>
-				<li class="tsd-kind-method tsd-parent-kind-interface"><span class="tsd-kind-icon">Method</span></li>
-				<li class="tsd-kind-index-signature tsd-parent-kind-interface"><span class="tsd-kind-icon">Index signature</span></li>
-			</ul>
-			<ul class="tsd-legend">
-				<li class="tsd-kind-class"><span class="tsd-kind-icon">Class</span></li>
-				<li class="tsd-kind-class tsd-has-type-parameter"><span class="tsd-kind-icon">Class with type parameter</span></li>
 				<li class="tsd-kind-constructor tsd-parent-kind-class"><span class="tsd-kind-icon">Constructor</span></li>
 				<li class="tsd-kind-property tsd-parent-kind-class"><span class="tsd-kind-icon">Property</span></li>
 				<li class="tsd-kind-method tsd-parent-kind-class"><span class="tsd-kind-icon">Method</span></li>
-				<li class="tsd-kind-accessor tsd-parent-kind-class"><span class="tsd-kind-icon">Accessor</span></li>
-				<li class="tsd-kind-index-signature tsd-parent-kind-class"><span class="tsd-kind-icon">Index signature</span></li>
 			</ul>
 			<ul class="tsd-legend">
-				<li class="tsd-kind-constructor tsd-parent-kind-class tsd-is-inherited"><span class="tsd-kind-icon">Inherited constructor</span></li>
 				<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited"><span class="tsd-kind-icon">Inherited property</span></li>
 				<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited"><span class="tsd-kind-icon">Inherited method</span></li>
-				<li class="tsd-kind-accessor tsd-parent-kind-class tsd-is-inherited"><span class="tsd-kind-icon">Inherited accessor</span></li>
-			</ul>
-			<ul class="tsd-legend">
-				<li class="tsd-kind-property tsd-parent-kind-class tsd-is-protected"><span class="tsd-kind-icon">Protected property</span></li>
-				<li class="tsd-kind-method tsd-parent-kind-class tsd-is-protected"><span class="tsd-kind-icon">Protected method</span></li>
-				<li class="tsd-kind-accessor tsd-parent-kind-class tsd-is-protected"><span class="tsd-kind-icon">Protected accessor</span></li>
 			</ul>
 			<ul class="tsd-legend">
 				<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><span class="tsd-kind-icon">Private property</span></li>
 				<li class="tsd-kind-method tsd-parent-kind-class tsd-is-private"><span class="tsd-kind-icon">Private method</span></li>
-				<li class="tsd-kind-accessor tsd-parent-kind-class tsd-is-private"><span class="tsd-kind-icon">Private accessor</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-property tsd-parent-kind-interface"><span class="tsd-kind-icon">Property</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-method tsd-parent-kind-class tsd-is-protected"><span class="tsd-kind-icon">Protected method</span></li>
 			</ul>
 			<ul class="tsd-legend">
 				<li class="tsd-kind-property tsd-parent-kind-class tsd-is-static"><span class="tsd-kind-icon">Static property</span></li>
-				<li class="tsd-kind-call-signature tsd-parent-kind-class tsd-is-static"><span class="tsd-kind-icon">Static method</span></li>
 			</ul>
 		</div>
 	</div>
 </footer>
 <div class="container tsd-generator">
-	<p>Generated using <a href="http://typedoc.org/" target="_blank">TypeDoc</a></p>
+	<p>Generated using <a href="https://typedoc.org/" target="_blank">TypeDoc</a></p>
 </div>
 <div class="overlay"></div>
 <script src="assets/js/main.js"></script>
-<script>if (location.protocol == 'file:') document.write('<script src="assets/js/search.js"><' + '/script>');</script>
 </body>
 </html>

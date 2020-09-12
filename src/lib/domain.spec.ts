@@ -42,11 +42,9 @@ test('We can create a resource', async t => {
 })
 
 test('We can create an event', async t => {
-  const date = new Date().toISOString()
-  const event: domain.Event = { number: 1, type: 'SomeEvent', created: date }
+  const event: domain.Event = { number: 1, type: 'SomeEvent' }
   t.deepEqual(event.number, 1)
   t.deepEqual(event.type, 'SomeEvent')
-  t.deepEqual(event.created, date)
 })
 
 test('We can create an aggregate', async t => {
@@ -66,8 +64,7 @@ test('The version after creating an aggregate should be zero', async t => {
 test('We can create an aggregate then save an event', async t => {
   await new domain.Aggregate<domain.Event>().commit({
     number: 1,
-    type: 'Event',
-    created: new Date().toISOString()
+    type: 'Event'
   })
   t.pass()
 })
@@ -75,8 +72,7 @@ test('We can create an aggregate then save an event', async t => {
 test('We can create an aggregate for a specific table then save an event', async t => {
   await new domain.Aggregate<domain.Event>({ table: tableName }).commit({
     number: 1,
-    type: 'Event',
-    created: new Date().toISOString()
+    type: 'Event'
   })
   t.pass()
 })
@@ -85,8 +81,7 @@ test('The number of events after creating an aggregate then saving an event shou
   const aggregate = new domain.Aggregate<domain.Event>()
   await aggregate.commit({
     number: 1,
-    type: 'Event',
-    created: new Date().toISOString()
+    type: 'Event'
   })
   t.is((await aggregate.events()).length, 1)
 })
@@ -95,8 +90,7 @@ test('The version after creating an aggregate then saving an event should be one
   const aggregate = new domain.Aggregate<domain.Event>()
   await aggregate.commit({
     number: 1,
-    type: 'Event',
-    created: new Date().toISOString()
+    type: 'Event'
   })
   t.is(aggregate.version, 1)
 })
@@ -105,8 +99,7 @@ test('We should not be able to save an event that the aggregate does not support
   try {
     await new domain.Aggregate<domain.Event>().commit({
       number: 1,
-      type: 'UnsupportedEvent',
-      created: new Date().toISOString()
+      type: 'UnsupportedEvent'
     })
     t.fail()
   } catch (error) {
@@ -119,14 +112,12 @@ test('We should not be able to create an event with an out of order number', asy
   const aggregate = new domain.Aggregate<domain.Event>()
   await aggregate.commit({
     number: 1,
-    type: 'Event',
-    created: new Date().toISOString()
+    type: 'Event'
   })
   try {
     await aggregate.commit({
       number: 3,
-      type: 'Event',
-      created: new Date().toISOString()
+      type: 'Event'
     })
     t.fail()
   } catch (error) {
@@ -139,13 +130,11 @@ test('The number of events after creating an aggregate then saving two events sh
   const aggregate = new domain.Aggregate<domain.Event>()
   await aggregate.commit({
     number: 1,
-    type: 'Event',
-    created: new Date().toISOString()
+    type: 'Event'
   })
   await aggregate.commit({
     number: 2,
-    type: 'Event',
-    created: new Date().toISOString()
+    type: 'Event'
   })
   t.is((await aggregate.events()).length, 2)
 })
@@ -154,13 +143,11 @@ test('The version after creating an aggregate then saving two events should be t
   const aggregate = new domain.Aggregate<domain.Event>()
   await aggregate.commit({
     number: 1,
-    type: 'Event',
-    created: new Date().toISOString()
+    type: 'Event'
   })
   await aggregate.commit({
     number: 2,
-    type: 'Event',
-    created: new Date().toISOString()
+    type: 'Event'
   })
   t.is(aggregate.version, 2)
 })
@@ -169,8 +156,7 @@ test('We can fetch an aggregate by id', async t => {
   const aggregate = new domain.Aggregate<domain.Event>()
   await aggregate.commit({
     number: 1,
-    type: 'Event',
-    created: new Date().toISOString()
+    type: 'Event'
   })
   const fetch = await domain.Aggregate.findOne<domain.Event, domain.Aggregate<domain.Event>>(domain.Aggregate, aggregate.id)
   if (!fetch) t.fail()
@@ -189,13 +175,11 @@ test('We should return undefined when fetching with a nonexistent id', async t =
 test('We can fetch all aggregates', async t => {
   await new domain.Aggregate<domain.Event>().commit({
     number: 1,
-    type: 'Event',
-    created: new Date().toISOString()
+    type: 'Event'
   })
   await new domain.Aggregate<domain.Event>().commit({
     number: 1,
-    type: 'Event',
-    created: new Date().toISOString()
+    type: 'Event'
   })
   const aggregates = await domain.Aggregate.findAll<domain.Event, domain.Aggregate<domain.Event>>(domain.Aggregate)
   if (aggregates.length < 2) t.fail()

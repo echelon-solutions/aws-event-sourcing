@@ -36,6 +36,8 @@ export const s3 = new AWS.S3({ apiVersion: '2006-03-01', region: loadProperty('A
  * Adds an AWS XRAY log annotation that is searchable/filterable (or not) in the console.
  */
 export function xray (key: string, value: string, searchable: boolean): void {
+  // we exclude testing the AWS XRAY telemetry code from code coverage
+  /* istanbul ignore if */
   if (!process.env.IS_OFFLINE) {
     if (searchable) AWSXRay.getSegment()?.addAnnotation(key, value)
     else AWSXRay.getSegment()?.addMetadata(key, value)

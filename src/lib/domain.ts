@@ -14,7 +14,6 @@ export interface Resource {
 export interface Event {
   readonly number: number
   readonly type: string
-  readonly created: string
 }
 
 export interface AggregateOptions {
@@ -23,10 +22,10 @@ export interface AggregateOptions {
 }
 
 export class Aggregate<BaseEventType extends Event> implements Resource {
-  public static async findOne<BaseEventType extends Event, AggregateImplementation extends Aggregate<BaseEventType>> (type: { new(options?: AggregateOptions): AggregateImplementation }, id: string, table?: string): Promise<AggregateImplementation | undefined> {
+  public static async findOne<BaseEventType extends Event, AggregateImplementation extends Aggregate<BaseEventType>> (type: { new(options?: AggregateOptions): AggregateImplementation }, id: string, table?: string): Promise<AggregateImplementation | ResourceNotFound> {
     const aggregate: AggregateImplementation = new type({ id, table })
     await aggregate.hydrate()
-    return (aggregate.version === 0) ? undefined : aggregate
+    return (aggregate.version === 0) ? new ResourceNotFound(id) : aggregate
   }
   public static async findAll<BaseEventType extends Event, AggregateImplementation extends Aggregate<BaseEventType>> (type: { new(options?: AggregateOptions): AggregateImplementation }, table?: string): Promise<AggregateImplementation[]> {
     const records = await dynamo.scan({
@@ -72,7 +71,7 @@ export class Aggregate<BaseEventType extends Event> implements Resource {
   }
   public async hydrate (hydrateFromEvents?: BaseEventType[]): Promise<void> {
     const events = (hydrateFromEvents) ? hydrateFromEvents : await this.events()
-    this.apply(await events.filter(event => event.number > this.version))
+    this.apply(events.filter(event => event.number > this.version))
   }
   public async commit (event: Event): Promise<void> { 
     xray('resource', this.id, true)
@@ -144,5 +143,11 @@ export class IllegalEventNumberArgument extends BaseError {
 export class IllegalEventArgument extends BaseError {
   constructor (event: Event) {
     super (`Unsupported event detected for event type ${event.type}. Please implement on${event.type}(event: ${event.type.endsWith('Event') ? event.type : event.type + 'Event'}).`)
+  }
+}
+
+export class ResourceNotFound extends BaseError {
+  constructor (id: string) {
+    super (`The resource with id ${id} does not exist.`)
   }
 }

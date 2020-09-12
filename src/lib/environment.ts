@@ -1,4 +1,4 @@
-import { DynamoDB } from 'aws-sdk'
+import { DynamoDB, S3 } from 'aws-sdk'
 import * as AWSXRay from 'aws-xray-sdk'
 /* tslint:disable:no-implicit-dependencies */
 import { APIGatewayProxyHandler, ScheduledHandler, SNSHandler, DynamoDBStreamHandler, APIGatewayEvent, ScheduledEvent, SNSEvent, DynamoDBStreamEvent } from 'aws-lambda'
@@ -29,6 +29,8 @@ const AWS = (process.env.IS_OFFLINE)
 export const dynamo = (process.env.IS_OFFLINE)
   ? new AWS.DynamoDB.DocumentClient({ region: 'localhost', endpoint: 'http://localhost:8000' }) as DynamoDB.DocumentClient
   : new AWS.DynamoDB.DocumentClient({ apiVersion: '2012-08-10', region: loadProperty('AWS_REGION') }) as DynamoDB.DocumentClient
+
+export const s3 = new AWS.S3({ apiVersion: '2006-03-01', region: loadProperty('AWS_REGION') }) as S3
 
 /**
  * Adds an AWS XRAY log annotation that is searchable/filterable (or not) in the console.

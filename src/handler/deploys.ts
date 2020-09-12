@@ -1,50 +1,48 @@
+// tslint:disable-next-line: no-submodule-imports
 import 'source-map-support/register'
-import * as Serverless from 'serverless-http'
-import * as asyncHandler from 'express-async-handler'
-import { defaultApp, defaultMiddlewares, handlerRouter } from '../app/environment'
-import { Resource, Event, Aggregate, ResourceNotFound } from '../app/domain'
+import Serverless from 'serverless-http'
+import asyncHandler from 'express-async-handler'
+import { defaultApp, defaultMiddlewares, handlerRouter, loadProperty } from '../lib/environment'
+import { Resource, Event, Aggregate, AggregateOptions, ResourceNotFound } from '../lib/domain'
 
 export interface DeployResource extends Resource {
+  // todo fix this readonly mess
+  // tslint:disable-next-line: readonly-keyword
   status?: 'processing' | 'success' | 'failed' | 'deleted'
+  // tslint:disable-next-line: readonly-keyword
   specification?: string
 }
 
 export interface DeployEvent extends Event {
-  type: 'DeployCreated' | 'DeployDeleted'
+  readonly type: 'DeployCreated' | 'DeployDeleted'
 }
 
 export interface DeployCreatedEvent extends DeployEvent {
-  type: 'DeployCreated'
-  specification: string
+  readonly type: 'DeployCreated'
+  readonly specification: string
 }
 
 export interface DeployDeletedEvent extends DeployEvent {
-  type: 'DeployDeleted'
+  readonly type: 'DeployDeleted'
 }
 
 export class Deploy extends Aggregate<DeployEvent> implements DeployResource {
-  status?: 'processing' | 'success' | 'failed' | 'deleted'
-  specification?: string
-  constructor (id?: string) {
-    super (id)
+  public status?: 'processing' | 'success' | 'failed' | 'deleted'
+  public specification?: string
+  constructor (options?: AggregateOptions) {
+    super (options)
   }
-  apply (events: Array<DeployEvent>) {
-    for (var event of events) {
-      switch (event.type) {
-        case 'DeployCreated': this.onDeployCreated(event as DeployCreatedEvent); break
-        case 'DeployDeleted': this.onDeployDeleted(event as DeployDeletedEvent); break
-        default: throw new Error('Unsupported event detected.')
-      }
-      this.version++
-    }
-  }
-  onDeployCreated (event: DeployCreatedEvent) {
-    if (this.status || event.number !== 1) throw new Error('Failed to apply the event.')
+  protected onDeployCreated (event: DeployCreatedEvent): void {
+    // todo check version vs number use
+    if (this.status || this.version !== 0 || event.number !== 1) throw new Error('Failed to apply the event.')
+    // tslint:disable-next-line: no-object-mutation
     this.status = 'processing'
+    // tslint:disable-next-line: no-object-mutation
     this.specification = event.specification
   }
-  onDeployDeleted (event: DeployDeletedEvent) {
+  protected onDeployDeleted (event: DeployDeletedEvent): void {
     if (!(this.status === 'processing' || this.status === 'success' || this.status === 'failed')) throw new Error('Failed to apply the event.')
+    // tslint:disable-next-line: no-object-mutation
     this.status = 'deleted'
   }
 }
@@ -52,39 +50,40 @@ export class Deploy extends Aggregate<DeployEvent> implements DeployResource {
 export const app = defaultApp()
 
 app.get('/deploys', asyncHandler(async (req, res, next) => {
-  let deploys = await Deploy.findAll<DeployEvent, Deploy>(Deploy) as DeployResource[]
+  const deploys = await Deploy.findAll<DeployEvent, Deploy>(Deploy) as DeployResource[]
   res.status(200).json(deploys.filter(resource => resource.status !== 'deleted')) 
 }))
 
 app.post('/deploys', asyncHandler(async (req, res, next) => {
   if (!req.body.specification) throw new Error('Invalid request')
-  let event: DeployCreatedEvent = {
+  const event: DeployCreatedEvent = {
     number: 1,
     type: 'DeployCreated',
     specification: req.body.specification
   }
-  let aggregate = new Deploy()
+  // todo table/function mismatch? better way for passing prop?
+  const aggregate = new Deploy({ table: loadProperty('DYNAMODB_TABLE') })
   await aggregate.commit(event)
   res.status(201).location(`/deploys/${aggregate.id}`).send()
 }))
 
 app.get('/deploys/:id', asyncHandler(async (req, res, next) => {
-  let deploy = await Deploy.findOne<DeployEvent, Deploy>(req.params.id, Deploy)
+  const deploy = await Deploy.findOne<DeployEvent, Deploy>(Deploy, req.params.id)
   if (deploy instanceof ResourceNotFound) res.status(404).send()
   else res.status(200).json(deploy as DeployResource)
 }))
 
 app.get('/deploys/:id/events', asyncHandler(async (req, res, next) => {
   // TODO need a 404 for resource not exists
-  let deploy = new Deploy(req.params.id)
-  let events = await deploy.events()
+  const deploy = new Deploy({ id: req.params.id, table: loadProperty('DYNAMODB_TABLE') })
+  const events = await deploy.events()
   res.status(200).json(events)
 }))
 
 app.delete('/deploys/:id', asyncHandler(async (req, res, next) => {
-  let aggregate = new Deploy(req.params.id)
+  const aggregate = new Deploy({ id: req.params.id, table: loadProperty('DYNAMODB_TABLE') })
   await aggregate.hydrate()
-  let event: DeployDeletedEvent = {
+  const event: DeployDeletedEvent = {
     number: aggregate.version + 1,  // TODO the resource version should be supplied in the request (otherwise let client know they are updating against stale version of a resource)
     type: 'DeployDeleted'
   }
@@ -96,7 +95,7 @@ app.use(defaultMiddlewares)
 
 export const apiHandler = Serverless(app)
 
-export const handler = (event, context, callback) => {
+export const handler = (event: any, context: any, callback: any) => {
   handlerRouter(event, context, callback, {
     api: apiHandler
   })

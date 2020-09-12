@@ -159,7 +159,7 @@ test('We can fetch an aggregate by id', async t => {
     type: 'Event'
   })
   const fetch = await domain.Aggregate.findOne<domain.Event, domain.Aggregate<domain.Event>>(domain.Aggregate, aggregate.id)
-  if (!fetch) t.fail()
+  if (fetch instanceof domain.ResourceNotFound) t.fail()
   else {
     await fetch.hydrate()
     t.deepEqual(aggregate.id, fetch.id)

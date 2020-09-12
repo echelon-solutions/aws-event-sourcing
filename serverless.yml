@@ -1,4 +1,4 @@
-service: s4-api
+service: aws-event-sourcing
 
 custom:
   deployTable: ${self:service}-${opt:stage, self:provider.stage}-deployTable

@@ -22,12 +22,12 @@ export interface AggregateOptions {
 }
 
 export class Aggregate<BaseEventType extends Event> implements Resource {
-  public static async findOne<BaseEventType extends Event, AggregateImplementation extends Aggregate<BaseEventType>> (type: { new(options?: AggregateOptions): AggregateImplementation }, id: string, table?: string): Promise<AggregateImplementation | ResourceNotFound> {
+  public static async findOne<BaseEventType extends Event, AggregateImplementation extends Aggregate<BaseEventType>> (type: new(options?: AggregateOptions) => AggregateImplementation, id: string, table?: string): Promise<AggregateImplementation | ResourceNotFound> {
     const aggregate: AggregateImplementation = new type({ id, table })
     await aggregate.hydrate()
     return (aggregate.version === 0) ? new ResourceNotFound(id) : aggregate
   }
-  public static async findAll<BaseEventType extends Event, AggregateImplementation extends Aggregate<BaseEventType>> (type: { new(options?: AggregateOptions): AggregateImplementation }, table?: string): Promise<AggregateImplementation[]> {
+  public static async findAll<BaseEventType extends Event, AggregateImplementation extends Aggregate<BaseEventType>> (type: new(options?: AggregateOptions) => AggregateImplementation, table?: string): Promise<AggregateImplementation[]> {
     const records = await dynamo.scan({
       TableName: table || loadProperty('DYNAMODB_TABLE')
     }).promise()

@@ -3,7 +3,6 @@ service: s4-api
 custom:
   deployTable: ${self:service}-${opt:stage, self:provider.stage}-deployTable
   contentTable: ${self:service}-${opt:stage, self:provider.stage}-contentTable
-  snsTopic: ${self:service}-${opt:stage, self:provider.stage}
   stackPrefix: ${self:service}-${opt:stage, self:provider.stage}-
   dynamodb:
     start:
@@ -26,7 +25,6 @@ provider:
   memorySize: 1024
   timeout: 6
   environment:
-    SNS_TOPIC: { "Fn::Join" : [ ":", [ "arn:aws:sns:${opt:region, self:provider.region}", { "Ref" : "AWS::AccountId" }, "${self:custom.snsTopic}" ] ] }
     STACK_PREFIX: ${self:custom.stackPrefix}
     AWS_XRAY_TRACING_NAME: ${self:service}-${opt:stage, self:provider.stage}-UNTITLED-service
   tracing: ${self:custom.${opt:stage, self:provider.stage}.tracing, 'true'}
@@ -123,11 +121,6 @@ functions:
           - xray:PutTraceSegments
           - xray:PutTelemetryRecords
         Resource: "*"
-    #  - Effect: Allow
-    #    Action:
-    #      - cloudformation:CreateChangeSet
-    #      - cloudformation:ExecuteChangeSet
-    #    Resource: { "Fn::Join" : [ ":", [ "arn:aws:cloudformation:${opt:region, self:provider.region}", { "Ref" : "AWS::AccountId" }, "stack/${self:custom.stackPrefix}*" ] ] }
     events:      
       - stream:
           type: dynamodb
@@ -141,7 +134,6 @@ functions:
             Fn::GetAtt:
               - ContentTable
               - StreamArn
-    #  - sns: ${self:custom.snsTopic}
 
 resources:
   Resources:

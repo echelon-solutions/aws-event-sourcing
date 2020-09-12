@@ -8,3 +8,6 @@ coverage
 *.log
 
 yarn.lock
+
+.build/
+.serverless/

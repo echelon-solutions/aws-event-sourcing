@@ -44,13 +44,12 @@ export interface Resource {
 
 An event definition extends the `Event` interface.
 
-An event has an event number, a type, and a creation date.
+An event has an event number and a type.
 
 ```typescript
 export interface Event {
   number: number
   type: string
-  created: string
 }
 ```
 
@@ -84,6 +83,12 @@ Let's look at this in the context of the online shopping business domain.
 ### Shopping Example
 
 In most online ordering systems, there is a concept of a shopping cart. We want our site to be highly available, but we don't want to allow purchases of a product if we don't have any more of it left in our warehouse.
+
+First, let's import the eventing framework.
+
+```typescript
+import { Resource, Event, Aggregate, AggregateOptions } from '@echelon-solutions/aws-event-sourcing'
+```
 
 In this domain, our resource is the "Product", so let's define it along with its attributes.
 
@@ -128,8 +133,8 @@ We are almost done. All that is left is to implement our state changing business
 export class Product extends Aggregate<ProductEvent> implements ProductResource {
   status?: 'available' | 'sold-out'
   quantity?: number
-  constructor (id?: string) {
-    super (id)
+  constructor (options: AggregateOptions) {
+    super (options)
   }
   onProductReserved (event: ProductReservedEvent) {
     if (!this.quantity || this.status === 'sold-out') throw new Error('Failed to apply the event.')
@@ -148,24 +153,28 @@ export class Product extends Aggregate<ProductEvent> implements ProductResource 
 And... we're done. we can now interface with the `Product` domain aggregate through its various methods. Let's expose an API that receives commands, loads the aggregate, and tries to apply new events.
 
 ```typescript
-...
-app.post('/products/{id}/buy', async (req, res, next) => 
+import express from 'express'
+import asyncHandler from 'express-async-handler'
+
+const app = express()
+
+app.post('/products/:id/buy', asyncHandler(async (req, res, next) => {
   // Create a new aggregate instance with the product id
-  let product = new Product(req.params.id)
+  let product = new Product({ id: req.params.id })
   // Hydrate the aggregate (get the latest events and state)
   await product.hydrate()
   // Create the new event
   let event: ProductReservedEvent = {
     number: product.version + 1,
-    type: 'ProductReserved',
-    created: new Date().toISOString()
+    type: 'ProductReserved'
   }
   // Commit the event to the Product aggregate
   await product.commit(event)
-  // Send back a success status to the API client
-  res.status(200).send()
-})
-...
+  // Send back a success status to the API client with the updated aggregate
+  res.status(200).json(product)
+}))
+
+app.listen(3000, () => console.log('listening'))
 ```
 
 For a fully working and deployable project that demonstrates the shopping example above, browse to `./examples/shopping/` in this repository.

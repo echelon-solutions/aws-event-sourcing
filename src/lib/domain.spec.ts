@@ -51,6 +51,7 @@ test('We can create an aggregate', async t => {
   const aggregate = new domain.Aggregate<domain.Event>()
   t.truthy(aggregate.id)
 })
+
 test('The number of events after creating an aggregate should be zero', async t => {
   const events = await new domain.Aggregate<domain.Event>().events()
   t.is(events.length, 0)

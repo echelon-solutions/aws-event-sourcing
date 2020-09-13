@@ -4,6 +4,32 @@ import AWSXRay from 'aws-xray-sdk'
 import { APIGatewayProxyHandler, ScheduledHandler, SNSHandler, DynamoDBStreamHandler, APIGatewayEvent, ScheduledEvent, SNSEvent, DynamoDBStreamEvent } from 'aws-lambda'
 import express from 'express'
 
+// ERRORS
+
+export class BaseError extends Error {
+  // We have to do complicated things to set the error prototype to be able to use instanceof on the error
+  // This is an issue with Typescript and es5, maybe fixable when using webpack w/ es6?
+  /* tslint:disable:member-access variable-name */
+  __proto__: Error
+  constructor (message: string) {
+    const trueProto = new.target.prototype
+    super(message)
+    this.__proto__ = trueProto
+  }
+}
+
+export class PropertyNotFound extends BaseError {
+  constructor (property: string) {
+    super (`Missing the required ${property} environment property.`)
+  }
+}
+
+export class UnroutableEventType extends BaseError {
+  constructor () {
+    super ('Unroutable unsupported event type received.')
+  }
+}
+
 // PROPERTIES
 
 export type Property = 'DYNAMODB_TABLE' | 'AWS_REGION'
@@ -82,30 +108,6 @@ export const defaultMiddlewares = [
   },
   AWSXRay.express.closeSegment()
 ]
-
-export class BaseError extends Error {
-  // We have to do complicated things to set the error prototype to be able to use instanceof on the error
-  // This is an issue with Typescript and es5, maybe fixable when using webpack w/ es6?
-  /* tslint:disable:member-access variable-name */
-  __proto__: Error
-  constructor (message: string) {
-    const trueProto = new.target.prototype
-    super(message)
-    this.__proto__ = trueProto
-  }
-}
-
-export class PropertyNotFound extends BaseError {
-  constructor (property: string) {
-    super (`Missing the required ${property} environment property.`)
-  }
-}
-
-export class UnroutableEventType extends BaseError {
-  constructor () {
-    super ('Unroutable unsupported event type received.')
-  }
-}
 
 /**
  * A Lambda handler router that determines the proper handler to use based on the type of the received event

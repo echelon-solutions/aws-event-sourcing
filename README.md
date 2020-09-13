@@ -2,7 +2,7 @@
 
 A straightforward way to build event based applications with AWS Lambda.
 
-![build](https://github.com/echelon-solutions/aws-event-sourcing/workflows/build/badge.svg) [![Code Coverage](https://codecov.io/gh/echelon-solutions/aws-event-sourcing/branch/master/graph/badge.svg)](https://codecov.io/gh/echelon-solutions/aws-event-sourcing) [![npm (scoped)](https://img.shields.io/npm/v/@echelon-solutions/aws-event-sourcing.svg)](https://www.npmjs.com/package/@echelon-solutions/aws-event-sourcing)
+![build](https://github.com/echelon-solutions/aws-event-sourcing/workflows/build/badge.svg) [![npm (scoped)](https://img.shields.io/npm/v/@echelon-solutions/aws-event-sourcing.svg)](https://www.npmjs.com/package/@echelon-solutions/aws-event-sourcing) ![GitHub last commit](https://img.shields.io/github/last-commit/khalidx/resource-x.svg?style=flat-square) ![GitHub](https://img.shields.io/github/license/khalidx/resource-x.svg?style=flat-square)
 
 ## Goals
 

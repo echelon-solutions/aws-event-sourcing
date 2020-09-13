@@ -15,7 +15,15 @@
     "url": "https://github.com/echelon-solutions/aws-event-sourcing/issues"
   },
   "license": "MIT",
-  "keywords": [],
+  "keywords": [
+    "event-sourcing",
+    "event-driven",
+    "aws",
+    "aws-lambda",
+    "serverless",
+    "serverless-framework",
+    "typescript"
+  ],
   "scripts": {
     "info": "npm-scripts-info",
     "build": "run-s clean && run-p build:*",

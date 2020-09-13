@@ -9,5 +9,6 @@ coverage
 
 yarn.lock
 
+.dynamodb/
 .build/
 .serverless/

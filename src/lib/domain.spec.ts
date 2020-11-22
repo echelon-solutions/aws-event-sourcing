@@ -58,12 +58,12 @@ test('The number of events after creating an aggregate should be zero', async t 
 })
 
 test('The version after creating an aggregate should be zero', async t => {
-  const aggregate = new domain.Aggregate<domain.Event>()
+  const aggregate = new domain.Aggregate()
   t.is(aggregate.version, 0)
 })
 
 test('We can create an aggregate then save an event', async t => {
-  await new domain.Aggregate<domain.Event>().commit({
+  await new domain.Aggregate().commit({
     number: 1,
     type: 'Event'
   })
@@ -71,7 +71,7 @@ test('We can create an aggregate then save an event', async t => {
 })
 
 test('We can create an aggregate for a specific table then save an event', async t => {
-  await new domain.Aggregate<domain.Event>({ table: tableName }).commit({
+  await new domain.Aggregate({ table: tableName }).commit({
     number: 1,
     type: 'Event'
   })
@@ -79,7 +79,7 @@ test('We can create an aggregate for a specific table then save an event', async
 })
 
 test('The number of events after creating an aggregate then saving an event should be one', async t => {
-  const aggregate = new domain.Aggregate<domain.Event>()
+  const aggregate = new domain.Aggregate()
   await aggregate.commit({
     number: 1,
     type: 'Event'
@@ -88,7 +88,7 @@ test('The number of events after creating an aggregate then saving an event shou
 })
 
 test('The version after creating an aggregate then saving an event should be one', async t => {
-  const aggregate = new domain.Aggregate<domain.Event>()
+  const aggregate = new domain.Aggregate()
   await aggregate.commit({
     number: 1,
     type: 'Event'
@@ -98,7 +98,7 @@ test('The version after creating an aggregate then saving an event should be one
 
 test('We should not be able to save an event that the aggregate does not support', async t => {
   try {
-    await new domain.Aggregate<domain.Event>().commit({
+    await new domain.Aggregate().commit({
       number: 1,
       type: 'UnsupportedEvent'
     })
@@ -110,7 +110,7 @@ test('We should not be able to save an event that the aggregate does not support
 })
 
 test('We should not be able to create an event with an out of order number', async t => {
-  const aggregate = new domain.Aggregate<domain.Event>()
+  const aggregate = new domain.Aggregate()
   await aggregate.commit({
     number: 1,
     type: 'Event'
@@ -128,7 +128,7 @@ test('We should not be able to create an event with an out of order number', asy
 })
 
 test('The number of events after creating an aggregate then saving two events should be two', async t => {
-  const aggregate = new domain.Aggregate<domain.Event>()
+  const aggregate = new domain.Aggregate()
   await aggregate.commit({
     number: 1,
     type: 'Event'
@@ -141,7 +141,7 @@ test('The number of events after creating an aggregate then saving two events sh
 })
 
 test('The version after creating an aggregate then saving two events should be two', async t => {
-  const aggregate = new domain.Aggregate<domain.Event>()
+  const aggregate = new domain.Aggregate()
   await aggregate.commit({
     number: 1,
     type: 'Event'
@@ -154,12 +154,12 @@ test('The version after creating an aggregate then saving two events should be t
 })
 
 test('We can fetch an aggregate by id', async t => {
-  const aggregate = new domain.Aggregate<domain.Event>()
+  const aggregate = new domain.Aggregate()
   await aggregate.commit({
     number: 1,
     type: 'Event'
   })
-  const fetch = await domain.Aggregate.findOne<domain.Event, domain.Aggregate<domain.Event>>(domain.Aggregate, aggregate.id)
+  const fetch = await domain.Aggregate.findOne(domain.Aggregate, aggregate.id)
   if (fetch instanceof domain.ResourceNotFound) t.fail()
   else {
     await fetch.hydrate()
@@ -168,7 +168,7 @@ test('We can fetch an aggregate by id', async t => {
 })
 
 test('We should return ResourceNotFound when fetching with a nonexistent id', async t => {
-  const fetch = await domain.Aggregate.findOne<domain.Event, domain.Aggregate<domain.Event>>(domain.Aggregate, 'some-nonexistent-id')
+  const fetch = await domain.Aggregate.findOne(domain.Aggregate, 'some-nonexistent-id')
   if (fetch instanceof domain.ResourceNotFound) t.pass()
   else t.fail()
 })
@@ -182,7 +182,7 @@ test('We can fetch all aggregates', async t => {
     number: 1,
     type: 'Event'
   })
-  const aggregates = await domain.Aggregate.findAll<domain.Event, domain.Aggregate<domain.Event>>(domain.Aggregate)
+  const aggregates = await domain.Aggregate.findAll(domain.Aggregate)
   if (aggregates.length < 2) t.fail()
   else t.pass()
 })

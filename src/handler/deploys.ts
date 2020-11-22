@@ -1,8 +1,7 @@
 // tslint:disable-next-line: no-submodule-imports
 import 'source-map-support/register'
-import Serverless from 'serverless-http'
 import asyncHandler from 'express-async-handler'
-import { defaultApp, defaultMiddlewares, handlerRouter, loadProperty } from '../lib/environment'
+import { defaultApp, defaultMiddlewares, router, loadProperty } from '../lib/environment'
 import { Resource, Event, Aggregate, AggregateOptions, ResourceNotFound } from '../lib/domain'
 
 export interface DeployResource extends Resource {
@@ -93,10 +92,10 @@ app.delete('/deploys/:id', asyncHandler(async (req, res, next) => {
 
 app.use(defaultMiddlewares)
 
-export const apiHandler = Serverless(app)
-
 export const handler = (event: any, context: any, callback: any) => {
-  return handlerRouter(event, context, callback, {
-    api: apiHandler
+  return router(event, context, callback, {
+    api: {
+      express: app
+    }
   })
 }

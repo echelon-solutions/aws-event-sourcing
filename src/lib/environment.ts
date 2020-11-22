@@ -1,8 +1,9 @@
 import { DynamoDB } from 'aws-sdk'
 import AWSXRay from 'aws-xray-sdk'
 /* tslint:disable:no-implicit-dependencies */
-import { APIGatewayProxyHandler, SQSHandler, ScheduledHandler, SNSHandler, DynamoDBStreamHandler, APIGatewayEvent, SQSEvent, ScheduledEvent, SNSEvent, DynamoDBStreamEvent } from 'aws-lambda'
-import express from 'express'
+import { APIGatewayProxyHandler, APIGatewayProxyHandlerV2, SQSHandler, ScheduledHandler, SNSHandler, DynamoDBStreamHandler, APIGatewayProxyEvent, APIGatewayProxyEventV2, SQSEvent, ScheduledEvent, SNSEvent, DynamoDBStreamEvent } from 'aws-lambda'
+import express, { Express } from 'express'
+import serverless from 'serverless-http'
 
 // ERRORS
 
@@ -110,13 +111,23 @@ export const defaultMiddlewares = [
 /**
  * A Lambda handler router that determines the proper handler to use based on the type of the received event
  */
-export const handlerRouter = (event: any, context: any, callback: any, handlers: { 
-  readonly api?: APIGatewayProxyHandler,
+export const router = (event: any, context: any, callback: any, handlers: { 
+  readonly api?: {
+    readonly proxy?: APIGatewayProxyHandler
+    readonly proxyV2?: APIGatewayProxyHandlerV2
+    readonly express?: Express
+    readonly serverless?: ReturnType<typeof serverless>
+  },
   readonly queue?: SQSHandler
-  readonly scheduled?: ScheduledHandler,
-  readonly topic?: SNSHandler,
+  readonly scheduled?: ScheduledHandler
+  readonly topic?: SNSHandler
   readonly stream?: DynamoDBStreamHandler }) => {
-  if ((event as APIGatewayEvent).httpMethod && handlers.api) return handlers.api(event, context, callback)
+  const { httpMethod } = event as Partial<APIGatewayProxyEvent>
+  const { requestContext } = event as Partial<APIGatewayProxyEventV2>
+  if (httpMethod && handlers.api?.proxy) return handlers.api.proxy(event, context, callback)
+  else if (requestContext?.http.method && handlers.api?.proxyV2) return handlers.api.proxyV2(event, context, callback)
+  else if (handlers.api?.express && (httpMethod || requestContext?.http.method)) return serverless(handlers.api.express)(event, context)
+  else if (handlers.api?.serverless && (httpMethod || requestContext?.http.method)) return handlers.api.serverless(event, context)
   else if ((event as SQSEvent).Records && ((event as SQSEvent).Records[0].eventSource === 'aws:sqs') && handlers.queue) return handlers.queue(event, context, callback)
   else if ((event as ScheduledEvent).source === 'aws.events' && handlers.scheduled) return handlers.scheduled(event, context, callback)
   else if ((event as SNSEvent).Records && ((event as SNSEvent).Records[0].EventSource === 'aws:sns') && handlers.topic) return handlers.topic(event, context, callback)

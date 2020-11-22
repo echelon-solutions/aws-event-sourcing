@@ -4,6 +4,8 @@ process.env.IS_OFFLINE = 'true'
 /* tslint:disable:no-expression-statement */
 import test from 'ava'
 import request from 'supertest'
+import express from 'express'
+import serverless from 'serverless-http'
 import * as environment from './environment'
 
 test.beforeEach('setup', async t => {
@@ -72,11 +74,93 @@ test('The default express middlewares return an HTTP 500 for an error', async t 
   t.is(response.status, 500)
 })
 
-test('The handler router can route an API Gateway event', async t => {
+test('The handler router can route an API Gateway proxy event', async t => {
   /* tslint:disable:no-let */
   let routed = false
-  environment.handlerRouter({ httpMethod: 'GET' }, null, null, {
-    api: (event, context, callback) => {
+  environment.router({ httpMethod: 'GET' }, null, null, {
+    api: {
+      proxy: (event, context, callback) => {
+        routed = true
+      }
+    }
+  })
+  t.is(routed, true)
+})
+
+test('The handler router can route an API Gateway proxy v2 event', async t => {
+  /* tslint:disable:no-let */
+  let routed = false
+  environment.router({ requestContext: { http: { method: 'GET' } } }, null, null, {
+    api: {
+      proxyV2: (event, context, callback) => {
+        routed = true
+      }
+    }
+  })
+  t.is(routed, true)
+})
+
+test('The handler router can route an API Gateway proxy event to an express app', async t => {
+  /* tslint:disable:no-let */
+  let routed = false
+  await environment.router({ httpMethod: 'GET' }, null, null, {
+    api: {
+      express: express().use((req, res) => {
+        routed = true
+        res.send()
+      })
+    }
+  })
+  t.is(routed, true)
+})
+
+test('The handler router can route an API Gateway proxy v2 event to an express app', async t => {
+  /* tslint:disable:no-let */
+  let routed = false
+  await environment.router({ requestContext: { http: { method: 'GET' } } }, null, null, {
+    api: {
+      express: express().use((req, res) => {
+        routed = true
+        res.send()
+      })
+    }
+  })
+  t.is(routed, true)
+})
+
+test('The handler router can route an API Gateway proxy event to a serverless http handler', async t => {
+  /* tslint:disable:no-let */
+  let routed = false
+  await environment.router({ httpMethod: 'GET' }, null, null, {
+    api: {
+      serverless: serverless(express().use((req, res) => {
+        routed = true
+        res.send()
+      }))
+    }
+  })
+  t.is(routed, true)
+})
+
+test('The handler router can route an API Gateway proxy v2 event to a serverless http handler', async t => {
+  /* tslint:disable:no-let */
+  let routed = false
+  await environment.router({ requestContext: { http: { method: 'GET' } } }, null, null, {
+    api: {
+      serverless: serverless(express().use((req, res) => {
+        routed = true
+        res.send()
+      }))
+    }
+  })
+  t.is(routed, true)
+})
+
+test('The handler router can route an SQS event', async t => {
+  /* tslint:disable:no-let */
+  let routed = false
+  environment.router({ Records: [ { eventSource: 'aws:sqs' } ] }, null, null, {
+    queue: (event, context, callback) => {
       routed = true
     }
   })
@@ -86,7 +170,7 @@ test('The handler router can route an API Gateway event', async t => {
 test('The handler router can route a scheduled event', async t => {
   /* tslint:disable:no-let */
   let routed = false
-  environment.handlerRouter({ source: 'aws.events' }, null, null, {
+  environment.router({ source: 'aws.events' }, null, null, {
     scheduled: (event, context, callback) => {
       routed = true
     }
@@ -97,7 +181,7 @@ test('The handler router can route a scheduled event', async t => {
 test('The handler router can route an SNS event', async t => {
   /* tslint:disable:no-let */
   let routed = false
-  environment.handlerRouter({ Records: [ { EventSource: 'aws:sns' } ] }, null, null, {
+  environment.router({ Records: [ { EventSource: 'aws:sns' } ] }, null, null, {
     topic: (event, context, callback) => {
       routed = true
     }
@@ -108,7 +192,7 @@ test('The handler router can route an SNS event', async t => {
 test('The handler router can route a DynamoDB Stream event', async t => {
   /* tslint:disable:no-let */
   let routed = false
-  environment.handlerRouter({ Records: [ { eventSource: 'aws:dynamodb' } ] }, null, null, {
+  environment.router({ Records: [ { eventSource: 'aws:dynamodb' } ] }, null, null, {
     stream: (event, context, callback) => {
       routed = true
     }
@@ -117,9 +201,28 @@ test('The handler router can route a DynamoDB Stream event', async t => {
 })
 
 test('The handler router should throw an error for unsupported events', async t => {
-  /* tslint:disable:no-let */
   try {
-    environment.handlerRouter('random', null, null, {})
+    environment.router('random', null, null, {})
+    t.fail()
+  } catch (error) {
+    if (error instanceof environment.UnroutableEventType) t.pass()
+    else t.fail()
+  }
+})
+
+test('The handler router should throw an error if a proxy event is detected but no api handler is configured', async t => {
+  try {
+    await environment.router({ httpMethod: 'GET' }, null, null, {})
+    t.fail()
+  } catch (error) {
+    if (error instanceof environment.UnroutableEventType) t.pass()
+    else t.fail()
+  }
+})
+
+test('The handler router should throw an error if a proxy v2 event is detected but no api handler is configured', async t => {
+  try {
+    await environment.router({ requestContext: { http: { method: 'GET' } } }, null, null, {})
     t.fail()
   } catch (error) {
     if (error instanceof environment.UnroutableEventType) t.pass()

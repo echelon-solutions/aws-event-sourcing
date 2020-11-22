@@ -46,9 +46,13 @@ export class Aggregate<BaseEventType extends Event> implements Resource {
     }
     return aggregates
   }
+  public static json<BaseEventType extends Event, AggregateImplementation extends Aggregate<BaseEventType>> (aggregate: AggregateImplementation): Omit<AggregateImplementation, 'table'> {
+    const { table, ...properties } = aggregate
+    return properties
+  }
   public readonly id: string
   public version: number
-  private table: string
+  public readonly table: string
   /**
    * Instantiate an aggregate instance, optionally passing in a resource id 
    *   to reference an existing resource.

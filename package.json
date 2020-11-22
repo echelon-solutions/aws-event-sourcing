@@ -101,7 +101,7 @@
     "nyc": "^15.1.0",
     "opn-cli": "^4.1.0",
     "prettier": "^2.2.0",
-    "serverless": "^2.12.0",
+    "serverless": "^2.0.0",
     "serverless-dynamodb-local": "^0.2.39",
     "serverless-iam-roles-per-function": "^2.0.2",
     "serverless-offline": "^6.8.0",

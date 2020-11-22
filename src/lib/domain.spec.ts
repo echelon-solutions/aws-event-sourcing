@@ -173,17 +173,23 @@ test('We should return ResourceNotFound when fetching with a nonexistent id', as
   else t.fail()
 })
 
-test('We can fetch all aggregates', async t => {
-  await new domain.Aggregate<domain.Event>().commit({
+test.serial('We can fetch all aggregates', async t => {
+  await new domain.Aggregate().commit({
     number: 1,
     type: 'Event'
   })
-  await new domain.Aggregate<domain.Event>().commit({
+  await new domain.Aggregate().commit({
     number: 1,
     type: 'Event'
   })
   const aggregates = await domain.Aggregate.findAll(domain.Aggregate)
   if (aggregates.length < 2) t.fail()
+  else t.pass()
+})
+
+test.serial('We can get a json representation of the aggregate, without the table field', async t => {
+  const aggregates = await domain.Aggregate.findAll(domain.Aggregate)
+  if (aggregates.filter(aggregate => (domain.Aggregate.json(aggregate) as any).table).length > 0) t.fail()
   else t.pass()
 })
 

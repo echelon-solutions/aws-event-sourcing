@@ -77,13 +77,13 @@ export class Aggregate<BaseEventType extends Event> implements Resource {
     const events = (hydrateFromEvents) ? hydrateFromEvents : await this.events()
     this.apply(events.filter(event => event.number > this.version))
   }
-  public async commit (event: Event): Promise<void> { 
+  public async commit (event: BaseEventType): Promise<void> { 
     xray('resource', this.id, true)
     xray('event', event.type, true)
     /* tslint:disable:object-literal-shorthand */
     xray('commit', JSON.stringify({ resource: this, event: event }), false)
     await this.hydrate()
-    await this.apply([ event as BaseEventType ])
+    await this.apply([ event ])
     if (this.version === 1 && event.number === 1) {
       /**
        * Create a new resource with an event.

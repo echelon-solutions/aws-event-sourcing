@@ -1,7 +1,7 @@
 import { DynamoDB } from 'aws-sdk'
 import AWSXRay from 'aws-xray-sdk'
 /* tslint:disable:no-implicit-dependencies */
-import { APIGatewayProxyHandler, SQSHandler, ScheduledHandler, SNSHandler, DynamoDBStreamHandler, APIGatewayEvent, SQSEvent, ScheduledEvent, SNSEvent, DynamoDBStreamEvent } from 'aws-lambda'
+import { APIGatewayProxyHandler, APIGatewayProxyHandlerV2, SQSHandler, ScheduledHandler, SNSHandler, DynamoDBStreamHandler, APIGatewayProxyEvent, APIGatewayProxyEventV2, SQSEvent, ScheduledEvent, SNSEvent, DynamoDBStreamEvent } from 'aws-lambda'
 import express from 'express'
 
 // ERRORS
@@ -111,12 +111,12 @@ export const defaultMiddlewares = [
  * A Lambda handler router that determines the proper handler to use based on the type of the received event
  */
 export const handlerRouter = (event: any, context: any, callback: any, handlers: { 
-  readonly api?: APIGatewayProxyHandler,
+  readonly api?: APIGatewayProxyHandler | APIGatewayProxyHandlerV2,
   readonly queue?: SQSHandler
   readonly scheduled?: ScheduledHandler,
   readonly topic?: SNSHandler,
   readonly stream?: DynamoDBStreamHandler }) => {
-  if ((event as APIGatewayEvent).httpMethod && handlers.api) return handlers.api(event, context, callback)
+  if (((event as APIGatewayProxyEvent).httpMethod || (event as APIGatewayProxyEventV2).requestContext) && handlers.api) return handlers.api(event, context, callback)
   else if ((event as SQSEvent).Records && ((event as SQSEvent).Records[0].eventSource === 'aws:sqs') && handlers.queue) return handlers.queue(event, context, callback)
   else if ((event as ScheduledEvent).source === 'aws.events' && handlers.scheduled) return handlers.scheduled(event, context, callback)
   else if ((event as SNSEvent).Records && ((event as SNSEvent).Records[0].EventSource === 'aws:sns') && handlers.topic) return handlers.topic(event, context, callback)

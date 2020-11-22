@@ -6,24 +6,20 @@ import { Resource, Event, Aggregate, AggregateOptions, ResourceNotFound, environ
 
 export interface DeployResource extends Resource {
   // todo fix this readonly mess
-  // tslint:disable-next-line: readonly-keyword
-  status?: 'processing' | 'success' | 'failed' | 'deleted'
-  // tslint:disable-next-line: readonly-keyword
-  specification?: string
+  readonly status?: 'processing' | 'success' | 'failed' | 'deleted'
+  readonly specification?: string
 }
 
-export interface DeployEvent extends Event {
-  readonly type: 'DeployCreated' | 'DeployDeleted'
-}
-
-export interface DeployCreatedEvent extends DeployEvent {
+export interface DeployCreatedEvent extends Event {
   readonly type: 'DeployCreated'
   readonly specification: string
 }
 
-export interface DeployDeletedEvent extends DeployEvent {
+export interface DeployDeletedEvent extends Event {
   readonly type: 'DeployDeleted'
 }
+
+export type DeployEvent = DeployCreatedEvent | DeployDeletedEvent
 
 export class Deploy extends Aggregate<DeployEvent> implements DeployResource {
   public status?: 'processing' | 'success' | 'failed' | 'deleted'

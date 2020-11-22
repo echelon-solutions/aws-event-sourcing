@@ -177,7 +177,7 @@ app.post('/products/:id/buy', asyncHandler(async (req, res, next) => {
 app.listen(3000, () => console.log('listening'))
 ```
 
-For a fully working and deployable project that demonstrates the shopping example above, browse to `./examples/shopping/` in this repository.
+For a fully working and deployable project that demonstrates the shopping example above, browse to `./example/shopping/` in this repository.
 
 ## What? Why?
 

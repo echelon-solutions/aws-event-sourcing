@@ -1,0 +1,92 @@
+service: aws-event-sourcing-shopping-example
+
+custom:
+  productTable: ${self:service}-${opt:stage, self:provider.stage}-productTable
+  dynamodb:
+    start:
+      inMemory: true
+      migrate: true
+  dev:
+    dataDeletionPolicy: 'Delete'
+    tracing: true
+
+plugins:
+  - serverless-plugin-typescript
+  - serverless-iam-roles-per-function
+  - serverless-plugin-tracing
+  - serverless-dynamodb-local
+  - serverless-offline
+
+provider:
+  name: aws
+  runtime: nodejs12.x
+  memorySize: 1024
+  timeout: 6
+  environment:
+    AWS_XRAY_TRACING_NAME: ${self:service}-${opt:stage, self:provider.stage}-UNTITLED-service
+  tracing: ${self:custom.${opt:stage, self:provider.stage}.tracing, 'true'}
+
+functions:
+
+  product:
+    handler: handler.product
+    environment:
+      DYNAMODB_TABLE: ${self:custom.productTable}
+      AWS_XRAY_TRACING_NAME: ${self:service}-${opt:stage, self:provider.stage}-product-service
+    iamRoleStatements:
+      - Effect: Allow
+        Action:
+          - xray:PutTraceSegments
+          - xray:PutTelemetryRecords
+        Resource: "*"
+      - Effect: Allow
+        Action:
+          - dynamodb:Query
+          - dynamodb:Scan
+          - dynamodb:GetItem
+          - dynamodb:PutItem
+        Resource: { "Fn::Join" : [ ":", [ "arn:aws:dynamodb:${opt:region, self:provider.region}", { "Ref" : "AWS::AccountId" }, "table/${self:custom.productTable}" ] ] }
+    events:
+      - http:
+          path: products
+          method: get
+          cors: true
+      - http:
+          path: products
+          method: post
+          cors: true
+      - http:
+          path: products/{id}
+          method: get
+          cors: true
+      - http:
+          path: products/{id}/events
+          method: get
+          cors: true
+      - http:
+          path: products/{id}
+          method: delete
+          cors: true
+
+resources:
+  Resources:
+    ProductTable:
+      Type: 'AWS::DynamoDB::Table'
+      DeletionPolicy: ${self:custom.${opt:stage, self:provider.stage}.dataDeletionPolicy, 'Retain'}
+      Properties:
+        AttributeDefinitions:
+          - AttributeName: id
+            AttributeType: S
+          - AttributeName: number
+            AttributeType: N
+        KeySchema:
+          - AttributeName: id
+            KeyType: HASH
+          - AttributeName: number
+            KeyType: RANGE
+        ProvisionedThroughput:
+          ReadCapacityUnits: 1
+          WriteCapacityUnits: 1
+        StreamSpecification:
+          StreamViewType: NEW_IMAGE
+        TableName: ${self:custom.productTable}

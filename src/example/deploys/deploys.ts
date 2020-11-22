@@ -42,45 +42,49 @@ export class Deploy extends Aggregate<DeployEvent> implements DeployResource {
 export const app = environment.defaultApp()
 
 app.get('/deploys', asyncHandler(async (req, res, next) => {
-  const deploys = await Deploy.findAll<DeployEvent, Deploy>(Deploy) as DeployResource[]
-  res.status(200).json(deploys.filter(resource => resource.status !== 'deleted')) 
+  const deploys = (await Deploy.findAll(Deploy))
+    .filter(resource => resource.status !== 'deleted')
+    .map(resource => ({ ...Deploy.json(resource), links: { events: `/deploys/${resource.id}/events` } }))
+  res.status(200).json(deploys)
 }))
 
 app.post('/deploys', asyncHandler(async (req, res, next) => {
   if (!req.body.specification) throw new Error('Invalid request')
-  const event: DeployCreatedEvent = {
+  const aggregate = new Deploy()
+  await aggregate.commit({
     number: 1,
     type: 'DeployCreated',
     specification: req.body.specification
-  }
-  // todo table/function mismatch? better way for passing prop?
-  const aggregate = new Deploy({ table: environment.loadProperty('DYNAMODB_TABLE') })
-  await aggregate.commit(event)
+  })
   res.status(201).location(`/deploys/${aggregate.id}`).send()
 }))
 
 app.get('/deploys/:id', asyncHandler(async (req, res, next) => {
-  const deploy = await Deploy.findOne<DeployEvent, Deploy>(Deploy, req.params.id)
+  const deploy = await Deploy.findOne(Deploy, req.params.id)
   if (deploy instanceof ResourceNotFound) res.status(404).send()
-  else res.status(200).json(deploy as DeployResource)
+  else res.status(200).json(deploy)
 }))
 
 app.get('/deploys/:id/events', asyncHandler(async (req, res, next) => {
-  // TODO need a 404 for resource not exists
-  const deploy = new Deploy({ id: req.params.id, table: environment.loadProperty('DYNAMODB_TABLE') })
-  const events = await deploy.events()
-  res.status(200).json(events)
+  const deploy = await Deploy.findOne(Deploy, req.params.id)
+  if (deploy instanceof ResourceNotFound) res.status(404).send()
+  else {
+    const events = await deploy.events()
+    res.status(200).json(events)
+  }
 }))
 
 app.delete('/deploys/:id', asyncHandler(async (req, res, next) => {
-  const aggregate = new Deploy({ id: req.params.id, table: environment.loadProperty('DYNAMODB_TABLE') })
-  await aggregate.hydrate()
-  const event: DeployDeletedEvent = {
-    number: aggregate.version + 1,  // TODO the resource version should be supplied in the request (otherwise let client know they are updating against stale version of a resource)
-    type: 'DeployDeleted'
+  const deploy = await Deploy.findOne<DeployEvent, Deploy>(Deploy, req.params.id)
+  if (deploy instanceof ResourceNotFound) res.status(404).send()
+  else {
+     // TODO ? the resource version should be supplied in the request (otherwise let client know they are updating against stale version of a resource)
+    await deploy.commit({
+      number: deploy.version + 1, 
+      type: 'DeployDeleted'
+    })
+    res.status(204).send()
   }
-  await aggregate.commit(event)
-  res.status(204).send()
 }))
 
 app.use(environment.defaultMiddlewares)

@@ -34,14 +34,11 @@ export class Deploy extends Aggregate<DeployEvent> implements DeployResource {
   protected onDeployCreated (event: DeployCreatedEvent): void {
     // todo check version vs number use
     if (this.status || this.version !== 0 || event.number !== 1) throw new Error('Failed to apply the event.')
-    // tslint:disable-next-line: no-object-mutation
     this.status = 'processing'
-    // tslint:disable-next-line: no-object-mutation
     this.specification = event.specification
   }
   protected onDeployDeleted (event: DeployDeletedEvent): void {
     if (!(this.status === 'processing' || this.status === 'success' || this.status === 'failed')) throw new Error('Failed to apply the event.')
-    // tslint:disable-next-line: no-object-mutation
     this.status = 'deleted'
   }
 }

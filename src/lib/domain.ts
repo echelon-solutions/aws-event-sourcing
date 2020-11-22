@@ -9,7 +9,7 @@ export interface Resource {
 }
 
 /**
- * An event has a number, a type, and a creation date as an ISO string.
+ * An event has a number and a type.
  */
 export interface Event {
   readonly number: number

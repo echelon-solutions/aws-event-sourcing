@@ -1,9 +1,3 @@
-
-/* tslint:disable:no-object-mutation */
-process.env.IS_OFFLINE = 'true'
-const tableName = process.env.DYNAMODB_TABLE = 'domain-test'
-
-/* tslint:disable:no-expression-statement */
 import test from 'ava'
 import DynamoDbLocal from 'dynamodb-local'
 import { DynamoDB } from 'aws-sdk'
@@ -11,6 +5,7 @@ import * as domain from './domain'
 
 test.beforeEach('setup', async t => {
   process.env.IS_OFFLINE = 'true'
+  process.env.DYNAMODB_TABLE = 'domain-test'
 })
 
 /* tslint:disable:no-let */
@@ -18,9 +13,9 @@ let localDatabase: any
 
 test.before('setup', async t => {
   localDatabase = await DynamoDbLocal.launch(8000)
-  const client = new DynamoDB({ region: 'localhost', endpoint: 'http://localhost:8000' })
+  const client = new DynamoDB({ region: 'localhost', endpoint: 'http://localhost:8000', accessKeyId: 'fake-test-value', secretAccessKey: 'fake-test-value' })
   await client.createTable({
-    TableName: tableName,
+    TableName: process.env.DYNAMODB_TABLE || 'domain-test',
     AttributeDefinitions: [
       { AttributeName: 'id', AttributeType: 'S' },
       { AttributeName: 'number', AttributeType: 'N' }
@@ -71,7 +66,7 @@ test('We can create an aggregate then save an event', async t => {
 })
 
 test('We can create an aggregate for a specific table then save an event', async t => {
-  await new domain.Aggregate({ table: tableName }).commit({
+  await new domain.Aggregate().commit({
     number: 1,
     type: 'Event'
   })

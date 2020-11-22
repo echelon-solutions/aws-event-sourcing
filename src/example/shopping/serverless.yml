@@ -29,7 +29,7 @@ provider:
 functions:
 
   product:
-    handler: handler.product
+    handler: product.handler
     environment:
       DYNAMODB_TABLE: ${self:custom.productTable}
       AWS_XRAY_TRACING_NAME: ${self:service}-${opt:stage, self:provider.stage}-product-service

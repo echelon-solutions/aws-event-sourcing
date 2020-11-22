@@ -1,8 +1,8 @@
 // tslint:disable-next-line: no-submodule-imports
 import 'source-map-support/register'
 import asyncHandler from 'express-async-handler'
-import { defaultApp, defaultMiddlewares, router, loadProperty } from '../lib/environment'
-import { Resource, Event, Aggregate, AggregateOptions, ResourceNotFound } from '../lib/domain'
+
+import { Resource, Event, Aggregate, AggregateOptions, ResourceNotFound, environment } from '../../'
 
 export interface DeployResource extends Resource {
   // todo fix this readonly mess
@@ -43,7 +43,7 @@ export class Deploy extends Aggregate<DeployEvent> implements DeployResource {
   }
 }
 
-export const app = defaultApp()
+export const app = environment.defaultApp()
 
 app.get('/deploys', asyncHandler(async (req, res, next) => {
   const deploys = await Deploy.findAll<DeployEvent, Deploy>(Deploy) as DeployResource[]
@@ -58,7 +58,7 @@ app.post('/deploys', asyncHandler(async (req, res, next) => {
     specification: req.body.specification
   }
   // todo table/function mismatch? better way for passing prop?
-  const aggregate = new Deploy({ table: loadProperty('DYNAMODB_TABLE') })
+  const aggregate = new Deploy({ table: environment.loadProperty('DYNAMODB_TABLE') })
   await aggregate.commit(event)
   res.status(201).location(`/deploys/${aggregate.id}`).send()
 }))
@@ -71,13 +71,13 @@ app.get('/deploys/:id', asyncHandler(async (req, res, next) => {
 
 app.get('/deploys/:id/events', asyncHandler(async (req, res, next) => {
   // TODO need a 404 for resource not exists
-  const deploy = new Deploy({ id: req.params.id, table: loadProperty('DYNAMODB_TABLE') })
+  const deploy = new Deploy({ id: req.params.id, table: environment.loadProperty('DYNAMODB_TABLE') })
   const events = await deploy.events()
   res.status(200).json(events)
 }))
 
 app.delete('/deploys/:id', asyncHandler(async (req, res, next) => {
-  const aggregate = new Deploy({ id: req.params.id, table: loadProperty('DYNAMODB_TABLE') })
+  const aggregate = new Deploy({ id: req.params.id, table: environment.loadProperty('DYNAMODB_TABLE') })
   await aggregate.hydrate()
   const event: DeployDeletedEvent = {
     number: aggregate.version + 1,  // TODO the resource version should be supplied in the request (otherwise let client know they are updating against stale version of a resource)
@@ -87,10 +87,10 @@ app.delete('/deploys/:id', asyncHandler(async (req, res, next) => {
   res.status(204).send()
 }))
 
-app.use(defaultMiddlewares)
+app.use(environment.defaultMiddlewares)
 
 export const handler = (event: any, context: any, callback: any) => {
-  return router(event, context, callback, {
+  return environment.router(event, context, callback, {
     api: {
       express: app
     }

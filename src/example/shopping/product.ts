@@ -1,4 +1,7 @@
-import { Resource, Event, Aggregate, AggregateOptions } from '../../'
+import { Resource, Event, Aggregate, AggregateOptions, environment } from '../../'
+
+import express from 'express'
+import asyncHandler from 'express-async-handler'
 
 interface ProductResource extends Resource {
   readonly status?: 'available' | 'sold-out'
@@ -35,4 +38,30 @@ export class Product extends Aggregate<ProductEvent> implements ProductResource 
     this.quantity += event.amount
     this.status = 'available'
   }
+}
+
+export const app = express()
+
+app.post('/products/:id/buy', asyncHandler(async (req, res, next) => {
+  // Create a new aggregate instance with the product id
+  const product = new Product({ id: req.params.id })
+  // Hydrate the aggregate (get the latest events and state)
+  await product.hydrate()
+  // Create the new event
+  const event: ProductReservedEvent = {
+    number: product.version + 1,
+    type: 'ProductReserved'
+  }
+  // Commit the event to the Product aggregate
+  await product.commit(event)
+  // Send back a success status to the API client with the updated aggregate
+  res.status(200).json(product)
+}))
+
+export const handler = (event: any, context: any, callback: any) => {
+  return environment.router(event, context, callback, {
+    api: {
+      express: app
+    }
+  })
 }

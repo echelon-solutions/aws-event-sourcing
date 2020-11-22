@@ -1,2 +1,2 @@
 export * from './lib/domain'
-export * from './lib/environment'
+export * as environment from './lib/environment'

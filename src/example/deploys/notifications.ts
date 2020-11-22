@@ -3,7 +3,7 @@ import 'source-map-support/register'
 // tslint:disable-next-line: no-implicit-dependencies
 import { DynamoDBStreamHandler } from 'aws-lambda'
 import { DynamoDB } from 'aws-sdk'
-import { router } from '../lib/environment'
+import { environment } from '../../'
 import { DeployCreatedEvent } from './deploys'
 
 export const streamHandler: DynamoDBStreamHandler = async (event, context, callback) => {
@@ -29,7 +29,7 @@ export const streamHandler: DynamoDBStreamHandler = async (event, context, callb
 }
 
 export const handler = (event: any, context: any, callback: any) => {
-  return router(event, context, callback, {
+  return environment.router(event, context, callback, {
     stream: streamHandler
   })
 }

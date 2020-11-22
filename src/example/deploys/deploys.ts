@@ -44,7 +44,13 @@ export const app = environment.defaultApp()
 app.get('/deploys', asyncHandler(async (req, res, next) => {
   const deploys = (await Deploy.findAll(Deploy))
     .filter(resource => resource.status !== 'deleted')
-    .map(resource => ({ ...Deploy.json(resource), links: { events: `/deploys/${resource.id}/events` } }))
+    .map(resource => ({
+      ...Deploy.json(resource),
+      links: {
+        resource: `/deploys/${resource.id}`,
+        events: `/deploys/${resource.id}/events`
+      }
+    }))
   res.status(200).json(deploys)
 }))
 

@@ -68,7 +68,7 @@ app.post('/deploys', asyncHandler(async (req, res, next) => {
 app.get('/deploys/:id', asyncHandler(async (req, res, next) => {
   const deploy = await Deploy.findOne(Deploy, req.params.id)
   if (deploy instanceof ResourceNotFound) res.status(404).send()
-  else res.status(200).json(deploy)
+  else res.status(200).json(Deploy.json(deploy))
 }))
 
 app.get('/deploys/:id/events', asyncHandler(async (req, res, next) => {

@@ -1,193 +1,206 @@
-import test from 'ava'
+process.env.IS_OFFLINE = 'true'
+process.env.DYNAMODB_TABLE = 'domain-test'
+process.env.AWS_ACCESS_KEY_ID = 'fake-unusable-test-value-for-access-key-id'
+process.env.AWS_SECRET_ACCESS_KEY = 'fake-unusable-test-value-for-secret-access-key'
+
+import { describe, it } from 'mocha'
+import { expect } from 'chai'
 import DynamoDbLocal from 'dynamodb-local'
 import { DynamoDB } from 'aws-sdk'
+
 import * as domain from './domain'
 
-test.beforeEach('setup', async t => {
-  process.env.IS_OFFLINE = 'true'
-  process.env.DYNAMODB_TABLE = 'domain-test'
-})
+describe('domain', function (): void {
 
-/* tslint:disable:no-let */
-let localDatabase: any
+  this.timeout(10 * 1000)
 
-test.before('setup', async t => {
-  localDatabase = await DynamoDbLocal.launch(8000)
-  const client = new DynamoDB({ region: 'localhost', endpoint: 'http://localhost:8000', accessKeyId: 'fake-test-value', secretAccessKey: 'fake-test-value' })
-  await client.createTable({
-    TableName: process.env.DYNAMODB_TABLE || 'domain-test',
-    AttributeDefinitions: [
-      { AttributeName: 'id', AttributeType: 'S' },
-      { AttributeName: 'number', AttributeType: 'N' }
-    ],
-    KeySchema: [
-      { AttributeName: 'id', KeyType: 'HASH' },
-      { AttributeName: 'number', KeyType: 'RANGE' }
-    ],
-    ProvisionedThroughput: {
-      ReadCapacityUnits: 1,
-      WriteCapacityUnits: 1
-    }
-  }).promise()
-})
-
-test('We can create a resource', async t => {
-  const resource: domain.Resource = { id: '123' }
-  t.deepEqual(resource.id, '123')
-})
-
-test('We can create an event', async t => {
-  const event: domain.Event = { number: 1, type: 'SomeEvent' }
-  t.deepEqual(event.number, 1)
-  t.deepEqual(event.type, 'SomeEvent')
-})
-
-test('We can create an aggregate', async t => {
-  const aggregate = new domain.Aggregate<domain.Event>()
-  t.truthy(aggregate.id)
-})
-
-test('The number of events after creating an aggregate should be zero', async t => {
-  const events = await new domain.Aggregate<domain.Event>().events()
-  t.is(events.length, 0)
-})
-
-test('The version after creating an aggregate should be zero', async t => {
-  const aggregate = new domain.Aggregate()
-  t.is(aggregate.version, 0)
-})
-
-test('We can create an aggregate then save an event', async t => {
-  await new domain.Aggregate().commit({
-    number: 1,
-    type: 'Event'
+  // tslint:disable-next-line: only-arrow-functions
+  this.beforeEach('setup environment variables', function (): void {
+    process.env.IS_OFFLINE = 'true'
+    process.env.DYNAMODB_TABLE = 'domain-test'
+    process.env.AWS_ACCESS_KEY_ID = 'fake-unusable-test-value-for-access-key-id'
+    process.env.AWS_SECRET_ACCESS_KEY = 'fake-unusable-test-value-for-secret-access-key'
   })
-  t.pass()
-})
 
-test('We can create an aggregate for a specific table then save an event', async t => {
-  await new domain.Aggregate().commit({
-    number: 1,
-    type: 'Event'
+  /* tslint:disable:no-let */
+  let localDatabase: any
+
+  // tslint:disable-next-line: only-arrow-functions
+  this.beforeAll('setup dynamodb local', async function (): Promise<void> {
+    localDatabase = await DynamoDbLocal.launch(8000)
+    await new DynamoDB({ region: 'localhost', endpoint: 'http://localhost:8000' }).createTable({
+      TableName: process.env.DYNAMODB_TABLE || 'domain-test',
+      AttributeDefinitions: [
+        { AttributeName: 'id', AttributeType: 'S' },
+        { AttributeName: 'number', AttributeType: 'N' }
+      ],
+      KeySchema: [
+        { AttributeName: 'id', KeyType: 'HASH' },
+        { AttributeName: 'number', KeyType: 'RANGE' }
+      ],
+      ProvisionedThroughput: {
+        ReadCapacityUnits: 1,
+        WriteCapacityUnits: 1
+      }
+    }).promise()
   })
-  t.pass()
-})
 
-test('The number of events after creating an aggregate then saving an event should be one', async t => {
-  const aggregate = new domain.Aggregate()
-  await aggregate.commit({
-    number: 1,
-    type: 'Event'
+  it('should be able to create a resource', () => {
+    const resource: domain.Resource = { id: '123' }
+    expect(resource.id).to.deep.equal('123')
   })
-  t.is((await aggregate.events()).length, 1)
-})
 
-test('The version after creating an aggregate then saving an event should be one', async t => {
-  const aggregate = new domain.Aggregate()
-  await aggregate.commit({
-    number: 1,
-    type: 'Event'
+  it('should be able to crate an event', () => {
+    const event: domain.Event = { number: 1, type: 'SomeEvent' }
+    expect(event.number).to.deep.equal(1)
+    expect(event.type).to.deep.equal('SomeEvent')
   })
-  t.is(aggregate.version, 1)
-})
 
-test('We should not be able to save an event that the aggregate does not support', async t => {
-  try {
+  it('should be able to create an aggregate', () => {
+    const aggregate = new domain.Aggregate()
+    expect(aggregate.id.length > 0).to.deep.equal(true)
+  })
+
+  it('should have zero events after creating an aggregate', async () => {
+    const events = await new domain.Aggregate().events()
+    expect(events.length).to.deep.equal(0)
+  })
+
+  it('should have a version of zero after creating an aggregate', () => {
+    const aggregate = new domain.Aggregate()
+    expect(aggregate.version).to.deep.equal(0)
+  })
+
+  it('should be able to create an aggregate then save an event', async () => {
     await new domain.Aggregate().commit({
       number: 1,
-      type: 'UnsupportedEvent'
-    })
-    t.fail()
-  } catch (error) {
-    if (error instanceof domain.IllegalEventArgument) t.pass()
-    else t.fail()
-  }
-})
-
-test('We should not be able to create an event with an out of order number', async t => {
-  const aggregate = new domain.Aggregate()
-  await aggregate.commit({
-    number: 1,
-    type: 'Event'
-  })
-  try {
-    await aggregate.commit({
-      number: 3,
       type: 'Event'
     })
-    t.fail()
-  } catch (error) {
-    if (error instanceof domain.IllegalEventNumberArgument) t.pass()
-    else t.fail()
-  }
-})
-
-test('The number of events after creating an aggregate then saving two events should be two', async t => {
-  const aggregate = new domain.Aggregate()
-  await aggregate.commit({
-    number: 1,
-    type: 'Event'
   })
-  await aggregate.commit({
-    number: 2,
-    type: 'Event'
-  })
-  t.is((await aggregate.events()).length, 2)
-})
 
-test('The version after creating an aggregate then saving two events should be two', async t => {
-  const aggregate = new domain.Aggregate()
-  await aggregate.commit({
-    number: 1,
-    type: 'Event'
+  it('should be able to create an aggregate for a specific table then save an event', async () => {
+    await new domain.Aggregate({ table: 'domain-test' }).commit({
+      number: 1,
+      type: 'Event'
+    })
   })
-  await aggregate.commit({
-    number: 2,
-    type: 'Event'
+
+  it('should have one event after creating an aggregate then saving an event', async () => {
+    const aggregate = new domain.Aggregate()
+    await aggregate.commit({
+      number: 1,
+      type: 'Event'
+    })
+    const events = await aggregate.events()
+    expect(events.length).to.deep.equal(1)
   })
-  t.is(aggregate.version, 2)
-})
-
-test('We can fetch an aggregate by id', async t => {
-  const aggregate = new domain.Aggregate()
-  await aggregate.commit({
-    number: 1,
-    type: 'Event'
+  
+  it('should have a version of one after creating an aggregate then saving an event', async () => {
+    const aggregate = new domain.Aggregate()
+    await aggregate.commit({
+      number: 1,
+      type: 'Event'
+    })
+    expect(aggregate.version).to.deep.equal(1)
   })
-  const fetch = await domain.Aggregate.findOne(domain.Aggregate, aggregate.id)
-  if (fetch instanceof domain.ResourceNotFound) t.fail()
-  else {
-    await fetch.hydrate()
-    t.deepEqual(aggregate.id, fetch.id)
-  }
-})
 
-test('We should return ResourceNotFound when fetching with a nonexistent id', async t => {
-  const fetch = await domain.Aggregate.findOne(domain.Aggregate, 'some-nonexistent-id')
-  if (fetch instanceof domain.ResourceNotFound) t.pass()
-  else t.fail()
-})
-
-test.serial('We can fetch all aggregates', async t => {
-  await new domain.Aggregate().commit({
-    number: 1,
-    type: 'Event'
+  it('should not be able to save an event that the aggregate does not support', async () => {
+    try {
+      await new domain.Aggregate().commit({
+        number: 1,
+        type: 'UnsupportedEvent'
+      })
+      expect.fail()
+    } catch (error) {
+      if (!(error instanceof domain.IllegalEventArgument)) expect.fail()
+    }
   })
-  await new domain.Aggregate().commit({
-    number: 1,
-    type: 'Event'
+  
+  it('should not be able to create an event with an out of order number', async () => {
+    const aggregate = new domain.Aggregate()
+    await aggregate.commit({
+      number: 1,
+      type: 'Event'
+    })
+    try {
+      await aggregate.commit({
+        number: 3,
+        type: 'Event'
+      })
+      expect.fail()
+    } catch (error) {
+      if (!(error instanceof domain.IllegalEventNumberArgument)) expect.fail()
+    }
   })
-  const aggregates = await domain.Aggregate.findAll(domain.Aggregate)
-  if (aggregates.length < 2) t.fail()
-  else t.pass()
-})
 
-test.serial('We can get a json representation of the aggregate, without the table field', async t => {
-  const aggregates = await domain.Aggregate.findAll(domain.Aggregate)
-  if (aggregates.filter(aggregate => (domain.Aggregate.json(aggregate) as any).table).length > 0) t.fail()
-  else t.pass()
-})
+  it('should have two events after creating an aggregate then saving two events', async () => {
+    const aggregate = new domain.Aggregate()
+    await aggregate.commit({
+      number: 1,
+      type: 'Event'
+    })
+    await aggregate.commit({
+      number: 2,
+      type: 'Event'
+    })
+    const events = await aggregate.events()
+    expect(events.length).to.deep.equal(2)
+  })
 
-test.after.always('teardown', async t => {
-  await DynamoDbLocal.stop(localDatabase)
+  it('should have a version of two after creating an aggregate then saving two events', async () => {
+    const aggregate = new domain.Aggregate()
+    await aggregate.commit({
+      number: 1,
+      type: 'Event'
+    })
+    await aggregate.commit({
+      number: 2,
+      type: 'Event'
+    })
+    expect(aggregate.version).to.deep.equal(2)
+  })
+
+  it('should be able to fetch an aggregate by id', async () => {
+    const aggregate = new domain.Aggregate()
+    await aggregate.commit({
+      number: 1,
+      type: 'Event'
+    })
+    const fetch = await domain.Aggregate.findOne(domain.Aggregate, aggregate.id)
+    if (fetch instanceof domain.ResourceNotFound) expect.fail()
+    else {
+      await fetch.hydrate()
+      expect(aggregate.id).to.deep.equal(fetch.id)
+    }
+  })
+
+  it('should return ResourceNotFound when fetching with a nonexistent id', async () => {
+    const fetch = await domain.Aggregate.findOne(domain.Aggregate, 'some-nonexistent-id')
+    if (!(fetch instanceof domain.ResourceNotFound)) expect.fail()
+  })
+
+  it('should be able to fetch all aggregates', async () => {
+    await new domain.Aggregate().commit({
+      number: 1,
+      type: 'Event'
+    })
+    await new domain.Aggregate().commit({
+      number: 1,
+      type: 'Event'
+    })
+    const aggregates = await domain.Aggregate.findAll(domain.Aggregate)
+    if (aggregates.length < 2) expect.fail()
+  })
+
+  it('should be able to get a json representation of the aggregate, without the table field', async () => {
+    const aggregates = await domain.Aggregate.findAll(domain.Aggregate)
+    for (const aggregate of aggregates) {
+      expect(aggregate.table.length > 0).to.deep.equal(true)
+      const json = domain.Aggregate.json(aggregate)
+      expect((json as any).table).to.deep.equal(undefined)
+    }
+  })
+
+  this.afterAll('teardown dynamodb local', () => DynamoDbLocal.stop(localDatabase))
+
 })

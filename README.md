@@ -105,15 +105,13 @@ a specific quantity, which lets us know how much of that product we have left in
 There are several things that can happen during the shopping experience, both online and in our business. Let's define a base event type that shows us what events are possible.
 
 ```typescript
-interface ProductEvent extends Event {
-  type: 'ProductReserved' | 'ProductRestocked'
-}
+type ProductEvent = ProductReservedEvent | ProductRestockedEvent
 ```
 
 Before the customer checks out, we reserve the product for his/her purchase with a `ProductReservedEvent`. This should decrement the quantity available of the `Product` by 1.
 
 ```typescript
-interface ProductReservedEvent extends ProductEvent {
+interface ProductReservedEvent extends Event {
   type: 'ProductReserved'
 }
 ```
@@ -121,7 +119,7 @@ interface ProductReservedEvent extends ProductEvent {
 Also, at any time we may restock that specific product in our warehouse with a `ProductRestockedEvent`. This should increment the quantity available of the `Product`.
 
 ```typescript
-interface ProductRestockedEvent extends ProductEvent {
+interface ProductRestockedEvent extends Event {
   type: 'ProductRestocked'
   amount: number
 }

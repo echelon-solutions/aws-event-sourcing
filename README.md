@@ -79,7 +79,7 @@ The aggregate exposes the following methods.
 > their events.
 
 > Even though we are doing event sourcing, APIs have the ability to respond immediately,
-> while async handlers are able respond to and ordered list of events. This is an extremely
+> while async handlers are able to consume an ordered list of events. This is an extremely
 > simple, powerful, and scalable serverless function and storage pattern.
 
 ## Implementation

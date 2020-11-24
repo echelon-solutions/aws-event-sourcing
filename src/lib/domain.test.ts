@@ -1,48 +1,57 @@
-process.env.IS_OFFLINE = 'true'
-process.env.DYNAMODB_TABLE = 'domain-test'
-process.env.AWS_ACCESS_KEY_ID = 'fake-unusable-test-value-for-access-key-id'
-process.env.AWS_SECRET_ACCESS_KEY = 'fake-unusable-test-value-for-secret-access-key'
+setTestEnvironmentVariables()
 
-import { describe, it } from 'mocha'
+import { describe, it, before, after, beforeEach } from 'mocha'
 import { expect } from 'chai'
 import DynamoDbLocal from 'dynamodb-local'
 import { DynamoDB } from 'aws-sdk'
 
 import * as domain from './domain'
 
+function setTestEnvironmentVariables (): void {
+  process.env.IS_OFFLINE = 'true'
+  process.env.DYNAMODB_TABLE = 'domain-test'
+  process.env.AWS_ACCESS_KEY_ID = 'fake-unusable-test-value-for-access-key-id'
+  process.env.AWS_SECRET_ACCESS_KEY = 'fake-unusable-test-value-for-secret-access-key'
+}
+
 describe('domain', function (): void {
 
   this.timeout(10 * 1000)
 
-  // tslint:disable-next-line: only-arrow-functions
-  this.beforeEach('setup environment variables', function (): void {
-    process.env.IS_OFFLINE = 'true'
-    process.env.DYNAMODB_TABLE = 'domain-test'
-    process.env.AWS_ACCESS_KEY_ID = 'fake-unusable-test-value-for-access-key-id'
-    process.env.AWS_SECRET_ACCESS_KEY = 'fake-unusable-test-value-for-secret-access-key'
-  })
+  beforeEach('setup environment variables', () => setTestEnvironmentVariables())
 
   /* tslint:disable:no-let */
   let localDatabase: any
+  let launched = false
 
   // tslint:disable-next-line: only-arrow-functions
-  this.beforeAll('setup dynamodb local', async function (): Promise<void> {
-    localDatabase = await DynamoDbLocal.launch(8000)
-    await new DynamoDB({ region: 'localhost', endpoint: 'http://localhost:8000' }).createTable({
-      TableName: process.env.DYNAMODB_TABLE || 'domain-test',
-      AttributeDefinitions: [
-        { AttributeName: 'id', AttributeType: 'S' },
-        { AttributeName: 'number', AttributeType: 'N' }
-      ],
-      KeySchema: [
-        { AttributeName: 'id', KeyType: 'HASH' },
-        { AttributeName: 'number', KeyType: 'RANGE' }
-      ],
-      ProvisionedThroughput: {
-        ReadCapacityUnits: 1,
-        WriteCapacityUnits: 1
-      }
-    }).promise()
+  before('setup dynamodb local', async function (): Promise<void> {
+    if (!launched) {
+      setTestEnvironmentVariables()
+      localDatabase = await DynamoDbLocal.launch(8000)
+      launched = true
+    }
+    const dynamoDb = new DynamoDB({ region: 'localhost', endpoint: 'http://localhost:8000' })
+    try {
+      await dynamoDb.describeTable({ TableName: 'domain-test' }).promise()
+    } catch (error) {
+      if (error.code !== 'ResourceNotFoundException') throw error
+      await dynamoDb.createTable({
+        TableName: process.env.DYNAMODB_TABLE || 'domain-test',
+        AttributeDefinitions: [
+          { AttributeName: 'id', AttributeType: 'S' },
+          { AttributeName: 'number', AttributeType: 'N' }
+        ],
+        KeySchema: [
+          { AttributeName: 'id', KeyType: 'HASH' },
+          { AttributeName: 'number', KeyType: 'RANGE' }
+        ],
+        ProvisionedThroughput: {
+          ReadCapacityUnits: 1,
+          WriteCapacityUnits: 1
+        }
+      }).promise()
+    }
   })
 
   it('should be able to create a resource', () => {
@@ -201,6 +210,6 @@ describe('domain', function (): void {
     }
   })
 
-  this.afterAll('teardown dynamodb local', () => DynamoDbLocal.stop(localDatabase))
+  after('teardown dynamodb local', () => DynamoDbLocal.stop(localDatabase))
 
 })

@@ -74,6 +74,14 @@ The aggregate exposes the following methods.
 - `apply` | call the appropriate handler to handle the event type and apply state changes to the resource
 - `commit` | retrieve up-to-date event history, attempt to apply an event, then publish the new event
 
+> The `findAll` operation performs a scan on the DynamoDB table. This may become a performance issue
+> as the table grows in size. Fortunately, only a single scan is needed to hydrate all resources and
+> their events.
+
+> Even though we are doing event sourcing, APIs have the ability to respond immediately,
+> while async handlers are able respond to and ordered list of events. This is an extremely
+> simple, powerful, and scalable serverless function and storage pattern.
+
 ## Implementation
 
 To implement the pattern above, we begin by defining the resource, the events that manipulate it, and the aggregate that is responsible for applying events and calculating state.

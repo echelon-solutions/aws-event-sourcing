@@ -24,6 +24,13 @@ A straightforward way to build event based applications with AWS Lambda.
 - Framework [ Serverless ]
 - Cloud (AWS) [ API Gateway, Lambda, DynamoDB ]
 
+## Quickstart
+
+```
+npm install
+npm run serverless:deploy
+```
+
 ## Concepts
 
 This design makes an assumption that everything in a system can be classified as either a `Resource` or an `Event`.
